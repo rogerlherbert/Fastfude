@@ -85,7 +85,7 @@ class User extends CI_Controller
 			if ($user_id) 
 			{
 				$this->session->set_userdata('user_id', $user_id);
-				redirect('home');
+				redirect('/');
 			}
 			else
 			{
