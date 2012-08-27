@@ -1,3 +1,4 @@
+<?php $this->load->view('common/header'); ?>
 <?php echo form_open(); ?>
 
 	<div id="username">
@@ -16,3 +17,4 @@
 
 	<?php if(isset($error)) { echo "<p>".$error."</p>"; } ?>
 <?php echo form_close(); ?>
+<?php $this->load->view('common/footer'); ?>

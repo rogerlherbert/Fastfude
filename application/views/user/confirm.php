@@ -1,3 +1,4 @@
+<?php $this->load->view('common/header'); ?>
 <?php echo form_open(); ?>
 
 	<div id="username">
@@ -21,3 +22,4 @@
 	<div id="submit"><?php echo form_submit(array('name' => 'comfirm', 'value' => 'Confirm Sign Up', 'class' => 'button')); ?></div>
 
 <?php echo form_close(); ?>
+<?php $this->load->view('common/footer'); ?>
