@@ -15,8 +15,9 @@ class Forum extends CI_Controller
 
 	public function index()
 	{
+		$this->load->helper('date');
 		$data['topics'] = $this->Forum_model->getRecentTopics();
 
-		$this->load->view('home/index', $data);
+		$this->load->view('forum/index', $data);
 	}
 }
