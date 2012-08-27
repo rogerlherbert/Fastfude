@@ -90,7 +90,8 @@ class User extends CI_Controller
 			else
 			{
 				// user/pass not found in DB
-				$this->load->view('user/sign_in');
+				$data['error'] = "That username & password combination is not correct.";
+				$this->load->view('user/sign_in', $data);
 			}
 
 		}

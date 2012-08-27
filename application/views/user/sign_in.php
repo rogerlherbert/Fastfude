@@ -14,4 +14,5 @@
 
 	<div id="submit"><?php echo form_submit(array('name' => 'sign_in', 'value' => 'sign in', 'class' => 'button')); ?></div>
 
+	<?php if(isset($error)) { echo "<p>".$error."</p>"; } ?>
 <?php echo form_close(); ?>
