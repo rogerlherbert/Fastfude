@@ -2,7 +2,7 @@
 <?php echo form_open(); ?>
 
 	<div id="username">
-		<?php echo form_label('username or email', 'username'); ?>
+		<?php echo form_label('username', 'username'); ?>
 		<?php echo form_input('username', set_value('username')); ?>
 		<?php echo form_error('username','<span class="form_error">','</span>'); ?>
 	</div>
