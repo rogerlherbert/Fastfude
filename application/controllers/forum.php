@@ -14,6 +14,9 @@ class Home extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('home/index');
+		$this->load->model('Forum_model');
+		$data['topics'] = $this->Forum_model->getRecentTopics();
+
+		$this->load->view('home/index', $data);
 	}
 }
