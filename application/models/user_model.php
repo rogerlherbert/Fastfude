@@ -68,6 +68,36 @@ Fastfude');
 
 		return $this->db->insert_id();
 	}
+	
+	public function muteUser($user_id, $muted_user_id)
+	{
+		$data = array('user_id' => $user_id, 'muted_user_id' => $muted_user_id);
+
+		$insert_query = $this->db->insert_string('users_muted', $data);
+		$insert_query = str_replace('INSERT INTO','INSERT IGNORE INTO',$insert_query);
+		$this->db->query($insert_query);
+	}
+	
+	public function unmuteUser($user_id, $muted_user_id)
+	{
+		$this->db->delete('users_muted', array('user_id' => $user_id, 'muted_user_id' => $muted_user_id));
+	}
+	
+	public function getMutedUsers($user_id)
+	{
+		$this->db->select('muted_user_id');
+		$query = $this->db->get_where('users_muted', array('user_id' => $user_id));
+		
+		if ($query->num_rows > 0) {
+			$column = array();
+
+			foreach ($query->result() as $row) {
+				$column[] = $row->muted_user_id;
+			}
+
+			return $column;
+		}
+	}
 
 	public function getUserID($username, $password)
 	{

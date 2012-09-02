@@ -102,4 +102,22 @@ class User extends CI_Controller
 		$this->session->sess_destroy();
 		redirect('/');
 	}
+	
+	public function mute($id)
+	{
+		if (!$this->session->userdata('user_id')) {
+			redirect('user/sign_in');
+		}
+		
+		$this->User_model->muteUser($this->session->userdata('user_id'), $id);
+	}
+
+	public function unmute($id)
+	{
+		if (!$this->session->userdata('user_id')) {
+			redirect('user/sign_in');
+		}
+		
+		$this->User_model->unmuteUser($this->session->userdata('user_id'), $id);
+	}
 }

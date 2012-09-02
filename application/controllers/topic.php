@@ -23,6 +23,12 @@ class Topic extends CI_Controller
 
 		$data['posts'] = $this->Topic_model->getPosts($id);
 
+		// muted users
+		if ($this->session->userdata('user_id')) {
+			$this->load->model('User_model');
+			$data['muted'] = $this->User_model->getMutedUsers($this->session->userdata('user_id'));
+		}
+
 		$this->load->view('topic/id', $data);
 	}
 
