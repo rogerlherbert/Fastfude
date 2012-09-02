@@ -5,6 +5,24 @@
 */
 class Forum_model extends CI_Model
 {
+	private $forums = array(
+		 0 => 'all',
+		13 => 'news',
+		 8 => 'gigs',
+		 4 => 'market',
+		 6 => 'equipment',
+		14 => 'recruitment',
+		 3 => 'services',
+		 7 => 'help',
+		 1 => 'miscellaneous',
+		15 => 'egregious'
+	);
+
+	public function getForums()
+	{
+		return $this->forums;
+	}
+
 	public function getRecentTopics()
 	{
 		$this->db->select('t.id, t.forum_id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_last) as post_time_last');
