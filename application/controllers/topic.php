@@ -25,4 +25,27 @@ class Topic extends CI_Controller
 
 		$this->load->view('topic/id', $data);
 	}
+
+	public function reply()
+	{
+		if (!$this->session->userdata('user_id')) {
+			redirect('user/sign_in');
+		}
+
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('topic_id', 'Topic ID', 'trim|required|is_natural_no_zero');
+		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required');
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('topic/reply');
+		}
+		else
+		{
+			$this->Topic_model->addPost($this->input->post('topic_id'), $this->session->userdata('user_id'), $this->input->post('post_text'));
+
+			redirect('/');
+		}
+	}
 }

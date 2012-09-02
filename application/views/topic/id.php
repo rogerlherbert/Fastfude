@@ -18,4 +18,12 @@
 <?php } ?>
 </ol>
 
+<section>
+	<?php echo form_open('topic/reply'); ?>
+	<?php echo form_hidden('topic_id', $topic->id); ?>
+	<?php echo form_textarea('post_text'); ?>
+	<?php echo form_submit('post', 'Post'); ?>
+	<?php echo form_close(); ?>
+</section>
+
 <?php $this->load->view('common/footer'); ?>
