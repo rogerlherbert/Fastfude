@@ -1,0 +1,1 @@
+<?php echo anchor('admin/reset', 'install or reset DB to defaults'); ?>

@@ -66,7 +66,7 @@ Fastfude');
 		$this->db->delete('users_pending', array('email' => $input['email']));
 		$this->db->insert('users', $fields);
 
-		return $this->db->insert_id;
+		return $this->db->insert_id();
 	}
 
 	public function getUserID($username, $password)
