@@ -17,7 +17,7 @@ class User extends CI_Controller
 	public function register()
 	{
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		$this->form_validation->set_rules('email', 'Email', 'trim|strtolower|required|valid_email');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
