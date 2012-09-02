@@ -6,6 +6,16 @@
 class User_model extends CI_Model
 {
 
+	public function getUser($id)
+	{
+		$this->db->select('id, username, MD5(email) as gravatar_id, UNIX_TIMESTAMP(created) as created');
+		$query = $this->db->get_where('users', array('id' => $id));
+
+		if ($query->num_rows > 0) {
+			return $query->result();
+		}
+	}
+
 	public function createPendingUser($email)
 	{
 		$this->load->helper('string');

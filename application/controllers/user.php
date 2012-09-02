@@ -14,6 +14,21 @@ class User extends CI_Controller
 		$this->load->model('User_model');
 	}
 
+	public function id($id)
+	{
+		if (!preg_match('/^[0-9]+$/', $id)) {
+			show_error('Bad user id');
+		}
+
+		$data['profile'] = $this->User_model->getUser($id);
+
+		if (is_null($data['profile'])) {
+			show_404();
+		}
+
+		$this->load->view('user/id', $data);
+	}
+
 	public function register()
 	{
 		$this->load->library('form_validation');
