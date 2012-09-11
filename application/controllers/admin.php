@@ -224,6 +224,14 @@ Yeah, that\'s it. \'Tis worth a discussion, apart from this hackneyed bollocks.
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
 
+		$this->db->query("DROP TABLE IF EXISTS `users_muted`;");
+		$this->db->query("CREATE TABLE `users_muted` (
+		 `user_id` int(10) unsigned NOT NULL,
+		 `muted_user_id` int(10) unsigned NOT NULL,
+		 PRIMARY KEY (`user_id`,`muted_user_id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
+
 		$this->load->model('User_model');
 
 		foreach ($this->users as $user) {
