@@ -232,6 +232,17 @@ Yeah, that\'s it. \'Tis worth a discussion, apart from this hackneyed bollocks.
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
 
+		$this->db->query("DROP TABLE IF EXISTS `users_forgot_pw`;");
+		$this->db->query("CREATE TABLE `users_forgot_pw` (
+		 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+		 `user_id` int(11) unsigned DEFAULT NULL,
+		 `key` varchar(64) DEFAULT NULL,
+		 `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+		 PRIMARY KEY (`id`),
+		 UNIQUE KEY `key` (`key`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+		
+		
 		$this->load->model('User_model');
 
 		foreach ($this->users as $user) {

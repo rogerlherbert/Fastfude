@@ -16,13 +16,15 @@ class User extends CI_Controller
 
 	public function id($id)
 	{
-		if (!preg_match('/^[0-9]+$/', $id)) {
+		if (!preg_match('/^[0-9]+$/', $id)) 
+		{
 			show_error('Bad user id');
 		}
 
 		$data['profile'] = $this->User_model->getUser($id);
 
-		if (is_null($data['profile'])) {
+		if (is_null($data['profile'])) 
+		{
 			show_404();
 		}
 
@@ -118,9 +120,65 @@ class User extends CI_Controller
 		redirect('/');
 	}
 	
+	public function forgot()
+	{
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('username', 'Username', 'required');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			// failed form validation
+			$this->load->view('user/forgot');
+		}
+		else
+		{
+			if ($user = $this->User_model->getUserByName($this->input->post('username'))) 
+			{
+				$this->User_model->createPasswordResetKey($user->id);
+			}
+
+			$this->load->view('user/forgot_check');
+		}
+	}
+	
+	public function recover($key)
+	{
+		$user_id = $this->User_model->isValidRecoveryKey($key);
+
+		if ($user_id === FALSE) 
+		{
+			show_404();
+		}
+
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[passconf]');
+		$this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required');
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			// failed form validation
+			$this->load->view('user/recover');
+		}
+		else
+		{
+			$this->User_model->resetPassword($user_id, $this->input->post('password'));
+			redirect('user/sign_in');
+		}
+	}
+	
+	public function test_key($key)
+	{
+		if (!$this->User_model->isValidRecoveryKey($key)) {
+			show_404();
+		}
+	}
+	
 	public function mute($id)
 	{
-		if (!$this->session->userdata('user_id')) {
+		if (!$this->session->userdata('user_id')) 
+		{
 			redirect('user/sign_in');
 		}
 		
@@ -129,7 +187,8 @@ class User extends CI_Controller
 
 	public function unmute($id)
 	{
-		if (!$this->session->userdata('user_id')) {
+		if (!$this->session->userdata('user_id')) 
+		{
 			redirect('user/sign_in');
 		}
 		
