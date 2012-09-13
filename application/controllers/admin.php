@@ -13,6 +13,10 @@ class Admin extends CI_Controller
 		array('username' => 'Robert\'); DROP TABLE users;', 'password' => 'password', 'email' => 'littlebobbytables@fastfude.org'),
 	);
 	
+	private $mutes = array(
+		array('user_id' => '1', 'muted_user_id' => '4')
+	);
+
 	private $topics = array(
 		array('forum_id' => '1', 'title' => 'test', 'user_id' => '1', 'post_text' => 'this is a test'),
 		array('forum_id' => '1', 'title' => 'Happy Birthday...(Sep.)', 'user_id' => '2', 'post_text' => '"Laurindo Almeida (2 September, 1917 - 26 July, 1995) was a Brazilian virtuoso guitarist and composer who made many recordings of enduring impact in classical, jazz and Latin genres. He is widely credited, with fellow artist Bud Shank, for creating the fusion of Latin and jazz which came to be known as [i]Jazz Samba[/i]."
@@ -250,6 +254,9 @@ Yeah, that\'s it. \'Tis worth a discussion, apart from this hackneyed bollocks.
 			$this->User_model->createUser($user);
 		}
 
+		foreach ($this->mutes as $mute) {
+			$this->User_model->muteUser($mute['user_id'], $mute['muted_user_id']);
+		}
 
 		$this->load->model('Topic_model');
 		
