@@ -15,6 +15,11 @@ class Topic extends CI_Controller
 
 	public function id($id)
 	{
+		if (!preg_match('/^[0-9]+$/', $id)) 
+		{
+			show_error('Bad topic id');
+		}
+		
 		$data['topic'] = $this->Topic_model->getTopic($id);
 		
 		if (is_null($data['topic'])) 
