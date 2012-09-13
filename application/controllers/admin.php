@@ -245,18 +245,21 @@ Yeah, that\'s it. \'Tis worth a discussion, apart from this hackneyed bollocks.
 		
 		$this->load->model('User_model');
 
-		foreach ($this->users as $user) {
+		foreach ($this->users as $user) 
+		{
 			$this->User_model->createUser($user);
 		}
 
 
 		$this->load->model('Topic_model');
 		
-		foreach ($this->topics as $topic) {
+		foreach ($this->topics as $topic) 
+		{
 			$this->Topic_model->addTopic($topic['forum_id'], $topic['user_id'], $topic['title'], $topic['post_text']);
 		}
 		
-		foreach ($this->extra_posts as $post) {
+		foreach ($this->extra_posts as $post) 
+		{
 			$this->Topic_model->addPost($post['topic_id'], $post['user_id'], $post['post_text']);
 		}
 	}

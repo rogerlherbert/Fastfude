@@ -23,7 +23,8 @@ class Topic_model extends CI_Model
 	
 		$query = $this->db->get();
 	
-		if ($query->num_rows() > 0) {
+		if ($query->num_rows() > 0) 
+		{
 			return $query->result();
 		}
 	}
@@ -32,7 +33,8 @@ class Topic_model extends CI_Model
 	{
 		$query = $this->db->get_where('posts', array('id' => $id));
 
-		if ($query->num_rows() > 0) {
+		if ($query->num_rows() > 0) 
+		{
 			return $query->row();
 		}
 	}

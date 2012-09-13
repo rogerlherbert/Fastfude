@@ -17,14 +17,16 @@ class Topic extends CI_Controller
 	{
 		$data['topic'] = $this->Topic_model->getTopic($id);
 		
-		if (is_null($data['topic'])) {
+		if (is_null($data['topic'])) 
+		{
 			show_404();
 		}
 
 		$data['posts'] = $this->Topic_model->getPosts($id);
 
 		// muted users
-		if ($this->session->userdata('user_id')) {
+		if ($this->session->userdata('user_id')) 
+		{
 			$this->load->model('User_model');
 			$data['muted'] = $this->User_model->getMutedUsers($this->session->userdata('user_id'));
 		}
@@ -34,7 +36,8 @@ class Topic extends CI_Controller
 
 	public function reply()
 	{
-		if (!$this->session->userdata('user_id')) {
+		if (!$this->session->userdata('user_id')) 
+		{
 			redirect('user/sign_in');
 		}
 

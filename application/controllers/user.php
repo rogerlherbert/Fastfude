@@ -170,7 +170,8 @@ class User extends CI_Controller
 	
 	public function test_key($key)
 	{
-		if (!$this->User_model->isValidRecoveryKey($key)) {
+		if (!$this->User_model->isValidRecoveryKey($key)) 
+		{
 			show_404();
 		}
 	}
