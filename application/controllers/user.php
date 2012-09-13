@@ -167,15 +167,7 @@ class User extends CI_Controller
 			redirect('user/sign_in');
 		}
 	}
-	
-	public function test_key($key)
-	{
-		if (!$this->User_model->isValidRecoveryKey($key)) 
-		{
-			show_404();
-		}
-	}
-	
+
 	public function mute($id)
 	{
 		if (!$this->session->userdata('user_id')) 
