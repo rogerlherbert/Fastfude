@@ -11,7 +11,7 @@
 			<?php echo date('c', $post->post_time); ?>
 		</div>
 		<div class="post_content">
-			<?php if ($muted && in_array($post->user_id, $muted)) {
+			<?php if (isset($muted) && in_array($post->user_id, $muted)) {
 				echo nl2br(html_escape("you have muted this user"));
 			} else {
 				echo nl2br(html_escape($post->post_text));
