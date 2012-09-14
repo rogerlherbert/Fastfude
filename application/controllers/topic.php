@@ -21,12 +21,13 @@ class Topic extends CI_Controller
 		}
 		
 		$data['topic'] = $this->Topic_model->getTopic($id);
-		
+
 		if (is_null($data['topic'])) 
 		{
 			show_404();
 		}
 
+		$data['title'] = $data['topic']->title;
 		$data['posts'] = $this->Topic_model->getPosts($id);
 
 		// muted users
@@ -53,7 +54,8 @@ class Topic extends CI_Controller
 		
 		if ($this->form_validation->run() == FALSE)
 		{
-			$this->load->view('topic/reply');
+			$data['title'] = 'Reply To Topic';
+			$this->load->view('topic/reply', $data);
 		}
 		else
 		{

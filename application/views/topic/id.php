@@ -1,14 +1,11 @@
 <?php $this->load->view('common/header'); ?>
 
-<?php echo $topic->title; ?>
-
-<ol>
+<ol class="posts">
 <?php foreach ($posts as $post) { ?>
 	<li id="post_<?php echo $post->id; ?>">
 		<div class="post_author">
-			<?php echo img('http://www.gravatar.com/avatar/'.$post->gravatar_id); ?>
-			<?php echo anchor('user/id/'.$post->user_id, html_escape($post->username)); ?>
-			<?php echo date('c', $post->post_time); ?>
+			<?php echo anchor('user/id/'.$post->user_id, img('http://www.gravatar.com/avatar/'.$post->gravatar_id) . html_escape($post->username)); ?>
+			<time datetime="<?php echo date("c", $post->post_time); ?>" class="comment_date"><?php echo date("D jS M Y, g:i a", $post->post_time); ?></time>
 		</div>
 		<div class="post_content">
 			<?php if (isset($muted) && in_array($post->user_id, $muted)) {
@@ -22,7 +19,11 @@
 <?php } ?>
 </ol>
 
-<section>
+
+<section class="reply">
+
+	<h2>Post A Reply</h2>
+
 	<?php echo form_open('topic/reply'); ?>
 	<?php echo form_hidden('topic_id', $topic->id); ?>
 	<?php echo form_textarea('post_text'); ?>

@@ -2,7 +2,7 @@
 
 <?php if (count($topics) > 0) { ?>
 
-<ol>
+<ol class="topics">
 <?php foreach ($topics as $topic) { ?>
 	<li>
 		<p class="topic_title"><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></p>

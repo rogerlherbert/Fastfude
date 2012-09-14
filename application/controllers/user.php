@@ -28,6 +28,8 @@ class User extends CI_Controller
 			show_404();
 		}
 
+		$data['title'] = $data['profile']->username;
+
 		$this->load->view('user/id', $data);
 	}
 
@@ -36,16 +38,18 @@ class User extends CI_Controller
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'Email', 'trim|strtolower|required|valid_email');
 		
+		$data['title'] = "Register";
+
 		if ($this->form_validation->run() == FALSE)
 		{
 			// first load or failed form validation
-			$this->load->view('user/register');
+			$this->load->view('user/register', $data);
 		}
 		else
 		{
 			// create temp user and send email
 			$this->User_model->createPendingUser($this->input->post('email'));
-			$this->load->view('user/register_confirm');
+			$this->load->view('user/register_confirm', $data);
 		}
 	}
 
@@ -55,7 +59,8 @@ class User extends CI_Controller
 
 		if (!$email)
 		{
-			$this->load->view('user/register_auth');
+			$data['title'] = "Onoes!";
+			$this->load->view('user/register_auth', $data);
 		}
 		else
 		{
@@ -66,8 +71,9 @@ class User extends CI_Controller
 			
 			if ($this->form_validation->run() == FALSE)
 			{
+				$data['title'] = "Pick a username and password";
 				// first load or failed form validation
-				$this->load->view('user/confirm');
+				$this->load->view('user/confirm', $data);
 			}
 			else
 			{
@@ -91,8 +97,9 @@ class User extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['title'] = "Sign In";
 			// failed form validation
-			$this->load->view('user/sign_in');
+			$this->load->view('user/sign_in', $data);
 		}
 		else
 		{
@@ -106,6 +113,8 @@ class User extends CI_Controller
 			}
 			else
 			{
+				$data['title'] = "Onoes!";
+
 				// user/pass not found in DB
 				$data['error'] = "That username & password combination is not correct.";
 				$this->load->view('user/sign_in', $data);
@@ -128,8 +137,9 @@ class User extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['title'] = "Forgot Password";
 			// failed form validation
-			$this->load->view('user/forgot');
+			$this->load->view('user/forgot', $data);
 		}
 		else
 		{
@@ -137,8 +147,9 @@ class User extends CI_Controller
 			{
 				$this->User_model->createPasswordResetKey($user->id);
 			}
+			$data['title'] = "Check Your Email";
 
-			$this->load->view('user/forgot_check');
+			$this->load->view('user/forgot_check', $data);
 		}
 	}
 	
@@ -158,8 +169,9 @@ class User extends CI_Controller
 		
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['title'] = "Choose a new password";
 			// failed form validation
-			$this->load->view('user/recover');
+			$this->load->view('user/recover', $data);
 		}
 		else
 		{

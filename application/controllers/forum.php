@@ -20,6 +20,8 @@ class Forum extends CI_Controller
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['topics'] = $this->Forum_model->getRecentTopics();
 
+		$data['title'] = "Fastfude - Northern Ireland's Music Scene";
+
 		$this->load->view('forum/index', $data);
 	}
 	
@@ -34,6 +36,7 @@ class Forum extends CI_Controller
 
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['topics'] = $this->Forum_model->getRecentTopics($id);
+		$data['title'] = $data['forums'][$id];
 
 		$this->load->view('forum/id', $data);
 	}
