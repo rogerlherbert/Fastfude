@@ -65,7 +65,7 @@ class User extends CI_Controller
 		else
 		{
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[users.username]');
+			$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[32]|is_unique[users.username]');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[passconf]');
 			$this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required');
 			
