@@ -16,9 +16,25 @@ class Forum extends CI_Controller
 	public function index()
 	{
 		$this->load->helper('date');
+
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['topics'] = $this->Forum_model->getRecentTopics();
 
 		$this->load->view('forum/index', $data);
+	}
+	
+	public function id($id)
+	{
+		if (!preg_match('/^[0-9]+$/', $id)) 
+		{
+			show_error('Bad forum id');
+		}
+
+		$this->load->helper('date');
+
+		$data['forums'] = $this->Forum_model->getForums();
+		$data['topics'] = $this->Forum_model->getRecentTopics($id);
+
+		$this->load->view('forum/id', $data);
 	}
 }

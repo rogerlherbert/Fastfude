@@ -26,7 +26,7 @@ class Admin extends CI_Controller
 [img]http://img1.liveinternet.ru/images/attach/c/0//48/251/48251758_Laurindo_Almeida.gif[/img]
 
 http://www.youtube.com/watch?v=W-9OrHd6QdM'),
-		array('forum_id' => '1', 'title' => 'Guitarists for Codemaking', 'user_id' => '3', 'post_text' => 'Hi,
+		array('forum_id' => '13', 'title' => 'Guitarists for Codemaking', 'user_id' => '3', 'post_text' => 'Hi,
 
  Burning Codes (solo collaborative project of Belfast born singer/songwriter Paul Archer) still looking for guitar players, (also keys, brass and strings). Paul sang on Snow Patrol\'s multi-platinum album Eyes Open and has just recently returned from singing with Snow Patrol at both their V Festival appearances.
 

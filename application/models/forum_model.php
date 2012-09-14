@@ -23,7 +23,7 @@ class Forum_model extends CI_Model
 		return $this->forums;
 	}
 
-	public function getRecentTopics()
+	public function getRecentTopics($forum_id = 0)
 	{
 		$this->db->select('t.id, t.forum_id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_last) as post_time_last');
 		
@@ -32,6 +32,10 @@ class Forum_model extends CI_Model
 		
 		$this->db->select('u2.username as username_last, t.user_id_last');
 		$this->db->join('users u2', 'u2.id = t.user_id_last', 'left outer');
+
+		if ($forum_id > 0) {
+			$this->db->where('forum_id', $forum_id);
+		}
 
 		$this->db->order_by('t.post_id_last', 'desc');
 		$this->db->limit(50);
