@@ -9,6 +9,7 @@ class Topic extends CI_Controller
 	{
 		parent::__construct();
 
+		$this->load->model('Forum_model');
 		$this->load->model('Topic_model');
 		$this->output->enable_profiler(TRUE);
 	}
@@ -72,6 +73,32 @@ class Topic extends CI_Controller
 		{
 			$this->Topic_model->addPost($this->input->post('topic_id'), $this->session->userdata('user_id'), $this->input->post('post_text'));
 
+			redirect('/');
+		}
+	}
+	
+	public function create()
+	{
+		if (!$this->session->userdata('user_id')) 
+		{
+			redirect('user/sign_in');
+		}
+
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('forum_id', 'Forum ID', 'required|is_natural_no_zero');
+		$this->form_validation->set_rules('subject', 'Topic Subject', 'trim|required');
+		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['forums'] = $this->Forum_model->getForums();
+			$data['title'] = 'Create A Topic';
+			$this->load->view('topic/create', $data);
+		}
+		else
+		{
+			$this->Topic_model->addTopic($this->input->post('forum_id'), $this->session->userdata('user_id'), $this->input->post('subject'), $this->input->post('post_text'));
 			redirect('/');
 		}
 	}
