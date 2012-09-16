@@ -1,5 +1,9 @@
 <?php $this->load->view('common/header'); ?>
 
+<?php if (isset($gig)) {
+	$this->load->view('gig/topic');
+} ?>
+
 <ol class="posts">
 <?php foreach ($posts as $post) { ?>
 	<li id="post_<?php echo $post->id; ?>">
