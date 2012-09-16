@@ -2,13 +2,25 @@
 
 <nav>
 	<?php echo anchor('/', img('assets/img/logo.gif'), 'id="logo" title="Fastfude"'); ?>
+
 	<div id="login"><?php
 		if ($this->session->userdata('user_id')) {
-			echo "logged in as ". anchor('user/id/'.$this->session->userdata('user_id'), $this->session->userdata('user_id')) . " " . anchor('user/sign_out', "sign out now");
+			echo anchor('user/id/'.$this->session->userdata('user_id'), img($this->session->userdata('gravatar_id')));
+			echo anchor('user/id/'.$this->session->userdata('user_id'), $this->session->userdata('username'));
+			echo anchor('user/sign_out', "sign out");
 		} else {
-			echo "not logged in. ". anchor('user/sign_in', "sign in now") ." or ". anchor('user/register', "register a new user");
+			echo anchor('user/sign_in', img('assets/img/unknown_user.png'));
+			echo anchor('user/sign_in', "sign in") . ' | ';
+			echo anchor('user/register', "register");
 		}
 	?></div>
+
+	<div id="sections">
+		<?php echo anchor('forums', 'Forums', 'id="nav_forums"'); ?>
+		<?php echo anchor('gigs', 'Gigs', 'id="nav_gigs"'); ?>
+		<?php echo anchor('wiki', 'Wiki', 'id="nav_wiki"'); ?>
+		<?php echo anchor('messages', 'Messages', 'id="nav_messages"'); ?>
+	</div>
 </nav>
 
 <footer>
