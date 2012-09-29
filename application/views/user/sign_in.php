@@ -1,6 +1,8 @@
 <?php $this->load->view('common/header'); ?>
 <?php echo form_open(); ?>
 
+	<?php if(isset($error)) { echo "<span class=\"form_error\">".$error."</span>"; } ?>
+
 	<div class="field" id="username">
 		<?php echo form_label('username', 'username'); ?>
 		<?php echo form_input('username', set_value('username')); ?>
@@ -15,8 +17,6 @@
 
 	<div class="field" id="submit"><?php echo form_submit(array('name' => 'sign_in', 'value' => 'sign in', 'class' => 'button')); ?></div>
 
-	<?php if(isset($error)) { echo "<p>".$error."</p>"; } ?>
-	
 	<?php echo anchor('user/forgot', 'Forgot Password'); ?>
 <?php echo form_close(); ?>
 <?php $this->load->view('common/footer'); ?>

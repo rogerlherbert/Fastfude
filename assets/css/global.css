@@ -127,6 +127,12 @@ input[type="submit"] {
 	cursor: pointer;
 }
 
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+	background-color: #444;
+}
+
 textarea { 
 	font: normal normal normal 16px/1.5 'MuseoSlab-500', serif;
 	max-width: 100%;
