@@ -1,7 +1,7 @@
 </div>
 
 <nav>
-	<?php echo anchor('/', img('assets/img/logo.gif'), 'id="logo" title="Fastfude"'); ?>
+	<?php echo anchor('user/sign_in', '<span>User</span>', ' id="user" class="icon-user nav-button"'); ?>
 
 	<div id="login"><?php
 		if ($this->session->userdata('user_id')) {
@@ -15,17 +15,22 @@
 		}
 	?></div>
 
+	<?php echo anchor('/', '<span>Home</span>', 'id="home" title="Home" class="icon-home nav-button"'); ?>
+
 	<div id="sections">
-		<?php echo anchor('forums', 'Forums', 'id="nav_forums"'); ?>
-		<?php echo anchor('gigs', 'Gigs', 'id="nav_gigs"'); ?>
-		<?php echo anchor('wiki', 'Wiki', 'id="nav_wiki"'); ?>
-		<?php echo anchor('messages', 'Messages', 'id="nav_messages"'); ?>
+		<?php echo anchor('gigs', '<span>Gigs</span>', 'id="nav_gigs" class="icon-music nav-button" title="Gigs"'); ?>
+		<?php echo anchor('wiki', '<span>Wiki</span>', 'id="nav_wiki" class="icon-book nav-button" title="Wiki"'); ?>
+		<?php echo anchor('messages', '<span>Messages</span>', 'id="nav_messages" class="icon-envelope-alt nav-button" title="Messages"'); ?>
 	</div>
 </nav>
 
+<?php echo form_open('search', array('id' => 'search')); ?>
+<?php echo form_input('search'); ?>
+<?php echo form_close(); ?>
+
 <footer>
-	<p id="indie_bastards">Independent Music in Ireland <?php echo anchor('http://www.thumped.com/', 'Thumped'); ?> | <?php echo anchor('http://www.metalireland.com/', 'Metal Ireland'); ?> | <?php echo anchor('/', 'Fastfude'); ?></p>
-	<p id="blurb">Fastfude &copy; 1997 - <?php echo date('Y'); ?> Roger Herbert. <?php echo anchor('https://github.com/junap/Fastfude', 'Help make Fastfude better'); ?>.</p>
+	<p id="linkage">Fastfude is on <?php echo anchor('https://twitter.com/fastfude', 'Twitter', ' class="icon-twitter-sign"'); ?>, <?php echo anchor('https://facebook.com/fastfude', 'Facebook', ' class="icon-facebook-sign"'); ?> &amp; <?php echo anchor('https://github.com/junap/Fastfude', 'Github', ' class="icon-github-sign"'); ?></p>
+	<p id="blurb">Scenewrecking since 1997</p>
 </footer>
 
 </body>

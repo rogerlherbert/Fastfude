@@ -1,5 +1,9 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="controls">
+	<?php echo anchor('topic/create', "Create a topic", ' class="button icon-plus"'); ?>
+</div>
+
 <?php if (count($topics) > 0) { ?>
 
 <ol class="topics">

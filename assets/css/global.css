@@ -13,10 +13,10 @@ html {
 }
 
 body {
-	font: normal normal normal 16px/1.5 Verdana, sans-serif;
+	font: normal normal normal 16px/1.5 'MuseoSlab-500', serif;
 	background: #1a1a1a url('../img/black_denim.png') repeat scroll top center;
 	color: #666;
-	padding-top: 8em
+	padding-top: 7em
 }
 
 header {
@@ -35,15 +35,51 @@ nav {
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 6em;
-	padding: 0 10%;
+	height: 3em;
+	padding: 0;
 	background-color: #000;
+	z-index: 999;
 }
 
-nav a#logo { padding: 1.5em 0; height: 3em; display: inline-block}
-nav div#login { position: absolute; top: 0; right: 10%; padding: 1.5em 0; }
+nav a.nav-button {
+	font-size: 150%; line-height: 1; width: 1em; height: 1em; padding: 0.5em
+}
 
-div#content { margin: 0 10%;}
+nav a.nav-button:hover {
+	text-decoration: none;
+	background-color: #003b4f;
+}
+
+nav a#home { 
+	display: inline-block;
+}
+
+nav a#user {
+	float: right;
+}
+
+nav a#home span, nav a#user span {
+	display: none;
+}
+
+nav div#login { 
+	display: none;
+}
+
+nav #sections {
+	display: inline-block;
+}
+nav #sections a { display: inline-block; text-align: center; }
+
+nav #sections a span { display: none; }
+
+form#search {
+	position: absolute;
+	top: 4em;
+	height: 3em
+}
+
+div#content { margin: 0 5%;}
 
 h1, h2, h3, h4, h5, h6 {
 	font-size: 150%;
@@ -61,12 +97,58 @@ a {
 	color: #fff;
 }
 
+a:hover {
+	text-decoration: underline;
+}
+
+button,
+input {
+	font: normal normal normal 16px/1.5 'MuseoSlab-500', serif;
+	background-color: #fff;
+	border: none;
+	padding: 0.25em;
+	max-width: 100%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+	background-color: #333;
+	color: #fff;
+	border-radius: 0.5em;
+	line-height: 1;
+	padding: 0.6667em 0.75em 0.3333em;
+	text-transform: capitalize;
+	cursor: pointer;
+}
+
+textarea { 
+	font: normal normal normal 16px/1.5 'MuseoSlab-500', serif;
+	max-width: 100%;
+}
+
+div.field {
+	margin-bottom: 1em;
+}
+
+div.field label {
+	display: block
+}
+
+span.form_error {
+	display: block;
+	color: #f00
+}
+
 .topics { border-top: 1px dotted #333; }
-.topics li { padding: 1em 0 1em 2em; border-bottom: 1px dotted #333; }
+.topics li { padding: 1em 0 1em; border-bottom: 1px dotted #333; }
 .topics .meta { font-size: 75%; margin-top: 0.5em }
 .topics .meta a { color: #999 }
-
-.reply form { padding: 1em; }
 
 .posts li { margin-bottom: 2em; }
 .posts .post_author { overflow: hidden;}
@@ -74,6 +156,24 @@ a {
 .posts .post_author a img { width: 2em; height: 2em; margin: 0.5em 1em 0.5em 0; display: inline-block; vertical-align: middle }
 .posts .post_content { padding: 1em 0; }
 
-p#indie_bastards,
-p#blurb { font-size: 75%; text-align: center}
+footer p { font-size: 75%; text-align: center}
+footer p a:before {margin-right: 0.5em; white-space:no-wrap}
 
+.controls {
+	margin-bottom: 1em;
+}
+
+a.button {
+	display:inline-block;
+	line-height: 1;
+	padding: 0.6667em 0.75em 0.3333em;
+	background-color: #333;
+	color: #fff;
+	border-radius: 0.5em;
+}
+
+a.button:before {margin-right: 0.5em}
+a.button:hover {
+	text-decoration: none;
+	background-color: #444;
+}

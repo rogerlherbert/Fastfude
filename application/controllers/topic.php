@@ -87,8 +87,8 @@ class Topic extends CI_Controller
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('forum_id', 'Forum ID', 'required|is_natural_no_zero');
-		$this->form_validation->set_rules('subject', 'Topic Subject', 'trim|required');
-		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required');
+		$this->form_validation->set_rules('subject', 'Topic Subject', 'trim|required|min_length[4]');
+		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required|min_length[30]');
 
 		if ($this->form_validation->run() == FALSE)
 		{
