@@ -10,7 +10,7 @@ class Forum extends CI_Controller
 		parent::__construct();
 	
 		$this->load->model('Forum_model');
-		$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 	}
 
 	public function index()
@@ -23,6 +23,16 @@ class Forum extends CI_Controller
 		$data['title'] = "Fastfude - Northern Ireland's Music Scene";
 
 		$this->load->view('forum/index', $data);
+	}
+	
+	public function gigs()
+	{
+		$this->load->helper('date');
+
+		$data['forums'] = $this->Forum_model->getForums();
+		$data['title'] = $data['forums'][8];
+		
+		$this->load->view('forum/gigs', $data);
 	}
 	
 	public function id($id)

@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "forum";
 $route['404_override'] = '';
+$route['gigs'] = "forum/gigs";
 
 
 /* End of file routes.php */

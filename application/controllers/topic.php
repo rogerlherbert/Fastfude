@@ -11,7 +11,7 @@ class Topic extends CI_Controller
 
 		$this->load->model('Forum_model');
 		$this->load->model('Topic_model');
-		$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 	}
 
 	public function id($id)
