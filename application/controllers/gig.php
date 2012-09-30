@@ -82,9 +82,11 @@ class Gig extends CI_Controller
 		if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $str)) {
 
 			$segments = explode('-', $str);
+			$unix = strtotime($str);
 
 			if (checkdate($segments[1], $segments[2], $segments[0]) && 
-				strtotime('midnight') <= strtotime($str)) {
+				strtotime('midnight') <= $unix &&
+				strtotime('+2 years') >= $unix) {
 				return TRUE;
 			}
 		}
@@ -95,12 +97,20 @@ class Gig extends CI_Controller
 
 	public function valid_time($str)
 	{
-		if (!preg_match('/^[0-9]{1,2}:[0-9]{2}$/', $str)) {
-			$this->form_validation->set_message('valid_time', 'The %s field should be a time in the format hh:mm');
-			return FALSE;
+		if (preg_match('/^[0-9]{2}:[0-9]{2}$/', $str)) {
+			
+			$segments = explode(':', $str);
+			
+			if ($segments[0] >= 0 && 
+				$segments[0] < 24 && 
+				$segments[1] >= 0 && 
+				$segments[1] < 60) {
+				return TRUE;
+			}
 		}
 
-		return TRUE;
+		$this->form_validation->set_message('valid_time', 'The %s field should be a time in the 24-hour format hh:mm');
+		return FALSE;
 	}
 }
 

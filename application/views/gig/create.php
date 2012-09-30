@@ -4,13 +4,13 @@
 
 <div class="field">
 	<?php echo form_label('Date', 'start_time_1'); ?>
-	<?php echo form_input(array('name' => 'start_time_1', 'value' => set_value('start_time_1'), 'type' => 'date')); ?>
+	<?php echo form_input(array('name' => 'start_time_1', 'value' => set_value('start_time_1'), 'placeholder' => date('Y-m-d'), 'type' => 'date', 'min' => date('Y-m-d'))); ?>
 	<?php echo form_error('start_time_1','<span class="form_error">','</span>'); ?>
 </div>
 
 <div class="field">
 	<?php echo form_label('Time', 'start_time_2'); ?>
-	<?php echo form_input(array('name' => 'start_time_2', 'value' => set_value('start_time_2'), 'type' => 'time')); ?>
+	<?php echo form_input(array('name' => 'start_time_2', 'value' => set_value('start_time_2'), 'placeholder' => '21:00', 'type' => 'time')); ?>
 	<?php echo form_error('start_time_2','<span class="form_error">','</span>'); ?>
 </div>
 
