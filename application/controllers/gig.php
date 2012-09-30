@@ -68,10 +68,12 @@ class Gig extends CI_Controller
 		}
 		else
 		{
-			$topic_id = $this->Topic_model->addTopic(8, $this->session->userdata('user_id'), $this->input->post('subject'), $this->input->post('post_text'));
-			$start_time = $this->input->post('start_time_1') . " " . $this->input->post('start_time_2') . ":00";
+			$this->load->model('Topic_model');
 
-			$this->Gig_model->addGig($topic_id, $start_time, $title, $this->input->post('location'), '', $lineup);
+			$topic_id = $this->Topic_model->addTopic(8, $this->session->userdata('user_id'), $this->input->post('subject'), $this->input->post('post_text'));
+			$start_time = strtotime($this->input->post('start_time_1') . " " . $this->input->post('start_time_2'));
+
+			$this->Gig_model->addGig($topic_id, $start_time, $this->input->post('subject'), $this->input->post('location'), '', $this->input->post('lineup'));
 
 			redirect('/');
 		}

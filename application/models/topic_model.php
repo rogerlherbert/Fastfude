@@ -52,6 +52,8 @@ class Topic_model extends CI_Model
 		$topic_id = $this->db->insert_id();
 
 		$this->addPost($topic_id, $user_id, $post_text);
+		
+		return $topic_id;
 	}
 
 	public function addPost($topic_id, $user_id, $post_text)
@@ -67,7 +69,11 @@ class Topic_model extends CI_Model
 	
 		$this->db->insert('posts', $fields);
 		
+		$post_id = $this->db->insert_id();
+
 		$this->updateTopic($topic_id);
+		
+		return $post_id;
 	}
 
 	public function updateTopic($topic_id)

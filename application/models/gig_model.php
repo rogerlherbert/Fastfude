@@ -19,7 +19,7 @@ class Gig_model extends CI_Model
 		$fields = array(
 			'topic_id' => $topic_id,
 			'start_time' => date('Y-m-d h:i:s', $start_time),
-			'title' => $title,
+			'gig_title' => $title,
 			'location' => $location,
 			'reference_token' => $reference_token,
 			'lineup' => $lineup
