@@ -183,3 +183,5 @@ a.button:hover {
 	text-decoration: none;
 	background-color: #444;
 }
+
+.calendar h2 { margin: 1em 0; padding-top: 1em; border-top: 1px solid #333}

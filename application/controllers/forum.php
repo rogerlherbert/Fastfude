@@ -24,17 +24,7 @@ class Forum extends CI_Controller
 
 		$this->load->view('forum/index', $data);
 	}
-	
-	public function gigs()
-	{
-		$this->load->helper('date');
 
-		$data['forums'] = $this->Forum_model->getForums();
-		$data['title'] = $data['forums'][8];
-		
-		$this->load->view('forum/gigs', $data);
-	}
-	
 	public function id($id)
 	{
 		if (!preg_match('/^[0-9]+$/', $id)) 
