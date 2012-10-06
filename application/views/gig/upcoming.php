@@ -29,7 +29,7 @@
 					<span class="meta">
 						<?php if ($gig->topic_id != '') { echo $gig->replies . " replies | "; } ?>
 						<span class="location"><?php echo $gig->location; ?></span>
-						Doors at <time class="dtstart" datetime="<?php echo date('c', $gig->start_time); ?>"></time>
+						Doors at <time class="dtstart" datetime="<?php echo date('c', $gig->start_time); ?>"><?php echo date('h:i a', $gig->start_time); ?></time>
 					</span>
 				</li>
 				<?php } ?>

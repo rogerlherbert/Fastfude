@@ -185,3 +185,4 @@ a.button:hover {
 }
 
 .calendar h2 { margin: 1em 0; padding-top: 1em; border-top: 1px solid #333}
+.calendar .vevent { margin-bottom: 1em;}

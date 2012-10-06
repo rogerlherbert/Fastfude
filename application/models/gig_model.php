@@ -7,6 +7,7 @@ class Gig_model extends CI_Model
 {
 	public function getGigByTopicID($topic_id)
 	{
+		$this->db->select('UNIX_TIMESTAMP(start_time) as start_time, gig_title, location, lineup');
 		$query = $this->db->get_where('gigs', array('topic_id' => $topic_id));
 		
 		if ($query->num_rows() > 0) 
