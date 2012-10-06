@@ -33,7 +33,8 @@ class Forum_model extends CI_Model
 		$this->db->select('u2.username as username_last, t.user_id_last');
 		$this->db->join('users u2', 'u2.id = t.user_id_last', 'left outer');
 
-		if ($forum_id > 0) {
+		if ($forum_id > 0) 
+		{
 			$this->db->where('forum_id', $forum_id);
 		}
 
@@ -42,7 +43,8 @@ class Forum_model extends CI_Model
 
 		$query = $this->db->get('topics t');
 
-		if ($query->num_rows() > 0) {
+		if ($query->num_rows() > 0) 
+		{
 			return $query->result();
 		}
 	}

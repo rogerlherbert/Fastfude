@@ -9,7 +9,8 @@ class Topic_model extends CI_Model
 	{
 		$query = $this->db->get_where('topics', array('id' => $topic_id));
 	
-		if ($query->num_rows() > 0) {
+		if ($query->num_rows() > 0) 
+		{
 			return $query->row();
 		}
 	}

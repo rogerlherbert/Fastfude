@@ -9,10 +9,12 @@ class Gig_model extends CI_Model
 	{
 		$query = $this->db->get_where('gigs', array('topic_id' => $topic_id));
 		
-		if ($query->num_rows() > 0) {
+		if ($query->num_rows() > 0) 
+		{
 			$gig = $query->row();
 			
-			if ($gig->lineup != '') {
+			if ($gig->lineup != '') 
+			{
 				$gig->lineup = implode(' + ', unserialize($gig->lineup));
 			}
 			
@@ -35,7 +37,7 @@ class Gig_model extends CI_Model
 
 		return $this->db->insert_id();
 	}
-	
+
 	public function getUpcomingGigs($days = 90)
 	{
 		$this->db->select('t.id as topic_id, UNIX_TIMESTAMP(g.start_time) as start_time, g.gig_title, g.lineup, g.location, t.replies');
@@ -46,18 +48,21 @@ class Gig_model extends CI_Model
 	
 		$query = $this->db->get('gigs g');
 	
-		if ($query->num_rows() > 0) {
-	
+		if ($query->num_rows() > 0) 
+		{
+
 			// prefill days of calendar
 			$calendar = array_pad(array(), $days, null);
 	
 			// insert each gig in calendar according to how many days away they are from now
-			foreach ($query->result() as $gig) {
+			foreach ($query->result() as $gig) 
+			{
 				$timediff = $gig->start_time - time();
 	
 				$offset = ($timediff <= 0) ? 0 : $offset = floor($timediff / 86400);
 
-				if ($gig->lineup != '') {
+				if ($gig->lineup != '') 
+				{
 					$gig->lineup = implode(' + ', unserialize($gig->lineup));
 				}
 
@@ -77,15 +82,19 @@ class Gig_model extends CI_Model
 	
 		$query = $this->db->get('gigs g');
 	
-		if ($query->num_rows() > 0) {
+		if ($query->num_rows() > 0) 
+		{
 	
 			$result = $query->result();
 	
-			foreach ($result as $gig) {
-				if ($gig->lineup != '') {
+			foreach ($result as $gig) 
+			{
+				if ($gig->lineup != '') 
+				{
 					$gig->lineup = implode(' + ', unserialize($gig->lineup));
 				}
 			}
+
 			return $query->result();
 		}
 	}
@@ -100,13 +109,16 @@ class Gig_model extends CI_Model
 		{
 			$array = array();
 			
-			foreach (explode('+', $str) as $band) {
+			foreach (explode('+', $str) as $band) 
+			{
 				$trimmed = trim($band);
-				if ($trimmed != '') {
+				
+				if ($trimmed != '') 
+				{
 					$array[] = mb_strtolower($trimmed);
 				}
 			}
-			
+
 			return $array;
 		}
 	}

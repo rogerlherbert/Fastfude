@@ -28,7 +28,8 @@ class Topic extends CI_Controller
 			show_404();
 		}
 
-		switch ($data['topic']->forum_id) {
+		switch ($data['topic']->forum_id) 
+		{
 			case 8:
 				$this->load->model('Gig_model');
 				$data['gig'] = $this->Gig_model->getGigByTopicID($id);

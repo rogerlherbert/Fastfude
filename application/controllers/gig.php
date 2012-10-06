@@ -88,7 +88,8 @@ class Gig extends CI_Controller
 
 			if (checkdate($segments[1], $segments[2], $segments[0]) && 
 				strtotime('midnight') <= $unix &&
-				strtotime('+2 years') >= $unix) {
+				strtotime('+2 years') >= $unix) 
+			{
 				return TRUE;
 			}
 		}
@@ -106,7 +107,8 @@ class Gig extends CI_Controller
 			if ($segments[0] >= 0 && 
 				$segments[0] < 24 && 
 				$segments[1] >= 0 && 
-				$segments[1] < 60) {
+				$segments[1] < 60) 
+			{
 				return TRUE;
 			}
 		}
