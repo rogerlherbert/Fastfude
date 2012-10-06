@@ -41,6 +41,7 @@
 $route['default_controller'] = "forum";
 $route['404_override'] = '';
 $route['gigs'] = 'gig/upcoming';
+$route['messages'] = 'message';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
