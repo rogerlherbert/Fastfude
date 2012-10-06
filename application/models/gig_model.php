@@ -10,7 +10,13 @@ class Gig_model extends CI_Model
 		$query = $this->db->get_where('gigs', array('topic_id' => $topic_id));
 		
 		if ($query->num_rows() > 0) {
-			return $query->row();
+			$gig = $query->row();
+			
+			if ($gig->lineup != '') {
+				$gig->lineup = implode(' + ', unserialize($gig->lineup));
+			}
+			
+			return $gig;
 		}
 	}
 
@@ -50,7 +56,11 @@ class Gig_model extends CI_Model
 				$timediff = $gig->start_time - time();
 	
 				$offset = ($timediff <= 0) ? 0 : $offset = floor($timediff / 86400);
-	
+
+				if ($gig->lineup != '') {
+					$gig->lineup = implode(' + ', unserialize($gig->lineup));
+				}
+
 				$calendar[$offset][] = $gig;
 			}
 	
@@ -73,7 +83,7 @@ class Gig_model extends CI_Model
 	
 			foreach ($result as $gig) {
 				if ($gig->lineup != '') {
-					$gig->lineup = unserialize($gig->lineup);
+					$gig->lineup = implode(' + ', unserialize($gig->lineup));
 				}
 			}
 			return $query->result();

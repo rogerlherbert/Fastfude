@@ -7,7 +7,7 @@
 		<?php foreach ($gigs as $gig) { ?>
 		<li class="vevent">
 			<?php if ($gig->lineup != '') { ?>
-				<div class="summary"><?php echo implode(' + ', unserialize($gig->lineup)); ?></div>
+				<div class="summary"><?php echo $gig->lineup; ?></div>
 			<?php } ?>
 
 			<?php if ($gig->topic_id != '') { ?>
