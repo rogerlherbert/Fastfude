@@ -17,8 +17,14 @@ class Admin extends CI_Controller
 		array('user_id' => '1', 'muted_user_id' => '4')
 	);
 
+	private $gigs = array(
+		array('topic_id' => '1', 'start_time' => '2012-10-10 21:00:00', 'gig_title' => 'Lorem Ipsum', 'location' => 'Venue, City', 'lineup' => 'lkj+über++études +çediña'),
+		array('topic_id' => '1', 'start_time' => '2012-10-11 21:00:00', 'gig_title' => 'Lorem Ipsum', 'location' => 'Venue, City', 'lineup' => 'The Room + Paul Tully + Window Seats'),
+		array('topic_id' => '1', 'start_time' => '2012-10-11 21:30:00', 'gig_title' => 'Ipsum Lorem', 'location' => 'Another Place, City', 'lineup' => 'The Whole Fandango - Alternative Student Anthems')
+	);
+	
 	private $topics = array(
-		array('forum_id' => '1', 'title' => 'test', 'user_id' => '1', 'post_text' => 'this is a test'),
+		array('forum_id' => '8', 'title' => 'test', 'user_id' => '1', 'post_text' => 'this is a test'),
 		array('forum_id' => '1', 'title' => 'Happy Birthday...(Sep.)', 'user_id' => '2', 'post_text' => '"Laurindo Almeida (2 September, 1917 - 26 July, 1995) was a Brazilian virtuoso guitarist and composer who made many recordings of enduring impact in classical, jazz and Latin genres. He is widely credited, with fellow artist Bud Shank, for creating the fusion of Latin and jazz which came to be known as [i]Jazz Samba[/i]."
 
 - [i]Wikipedia[/i]
@@ -184,6 +190,20 @@ Yeah, that\'s it. \'Tis worth a discussion, apart from this hackneyed bollocks.
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
 
+		$this->db->query("DROP TABLE IF EXISTS `gigs`;");
+		$this->db->query("CREATE TABLE `gigs` (
+		  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+		  `topic_id` mediumint(8) unsigned DEFAULT NULL,
+		  `start_time` datetime DEFAULT NULL,
+		  `gig_title` varchar(255) DEFAULT NULL,
+		  `location` varchar(255) DEFAULT NULL,
+		  `reference_token` varchar(255) DEFAULT NULL,
+		  `lineup` text,
+		  PRIMARY KEY (`id`),
+		  KEY `topic_id` (`topic_id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
+
 		$this->db->query("DROP TABLE IF EXISTS `topics`;");
 		$this->db->query("CREATE TABLE `topics` (
 		  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -269,5 +289,13 @@ Yeah, that\'s it. \'Tis worth a discussion, apart from this hackneyed bollocks.
 		{
 			$this->Topic_model->addPost($post['topic_id'], $post['user_id'], $post['post_text']);
 		}
+
+		$this->load->model('Gig_model');
+		
+		foreach ($this->gigs as $gig) 
+		{
+			$this->Gig_model->addGig($gig['topic_id'], strtotime($gig['start_time']), $gig['gig_title'], $gig['location'], '', $gig['lineup']);
+		}
+		
 	}
 }

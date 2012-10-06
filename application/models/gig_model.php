@@ -22,7 +22,7 @@ class Gig_model extends CI_Model
 			'gig_title' => $title,
 			'location' => $location,
 			'reference_token' => $reference_token,
-			'lineup' => $lineup
+			'lineup' => serialize($this->parseLineupStr($lineup))
 		);
 
 		$this->db->insert('gigs', $fields);
@@ -77,6 +77,27 @@ class Gig_model extends CI_Model
 				}
 			}
 			return $query->result();
+		}
+	}
+	
+	private function parseLineupStr($str)
+	{
+		if(strpos($str, '+') === FALSE)
+		{
+			return array($str);
+		}
+		else
+		{
+			$array = array();
+			
+			foreach (explode('+', $str) as $band) {
+				$trimmed = trim($band);
+				if ($trimmed != '') {
+					$array[] = mb_strtolower($trimmed);
+				}
+			}
+			
+			return $array;
 		}
 	}
 }
