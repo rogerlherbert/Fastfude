@@ -59,7 +59,7 @@ class Gig_model extends CI_Model
 			{
 				$timediff = $gig->start_time - time();
 	
-				$offset = ($timediff <= 0) ? 0 : $offset = floor($timediff / 86400);
+				$offset = ($timediff <= 0) ? 0 : ceil($timediff / 86400);
 
 				if ($gig->lineup != '') 
 				{
