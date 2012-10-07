@@ -133,6 +133,11 @@ input[type="submit"]:hover {
 	background-color: #444;
 }
 
+form#search input[type="search"] {
+	margin-left: 1em;
+	min-width: 18em;
+}
+
 textarea { 
 	font: normal normal normal 16px/1.5 'MuseoSlab-500', serif;
 	max-width: 100%;
