@@ -21,6 +21,7 @@ class Message extends CI_Controller
 	{
 		$this->load->helper('date');
 
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['title'] = 'Private Messages';
 		$data['messages'] = $this->Message_model->getAllMessages($this->session->userdata('user_id'));
 
@@ -43,6 +44,7 @@ class Message extends CI_Controller
 
 		$this->Message_model->markConversationAsRead($user_id, $this->session->userdata('user_id'));
 
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['muted'] = $this->User_model->getMutedUsers($this->session->userdata('user_id'));
 		$data['title'] = 'Private Messages with '.$user->username;
 		$data['user'] = $user;
@@ -65,6 +67,7 @@ class Message extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['title'] = 'Create A Private Message';
 			$data['user_id'] = $user_id;
 			$this->load->view('message/create', $data);
@@ -85,6 +88,7 @@ class Message extends CI_Controller
 		
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['title'] = 'Reply To Private Message';
 			$this->load->view('message/reply', $data);
 		}

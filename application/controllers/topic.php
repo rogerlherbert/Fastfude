@@ -40,6 +40,7 @@ class Topic extends CI_Controller
 				break;
 		}
 
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['title'] = $data['topic']->title;
 		$data['posts'] = $this->Topic_model->getPosts($id);
 
@@ -67,6 +68,7 @@ class Topic extends CI_Controller
 		
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['title'] = 'Reply To Topic';
 			$this->load->view('topic/reply', $data);
 		}
@@ -93,6 +95,7 @@ class Topic extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['forums'] = $this->Forum_model->getForums();
 			$data['title'] = 'Create A Topic';
 			$this->load->view('topic/create', $data);

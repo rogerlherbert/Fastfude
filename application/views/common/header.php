@@ -14,7 +14,7 @@
 	<script src="<?php echo base_url('assets/js/global.js'); ?>" type="text/javascript"></script>
 </head>
 
-<body>
+<body class="<?php echo html_escape($bodyclass); ?>">
 <div id="content">
 
 <h1><?php echo html_escape($title); ?></h1>

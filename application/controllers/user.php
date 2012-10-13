@@ -28,6 +28,7 @@ class User extends CI_Controller
 			show_404();
 		}
 
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['title'] = $data['profile']->username;
 
 		$this->load->view('user/id', $data);
@@ -38,6 +39,7 @@ class User extends CI_Controller
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'Email', 'trim|strtolower|required|valid_email');
 		
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['title'] = "Register";
 
 		if ($this->form_validation->run() == FALSE)
@@ -56,6 +58,8 @@ class User extends CI_Controller
 	public function confirm($auth_key)
 	{
 		$email = $this->User_model->getPendingEmail($auth_key);
+
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 
 		if (!$email)
 		{
@@ -94,6 +98,8 @@ class User extends CI_Controller
 
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
+
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -135,6 +141,8 @@ class User extends CI_Controller
 		
 		$this->form_validation->set_rules('username', 'Username', 'required');
 
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['title'] = "Forgot Password";
@@ -169,6 +177,7 @@ class User extends CI_Controller
 		
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['title'] = "Choose a new password";
 			// failed form validation
 			$this->load->view('user/recover', $data);
