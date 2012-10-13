@@ -34,15 +34,19 @@ class Message_model extends CI_Model
 
 			ORDER BY post_time DESC");
 
-		if ($query->num_rows() > 0) {
+		if ($query->num_rows() > 0) 
+		{
 
 			$conv = array();
 
-			foreach ($query->result() as $row) {
+			foreach ($query->result() as $row) 
+			{
 				// already have a msg to/from this user?
-				if (array_key_exists($row->user_id, $conv)) {
+				if (array_key_exists($row->user_id, $conv)) 
+				{
 					// this msg sooner than previous?
-					if ($conv[$row->user_id]['post_time'] < $row->post_time) {
+					if ($conv[$row->user_id]['post_time'] < $row->post_time) 
+					{
 						$conv[$row->user_id] = array(
 							'username' => $row->username, 
 							'post_time' => $row->post_time,
@@ -51,7 +55,9 @@ class Message_model extends CI_Model
 							'dir' => $row->dir
 						);
 					}
-				} else {
+				} 
+				else 
+				{
 					// record this user msg
 					$conv[$row->user_id] = array(
 						'username' => $row->username, 
@@ -95,24 +101,28 @@ class Message_model extends CI_Model
 
 			ORDER BY post_time ASC");
 
-		if ($query->num_rows() > 0) {
-
-			$this->load->library('decoda/decoda/Decoda');
-
-			foreach ($query->result() as $row) {
-				$text = new Decoda($this->encrypt->decode($row->post_text));
-				$text->defaults();
-				$row->post_text = $text->parse();
+		if ($query->num_rows() > 0) 
+		{
+			foreach ($query->result() as $row) 
+			{
+				$row->post_text = $this->encrypt->decode($row->post_text);
 			}
 
 			return $query->result();
 		}
 	}
 
-	public function markConversationAsRead($my_id, $user_id)
+	public function markConversationAsRead($from_id, $to_id)
 	{
 		$this->db->set('is_read', 1);
-		$this->db->where(array('from_id' => $my_id, 'to_id' => $user_id));
+		$this->db->where(array('from_id' => $from_id, 'to_id' => $to_id));
+		$this->db->update('private_messages');
+	}
+	
+	public function markAllConversationsAsRead($to_id)
+	{
+		$this->db->set('is_read', 1);
+		$this->db->where('to_id', $to_id);
 		$this->db->update('private_messages');
 	}
 

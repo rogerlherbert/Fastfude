@@ -19,6 +19,8 @@ class Message extends CI_Controller
 
 	public function index()
 	{
+		$this->load->helper('date');
+
 		$data['title'] = 'Private Messages';
 		$data['messages'] = $this->Message_model->getAllMessages($this->session->userdata('user_id'));
 
@@ -39,13 +41,14 @@ class Message extends CI_Controller
 			TODO check user exists!
 		*/
 
-		$this->Message_model->markConversationAsRead($this->session->userdata('user_id'), $user->id);
+		$this->Message_model->markConversationAsRead($user_id, $this->session->userdata('user_id'));
 
+		$data['muted'] = $this->User_model->getMutedUsers($this->session->userdata('user_id'));
 		$data['title'] = 'Private Messages with '.$user->username;
 		$data['user'] = $user;
-		$data['messages'] = $this->Message_model->getConversationWith($this->session->userdata('user_id'), $user->id);
+		$data['messages'] = $this->Message_model->getConversationWith($this->session->userdata('user_id'), $user_id);
 
-		$this->load->view('message/index', $data);
+		$this->load->view('message/with', $data);
 	}
 
 	public function send($to_id)

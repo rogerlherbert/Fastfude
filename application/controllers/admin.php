@@ -23,6 +23,14 @@ class Admin extends CI_Controller
 		array('topic_id' => '1', 'start_time' => '2012-10-11 21:30:00', 'gig_title' => 'Ipsum Lorem', 'location' => 'Another Place, City', 'lineup' => 'The Whole Fandango - Alternative Student Anthems')
 	);
 	
+	private $messages = array(
+		array('post_text' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'from_id' => '1', 'to_id' => '2'),
+		array('post_text' => 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'from_id' => '2', 'to_id' => '1'),
+		array('post_text' => 'Lorem ipsum dolor sit amet', 'from_id' => '3', 'to_id' => '1'),
+		array('post_text' => 'consectetur adipisicing elit, sed do eiusmod tempor incididunt', 'from_id' => '1', 'to_id' => '4'),
+		array('post_text' => 'ipsum dolor sit ametipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt', 'from_id' => '1', 'to_id' => '4')
+	);
+	
 	private $topics = array(
 		array('forum_id' => '8', 'title' => 'test', 'user_id' => '1', 'post_text' => 'this is a test'),
 		array('forum_id' => '1', 'title' => 'Happy Birthday...(Sep.)', 'user_id' => '2', 'post_text' => '"Laurindo Almeida (2 September, 1917 - 26 July, 1995) was a Brazilian virtuoso guitarist and composer who made many recordings of enduring impact in classical, jazz and Latin genres. He is widely credited, with fellow artist Bud Shank, for creating the fusion of Latin and jazz which came to be known as [i]Jazz Samba[/i]."
@@ -265,8 +273,22 @@ Yeah, that\'s it. \'Tis worth a discussion, apart from this hackneyed bollocks.
 		 PRIMARY KEY (`id`),
 		 UNIQUE KEY `key` (`key`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
-		
-		
+
+
+		$this->db->query("DROP TABLE IF EXISTS `private_messages`;");
+		$this->db->query("CREATE TABLE `private_messages` (
+		 `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+		 `post_text` text NOT NULL,
+		 `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		 `from_id` smallint(6) NOT NULL DEFAULT '0',
+		 `to_id` smallint(6) NOT NULL DEFAULT '0',
+		 `binned_by` enum('none','sender','receiver','both') NOT NULL DEFAULT 'none',
+		 `is_read` tinyint(1) NOT NULL DEFAULT '0',
+		 PRIMARY KEY (`id`),
+		 KEY `from_id` (`from_id`,`to_id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
+
 		$this->load->model('User_model');
 
 		foreach ($this->users as $user) 
@@ -295,6 +317,13 @@ Yeah, that\'s it. \'Tis worth a discussion, apart from this hackneyed bollocks.
 		foreach ($this->gigs as $gig) 
 		{
 			$this->Gig_model->addGig($gig['topic_id'], strtotime($gig['start_time']), $gig['gig_title'], $gig['location'], '', $gig['lineup']);
+		}
+		
+		$this->load->model('Message_model');
+		
+		foreach ($this->messages as $message) 
+		{
+			$this->Message_model->sendMessage($message['from_id'], $message['to_id'], $message['post_text']);
 		}
 		
 	}
