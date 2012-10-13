@@ -162,10 +162,14 @@ span.form_error {
 .topics .meta a { color: #999 }
 
 .posts li { margin-bottom: 2em; }
-.posts .post_author { overflow: hidden;}
-.posts .post_author a { display: inline-block; padding-right: 1em; }
-.posts .post_author a img { width: 2em; height: 2em; margin: 0.5em 1em 0.5em 0; display: inline-block; vertical-align: middle }
+.posts .post_author { overflow: hidden; padding-left: 4em;}
+.posts .post_author a { }
+.posts .post_author a img { margin-left: -4em; float: left}
+.posts .post_author time { display: block}
 .posts .post_content { padding: 1em 0; }
+
+.messages li { padding-left: 4em; margin-bottom: 1em; overflow: hidden}
+.messages .avatar { margin-left: -4em; float: left}
 
 footer p { font-size: 75%; text-align: center}
 footer p a:before {margin-right: 0.5em; white-space:no-wrap}
