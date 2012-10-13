@@ -26,7 +26,7 @@
 
 <?php echo form_open('search', array('id' => 'search')); ?>
 <?php echo form_hidden('type', 'forums'); ?>
-<?php echo form_input(array('name' => 'q', 'type' => 'search')); ?>
+<?php echo form_input(array('name' => 'q', 'type' => 'search', 'placeholder' => 'Search Forums')); ?>
 <?php echo form_close(); ?>
 
 <footer>
