@@ -161,6 +161,9 @@ span.form_error {
 .topics .meta { font-size: 75%; margin-top: 0.5em }
 .topics .meta a { color: #999 }
 
+.topic.id .vevent { margin-bottom: 1em; padding-bottom: 1em; border-bottom: 2px solid #003b4f}
+.topic.id .vevent dd { margin-bottom: 0.5em; color: #ccc}
+
 .posts li { margin-bottom: 2em; }
 .posts .post_author { overflow: hidden; padding-left: 4em;}
 .posts .post_author a { }
