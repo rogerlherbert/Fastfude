@@ -20,7 +20,7 @@
 	<?php echo form_error('post_text','<span class="form_error">','</span>'); ?>
 </div>
 
-<div class="field" id="submit"><?php echo form_submit(array('name' => 'comfirm', 'value' => 'Create Topic', 'class' => 'button')); ?></div>
+<div class="field" id="submit"><?php echo form_submit(array('name' => 'confirm', 'value' => 'Create Topic', 'class' => 'button')); ?></div>
 
 <?php echo form_close(); ?>
 

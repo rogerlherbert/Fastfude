@@ -51,13 +51,63 @@ class Message extends CI_Controller
 		$this->load->view('message/with', $data);
 	}
 
-	public function send($to_id)
+	public function create($user_id = 0)
 	{
-		if (!preg_match('/^[0-9]+$/', $to_id)) 
+		if (!preg_match('/^[0-9]+$/', $user_id)) 
 		{
 			show_error('Bad user id');
 		}
+
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('user_id', 'User ID', 'trim|required|is_natural_no_zero|callback_valid_userid');
+		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['title'] = 'Create A Private Message';
+			$data['user_id'] = $user_id;
+			$this->load->view('message/create', $data);
+		}
+		else
+		{
+			$this->Message_model->sendMessage($this->session->userdata('user_id'), $this->input->post('user_id'), $this->input->post('post_text'));
+			redirect('messages');
+		}
+	}
+	
+	public function reply()
+	{
+		$this->load->library('form_validation');
 		
+		$this->form_validation->set_rules('user_id', 'User ID', 'trim|required|is_natural_no_zero|callback_valid_userid');
+		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required');
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['title'] = 'Reply To Private Message';
+			$this->load->view('message/reply', $data);
+		}
+		else
+		{
+			$this->Message_model->sendMessage($this->session->userdata('user_id'), $this->input->post('user_id'), $this->input->post('post_text'));
+			redirect('messages');
+		}
+	}
+	
+	public function valid_userid($user_id)
+	{
+		$this->db->where('id', $user_id);
+
+		if ($this->db->count_all_results('users') > 0) 
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('valid_userid', 'The user does not exist');
+			return FALSE;
+		}
 	}
 }
 

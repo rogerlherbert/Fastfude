@@ -1,5 +1,9 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="controls">
+	<?php echo anchor('message/create', "Create a Private Message", ' class="button icon-plus"'); ?>
+</div>
+
 <?php if (count($messages) > 0) { ?>
 
 <ol class="messages">
