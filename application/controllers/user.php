@@ -28,6 +28,12 @@ class User extends CI_Controller
 			show_404();
 		}
 
+		// muted users
+		if ($this->session->userdata('user_id')) 
+		{
+			$data['muted'] = $this->User_model->getMutedUsers($this->session->userdata('user_id'));
+		}
+		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['title'] = $data['profile']->username;
 
@@ -196,7 +202,14 @@ class User extends CI_Controller
 			redirect('user/sign_in');
 		}
 		
+		if (!preg_match('/^[0-9]+$/', $id)) 
+		{
+			show_error('Bad user id');
+		}
+		
 		$this->User_model->muteUser($this->session->userdata('user_id'), $id);
+		
+		redirect('user/id/'.$id);
 	}
 
 	public function unmute($id)
@@ -206,6 +219,13 @@ class User extends CI_Controller
 			redirect('user/sign_in');
 		}
 		
+		if (!preg_match('/^[0-9]+$/', $id)) 
+		{
+			show_error('Bad user id');
+		}
+		
 		$this->User_model->unmuteUser($this->session->userdata('user_id'), $id);
+
+		redirect('user/id/'.$id);
 	}
 }
