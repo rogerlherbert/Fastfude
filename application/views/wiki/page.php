@@ -6,6 +6,6 @@
 
 <p>last edited <?php echo $page->created; ?> by: <?php echo anchor('user/id/'.$page->user_id, $page->username); ?></p>
 
-<p>View <?php echo anchor('wiki/history/'.$page->stub, 'full history'); ?></p>
+<p>View the <?php echo anchor('wiki/history/'.$page->stub, 'edit history'); ?> of this page.</p>
 
 <?php $this->load->view('common/footer'); ?>

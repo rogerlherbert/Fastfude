@@ -14,6 +14,17 @@ class Wiki extends CI_Controller
 		$this->output->enable_profiler(TRUE);
 	}
 	
+	public function index()
+	{
+		$this->load->helper('date');
+		
+		$data['history'] = $this->Wiki_model->getRecentEdits();
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['title'] = 'Recent Wiki Edits';
+		
+		$this->load->view('wiki/index', $data);
+	}
+	
 	public function page($stub, $edit_id = NULL)
 	{
 		if (!is_null($edit_id)) 
@@ -43,6 +54,8 @@ class Wiki extends CI_Controller
 	
 	public function history($stub)
 	{
+		$this->load->helper('date');
+
 		$data['page'] = $this->Wiki_model->getCurrentPage($stub);
 		
 		if (is_null($data['page'])) 

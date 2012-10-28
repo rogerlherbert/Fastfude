@@ -1,6 +1,6 @@
 <?php $this->load->view('common/header'); ?>
 
-<?php if (in_array($profile->id, $muted)) { ?>
+<?php if (isset($muted) && in_array($profile->id, $muted)) { ?>
 
 <p>You have muted this user</p>
 
