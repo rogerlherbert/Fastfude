@@ -1,200 +1,130 @@
-* {
-	margin: 0;
-	padding: 0;
-	text-decoration: none;
-	text-transform: none;
-	font-weight: normal;
-	font-style: normal;
-}
+/* FONTS */
 
-html {
-	-webkit-text-size-adjust: 100%;
-	font-size: 100%;
-}
+@font-face {font-family:'MuseoSlab-500'; src:url('../fonts/museo-slab/243BC4_0_0.eot'); src:url('../fonts/museo-slab/243BC4_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/museo-slab/243BC4_0_0.woff') format('woff'),url('../fonts/museo-slab/243BC4_0_0.ttf') format('truetype')}
 
-body {
-	font: normal normal normal 16px/1.5 'MuseoSlab-500', serif;
-	background: #1a1a1a url('../img/black_denim.png') repeat scroll top center;
-	color: #666;
-	padding-top: 7em
-}
+@font-face {font-family:'MuseoSlab-500Italic'; src:url('../fonts/museo-slab/243BC4_1_0.eot'); src:url('../fonts/museo-slab/243BC4_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/museo-slab/243BC4_1_0.woff') format('woff'),url('../fonts/museo-slab/243BC4_1_0.ttf') format('truetype')}
 
-header {
-	
-}
 
-footer {
-	margin-top: 3em;
-	padding: 2em 0;
-}
+/* COMMON & LAYOUT */
 
-ol, ul, li { list-style-type: none;}
+* {margin:0; padding:0; text-decoration:none; text-transform:none; font-weight:normal; font-style:normal}
 
-nav {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 3em;
-	padding: 0;
-	background-color: #000;
-	z-index: 999;
-}
+html {-webkit-text-size-adjust:100%; font-size:100%}
 
-nav a.nav-button {
-	font-size: 150%; line-height: 1; width: 1em; height: 1em; padding: 0.5em
-}
+body {font:normal normal normal 16px/1.5 'MuseoSlab-500',serif; background:#1a1a1a url('../img/black_denim.png') repeat scroll top center; color:#666; padding-top:7em}
 
-nav a.nav-button:hover {
-	text-decoration: none;
-	background-color: #003b4f;
-}
+ol,ul,li {list-style-type:none}
 
-nav a#home { 
-	display: inline-block;
-}
+h1,h2,h3,h4,h5,h6 {font-size:150%; line-height:1; text-transform:uppercase; margin-bottom:1em}
 
-nav a#user {
-	float: right;
-}
+h1 {color:#eee; border-bottom:2px solid #003b4f}
 
-nav a#home span, nav a#user span {
-	display: none;
-}
+a {color:#fff}
 
-nav div#login { 
-	display: none;
-}
+a:hover {text-decoration:underline}
 
-nav #sections {
-	display: inline-block;
-}
-nav #sections a { display: inline-block; text-align: center; }
+header {}
 
-nav #sections a span { display: none; }
+footer {margin-top:3em; padding:2em 0}
 
-form#search {
-	position: absolute;
-	top: 4em;
-	height: 3em
-}
+footer p {font-size:75%; text-align:center}
 
-div#content { margin: 0 5%;}
+footer p a:before {margin-right:0.5em; white-space:no-wrap}
 
-h1, h2, h3, h4, h5, h6 {
-	font-size: 150%;
-	line-height: 1;
-	text-transform: uppercase;
-	margin-bottom: 1em;
-}
+nav {position:fixed; top:0; left:0; right:0; height:3em; padding:0; background-color:#000; z-index:999}
 
-h1 {
-	color: #eee;
-	border-bottom: 2px solid #003b4f;
-}
+nav a.nav-button {font-size:150%; line-height:1; width:1em; height:1em; padding:0.5em}
 
-a {
-	color: #fff;
-}
+nav a.nav-button:hover {text-decoration:none; background-color:#003b4f}
 
-a:hover {
-	text-decoration: underline;
-}
+nav a#home {display:inline-block}
+
+nav a#user {float:right}
+
+nav a#home span,nav a#user span {display:none}
+
+nav div#login {display:none}
+
+nav #sections {display:inline-block}
+
+nav #sections a {display:inline-block; text-align:center}
+
+nav #sections a span {display:none}
+
+div#content {margin:0 5%}
+
+.controls {margin-bottom:1em}
+
+a.button {display:inline-block; line-height:1; padding:0.6667em 0.75em 0.3333em; background-color:#333; color:#fff; border-radius:0.5em}
+
+a.button:before {margin-right:0.5em}
+
+a.button:hover {text-decoration:none; background-color:#444}
+
+
+/* FORMS */
 
 button,
-input {
-	font: normal normal normal 16px/1.5 'MuseoSlab-500', serif;
-	background-color: #fff;
-	border: none;
-	padding: 0.25em;
-	max-width: 100%;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	-ms-appearance: none;
-	-o-appearance: none;
-	appearance: none
-}
+input {font:normal normal normal 16px/1.5 'MuseoSlab-500',serif; background-color:#fff; border:none; padding:0.25em; max-width:100%; -webkit-appearance:none; -moz-appearance:none; -ms-appearance:none; -o-appearance:none; appearance:none}
 
 button,
 input[type="button"],
-input[type="submit"] {
-	background-color: #333;
-	color: #fff;
-	border-radius: 0.5em;
-	line-height: 1;
-	padding: 0.6667em 0.75em 0.3333em;
-	text-transform: capitalize;
-	cursor: pointer;
-}
+input[type="submit"] {background-color:#333; color:#fff; border-radius:0.5em; line-height:1; padding:0.6667em 0.75em 0.3333em; text-transform:capitalize; cursor:pointer}
 
 button:hover,
 input[type="button"]:hover,
-input[type="submit"]:hover {
-	background-color: #444;
-}
+input[type="submit"]:hover {background-color:#444}
 
-form#search input[type="search"] {
-	margin-left: 1em;
-	min-width: 18em;
-}
+form#search {position:absolute; top:4em; height:3em}
 
-textarea { 
-	font: normal normal normal 16px/1.5 'MuseoSlab-500', serif;
-	max-width: 100%;
-}
+form#search input[type="search"] {margin-left:1em; min-width:18em}
 
-div.field {
-	margin-bottom: 1em;
-}
+textarea {font:normal normal normal 16px/1.5 'MuseoSlab-500',serif; max-width:100%}
 
-div.field label {
-	display: block
-}
+div.field {margin-bottom:1em}
 
-span.form_error {
-	display: block;
-	color: #f00
-}
+div.field label {display:block}
 
-.topics { border-top: 1px dotted #333; }
-.topics li { padding: 1em 0 1em; border-bottom: 1px dotted #333; }
-.topics .meta { font-size: 75%; margin-top: 0.5em }
-.topics .meta a { color: #999 }
+span.form_error {display:block; color:#f00}
 
-.topic.id .vevent { margin-bottom: 1em; padding-bottom: 1em; border-bottom: 2px solid #003b4f}
-.topic.id .vevent dd { margin-bottom: 0.5em; color: #ccc}
 
-.posts li { margin-bottom: 2em; }
-.posts .post_author { overflow: hidden; padding-left: 4em;}
-.posts .post_author a { }
-.posts .post_author a img { margin-left: -4em; float: left}
-.posts .post_author time { display: block}
-.posts .post_content { padding: 1em 0; }
+/* FORUMS */
 
-.messages li { padding-left: 4em; margin-bottom: 1em; overflow: hidden}
-.messages .avatar { margin-left: -4em; float: left}
+.topics {border-top:1px dotted #333}
 
-footer p { font-size: 75%; text-align: center}
-footer p a:before {margin-right: 0.5em; white-space:no-wrap}
+.topics li {padding:1em 0 1em; border-bottom:1px dotted #333}
 
-.controls {
-	margin-bottom: 1em;
-}
+.topics .meta {font-size:75%; margin-top:0.5em}
 
-a.button {
-	display:inline-block;
-	line-height: 1;
-	padding: 0.6667em 0.75em 0.3333em;
-	background-color: #333;
-	color: #fff;
-	border-radius: 0.5em;
-}
+.topics .meta a {color:#999}
 
-a.button:before {margin-right: 0.5em}
-a.button:hover {
-	text-decoration: none;
-	background-color: #444;
-}
+.topic.id .vevent {margin-bottom:1em; padding-bottom:1em; border-bottom:2px solid #003b4f}
 
-.calendar h2 { margin: 1em 0; padding-top: 1em; border-top: 1px solid #333}
-.calendar .vevent { margin-bottom: 1em;}
+.topic.id .vevent dd {margin-bottom:0.5em; color:#ccc}
+
+.posts li {margin-bottom:2em}
+
+.posts .post_author {overflow:hidden; padding-left:4em}
+
+.posts .post_author a {}
+
+.posts .post_author a img {margin-left:-4em; float:left}
+
+.posts .post_author time {display:block}
+
+.posts .post_content {padding:1em 0}
+
+
+/* PRIVATE MESSAGES */
+
+.messages li {padding-left:4em; margin-bottom:1em; overflow:hidden}
+
+.messages .avatar {margin-left:-4em; float:left}
+
+
+/* GIGS */
+
+.calendar h2 {margin:1em 0; padding-top:1em; border-top:1px solid #333}
+
+.calendar .vevent {margin-bottom:1em}
+
