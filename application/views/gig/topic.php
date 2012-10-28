@@ -5,8 +5,12 @@
 		<dt>Date</dt>
 		<dd><time class="dtstart" datetime="<?php echo date("c", $gig->start_time); ?>"><?php echo date("D jS M Y, g:i a", $gig->start_time); ?></time></dd>
 		<dt>Location</dt>
-		<dd class="location"><?php echo html_escape($gig->location); ?></dd>
+		<dd class="location"><?php echo anchor('wiki/page/'.url_title(convert_accented_characters($gig->location)), html_escape($gig->location)); ?></dd>
 		<dt>Lineup</dt>
-		<dd class="description"><?php echo html_escape($gig->lineup); ?></dd>
+		<dd class="description">
+		<?php foreach ($gig->lineup as $band) { ?>
+			<?php echo anchor('wiki/page/'.url_title(convert_accented_characters($band)), html_escape($band)); ?> + 
+		<?php } ?>
+		</dd>
 	</dl>
 </section>

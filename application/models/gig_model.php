@@ -16,7 +16,7 @@ class Gig_model extends CI_Model
 			
 			if ($gig->lineup != '') 
 			{
-				$gig->lineup = implode(' + ', unserialize($gig->lineup));
+				$gig->lineup = unserialize($gig->lineup);
 			}
 			
 			return $gig;
