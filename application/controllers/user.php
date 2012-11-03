@@ -120,7 +120,12 @@ class User extends CI_Controller
 			
 			if ($user_id) 
 			{
+				$user = $this->User_model->getUser($user_id);
+
 				$this->session->set_userdata('user_id', $user_id);
+				$this->session->set_userdata('username', $user->username);
+				$this->session->set_userdata('gravatar_id', $user->gravatar_id);
+
 				redirect('/');
 			}
 			else

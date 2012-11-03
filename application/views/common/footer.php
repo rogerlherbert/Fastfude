@@ -11,14 +11,15 @@
 	
 		<ul class="icons">
 			<li><?php echo anchor('/', '<i class="icon-home"></i>Home', 'id="home" rel="home"'); ?></li>
-			<?php if ($this->session->userdata('user_id')) { ?>
-			<li><?php echo anchor('user/id/'.$this->session->userdata('user_id'), '<i class="icon-user"></i>'.$this->session->userdata('username'), 'id="user"'); ?></li>
-			<?php } else { ?>
-			<li><?php echo anchor('user/sign_in', '<i class="icon-user"></i>Sign In', 'id="user"'); ?></li>
-			<?php } ?>
 			<li><?php echo anchor('gigs', '<i class="icon-music"></i>Gig Calendar', 'id="nav_gigs"'); ?></li>
 			<li><?php echo anchor('wiki', '<i class="icon-book"></i>Wiki', 'id="nav_wiki"'); ?></li>
 			<li><?php echo anchor('messages', '<i class="icon-envelope-alt"></i>Private Messages', 'id="nav_messages"'); ?></li>
+			<?php if ($this->session->userdata('user_id')) { ?>
+			<li><?php echo anchor('user/id/'.$this->session->userdata('user_id'), '<i class="icon-user"></i>Profile', 'id="user"'); ?></li>
+			<li><?php echo anchor('user/sign_out', '<i class="icon-user"></i>Sign Out', 'id="signout"'); ?></li>
+			<?php } else { ?>
+			<li><?php echo anchor('user/sign_in', '<i class="icon-user"></i>Sign In', 'id="user"'); ?></li>
+			<?php } ?>
 		</ul>
 	</div>
 </nav>
