@@ -26,7 +26,7 @@ class Wiki_model extends CI_Model
 	
 	public function getCurrentPage($stub)
 	{
-		$this->db->select('p.*, h.*, u.username, md5(u.email) as gravatar_id');
+		$this->db->select('p.id as page_id, p.stub, p.title, h.id as edit_id, UNIX_TIMESTAMP(h.created) as created, h.page_text, u.id as user_id, u.username, MD5(u.email) as gravatar_id');
 
 		$this->db->where('p.stub', $stub);
 
@@ -80,5 +80,32 @@ class Wiki_model extends CI_Model
 		}
 
 		return NULL;
+	}
+	
+	public function addPage($title)
+	{
+		$stub = url_title(convert_accented_characters($title));
+
+		$this->db->where('stub', $stub);
+		if ($this->db->count_all_results('wiki_pages') > 0) {
+			return FALSE;
+		}
+		
+		$this->db->insert('wiki_pages', array('stub' => $stub, 'title' => $title));
+		
+		return $this->db->insert_id();
+	}
+	
+	public function editPage($page_id, $user_id, $text)
+	{
+		$fields = array(
+			'page_id' => $page_id,
+			'user_id' => $user_id,
+			'page_text' => $text
+		);
+
+		$this->db->insert('wiki_history', $fields);
+		
+		return $this->db->insert_id();
 	}
 }
