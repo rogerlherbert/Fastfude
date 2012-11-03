@@ -9,7 +9,6 @@
 
 	<?php echo link_tag('assets/css/global.css'); ?>
 	<?php echo link_tag('assets/css/font-awesome.css'); ?>
-	<?php echo link_tag('assets/css/museo-slab.css'); ?>
 
 	<script src="<?php echo base_url('assets/js/global.js'); ?>" type="text/javascript"></script>
 </head>

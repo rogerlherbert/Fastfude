@@ -11,7 +11,7 @@
 
 html {-webkit-text-size-adjust:100%; font-size:100%}
 
-body {font:normal normal normal 16px/1.5 'MuseoSlab-500',serif; background:#1a1a1a url('../img/black_denim.png') repeat scroll top center; color:#666; padding-top:7em}
+body {font:normal normal normal 16px/1.5 'MuseoSlab-500',serif; background:#1a1a1a url('../img/black_denim.png') repeat scroll top center; color:#666; padding-top: 4em}
 
 ol,ul,li {list-style-type:none}
 
@@ -31,25 +31,18 @@ footer p {font-size:75%; text-align:center}
 
 footer p a:before {margin-right:0.5em; white-space:no-wrap}
 
-nav {position:fixed; top:0; left:0; right:0; height:3em; padding:0; background-color:#000; z-index:999}
+nav { position: fixed; top: 0; left: 5%; right: 5%; width: auto; background-color: #000; color: #fff}
+nav .menu { cursor: pointer; text-transform: uppercase; display:block; padding: 0.5em}
+nav .menu i { margin-right: 0.5em;}
 
-nav a.nav-button {font-size:150%; line-height:1; width:1em; height:1em; padding:0.5em}
+nav #nav-wrapper { display:none; }
+nav:hover { width: auto; height: auto;}
+nav:hover #nav-wrapper {display: block}
+nav ul.icons a { display: block; padding: 0.5em 0 0.5em 0.5em}
+nav ul.icons a:hover {text-decoration: none; background-color: #003b4f; color: #fff}
+nav ul.icons a i { margin-right: 0.5em}
 
-nav a.nav-button:hover {text-decoration:none; background-color:#003b4f}
-
-nav a#home {display:inline-block}
-
-nav a#user {float:right}
-
-nav a#home span,nav a#user span {display:none}
-
-nav div#login {display:none}
-
-nav #sections {display:inline-block}
-
-nav #sections a {display:inline-block; text-align:center}
-
-nav #sections a span {display:none}
+nav input[type="search"] { width: 20em; }
 
 div#content {margin:0 5%}
 
@@ -74,10 +67,6 @@ input[type="submit"] {background-color:#333; color:#fff; border-radius:0.5em; li
 button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover {background-color:#444}
-
-form#search {position:absolute; top:4em; height:3em}
-
-form#search input[type="search"] {margin-left:1em; min-width:18em}
 
 textarea {font:normal normal normal 16px/1.5 'MuseoSlab-500',serif; max-width:100%}
 

@@ -1,33 +1,27 @@
 </div>
 
 <nav>
-	<?php echo anchor('user/sign_in', '<span>User</span>', ' id="user" class="icon-user nav-button"'); ?>
+	<div class="menu"><i class="icon-reorder"></i>Fastfude</div>
 
-	<div id="login"><?php
-		if ($this->session->userdata('user_id')) {
-			echo anchor('user/id/'.$this->session->userdata('user_id'), img($this->session->userdata('gravatar_id')));
-			echo anchor('user/id/'.$this->session->userdata('user_id'), $this->session->userdata('username'));
-			echo anchor('user/sign_out', "sign out");
-		} else {
-			echo anchor('user/sign_in', img('assets/img/unknown_user.png'));
-			echo anchor('user/sign_in', "sign in") . ' | ';
-			echo anchor('user/register', "register");
-		}
-	?></div>
-
-	<?php echo anchor('/', '<span>Home</span>', 'id="home" title="Home" class="icon-home nav-button" rel="home"'); ?>
-
-	<div id="sections">
-		<?php echo anchor('gigs', '<span>Gigs</span>', 'id="nav_gigs" class="icon-music nav-button" title="Gigs"'); ?>
-		<?php echo anchor('wiki', '<span>Wiki</span>', 'id="nav_wiki" class="icon-book nav-button" title="Wiki"'); ?>
-		<?php echo anchor('messages', '<span>Messages</span>', 'id="nav_messages" class="icon-envelope-alt nav-button" title="Messages"'); ?>
+	<div id="nav-wrapper">
+		<?php echo form_open('search', array('id' => 'search')); ?>
+		<?php echo form_hidden('type', 'forums'); ?>
+		<?php echo form_input(array('name' => 'q', 'type' => 'search', 'placeholder' => 'Search Forums')); ?>
+		<?php echo form_close(); ?>
+	
+		<ul class="icons">
+			<li><?php echo anchor('/', '<i class="icon-home"></i>Home', 'id="home" rel="home"'); ?></li>
+			<?php if ($this->session->userdata('user_id')) { ?>
+			<li><?php echo anchor('user/id/'.$this->session->userdata('user_id'), '<i class="icon-user"></i>'.$this->session->userdata('username'), 'id="user"'); ?></li>
+			<?php } else { ?>
+			<li><?php echo anchor('user/sign_in', '<i class="icon-user"></i>Sign In', 'id="user"'); ?></li>
+			<?php } ?>
+			<li><?php echo anchor('gigs', '<i class="icon-music"></i>Gig Calendar', 'id="nav_gigs"'); ?></li>
+			<li><?php echo anchor('wiki', '<i class="icon-book"></i>Wiki', 'id="nav_wiki"'); ?></li>
+			<li><?php echo anchor('messages', '<i class="icon-envelope-alt"></i>Private Messages', 'id="nav_messages"'); ?></li>
+		</ul>
 	</div>
 </nav>
-
-<?php echo form_open('search', array('id' => 'search')); ?>
-<?php echo form_hidden('type', 'forums'); ?>
-<?php echo form_input(array('name' => 'q', 'type' => 'search', 'placeholder' => 'Search Forums')); ?>
-<?php echo form_close(); ?>
 
 <footer>
 	<p id="linkage">Fastfude is on <?php echo anchor('https://twitter.com/fastfude', 'Twitter', ' class="icon-twitter-sign" rel="publisher"'); ?>, <?php echo anchor('https://facebook.com/fastfude', 'Facebook', ' class="icon-facebook-sign" rel="publisher"'); ?> &amp; <?php echo anchor('https://github.com/junap/Fastfude', 'Github', ' class="icon-github-sign" rel="publisher"'); ?></p>
