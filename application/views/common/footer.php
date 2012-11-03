@@ -15,7 +15,7 @@
 		}
 	?></div>
 
-	<?php echo anchor('/', '<span>Home</span>', 'id="home" title="Home" class="icon-home nav-button"'); ?>
+	<?php echo anchor('/', '<span>Home</span>', 'id="home" title="Home" class="icon-home nav-button" rel="home"'); ?>
 
 	<div id="sections">
 		<?php echo anchor('gigs', '<span>Gigs</span>', 'id="nav_gigs" class="icon-music nav-button" title="Gigs"'); ?>
@@ -30,7 +30,7 @@
 <?php echo form_close(); ?>
 
 <footer>
-	<p id="linkage">Fastfude is on <?php echo anchor('https://twitter.com/fastfude', 'Twitter', ' class="icon-twitter-sign"'); ?>, <?php echo anchor('https://facebook.com/fastfude', 'Facebook', ' class="icon-facebook-sign"'); ?> &amp; <?php echo anchor('https://github.com/junap/Fastfude', 'Github', ' class="icon-github-sign"'); ?></p>
+	<p id="linkage">Fastfude is on <?php echo anchor('https://twitter.com/fastfude', 'Twitter', ' class="icon-twitter-sign" rel="publisher"'); ?>, <?php echo anchor('https://facebook.com/fastfude', 'Facebook', ' class="icon-facebook-sign" rel="publisher"'); ?> &amp; <?php echo anchor('https://github.com/junap/Fastfude', 'Github', ' class="icon-github-sign" rel="publisher"'); ?></p>
 	<p id="blurb">Scenewrecking since 1997</p>
 </footer>
 
