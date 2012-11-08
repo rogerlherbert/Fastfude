@@ -12,7 +12,7 @@
 
 	<li<?php echo $class; ?>>
 		<?php echo anchor('message/with/'.$user_id, img(array('src' => 'http://www.gravatar.com/avatar/'.$msg['gravatar_id'].'?s=48', 'class' => 'avatar')) . html_escape($msg['username'])); ?>
-		<span class="meta"><?php echo timespan($msg['post_time'], time(), 2); ?></span>
+		<p class="meta"><?php echo timespan($msg['post_time'], time(), 2); ?></p>
 	</li>
 
 	<?php } ?>

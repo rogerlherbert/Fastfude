@@ -7,7 +7,7 @@
 
 /* COMMON & LAYOUT */
 
-* {margin:0; padding:0; text-decoration:none; text-transform:none; font-weight:normal; font-style:normal}
+* {margin:0; padding:0; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; text-decoration:none; text-transform:none; font-weight:normal; font-style:normal}
 
 html {-webkit-text-size-adjust:100%; font-size:100%}
 
@@ -106,14 +106,31 @@ span.form_error {display:block; color:#f00}
 
 /* PRIVATE MESSAGES */
 
-.messages li {padding-left:4em; margin-bottom:1em; overflow:hidden}
+.messages li {padding-left:4em; margin-bottom:1em; overflow:hidden; padding-top:1em; border-top:1px solid #333}
 
 .messages .avatar {margin-left:-4em; float:left}
 
+.messages .meta {font-size:75%; margin-top:0.5em}
 
 /* GIGS */
 
 .calendar h2 {margin:1em 0; padding-top:1em; border-top:1px solid #333}
 
-.calendar .vevent {margin-bottom:1em}
+.vcalendar .vevent {margin-bottom:1em}
+
+.vcalendar .meta {font-size:75%; margin-top:0.5em}
+
+.vcalendar .meta a {color:#999}
+
+
+/* WIKI */
+
+.edit_history {border-top:1px dotted #333}
+
+.edit_history li {padding:1em 0 1em; border-bottom:1px dotted #333}
+
+.edit_history .meta {font-size:75%; margin-top:0.5em}
+
+.edit_history .meta a {color:#999}
+
 

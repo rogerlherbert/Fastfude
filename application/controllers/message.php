@@ -6,7 +6,7 @@ class Message extends CI_Controller
 	{
 		parent::__construct();
 
-		$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 
 		$this->load->model('Message_model');
 		
