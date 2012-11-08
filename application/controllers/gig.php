@@ -17,7 +17,7 @@ class Gig extends CI_Controller
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['forums'] = $this->Forum_model->getForums();
-		$data['title'] = $data['forums'][8];
+		$data['title'] = 'Gig Calendar';
 		$data['calendar'] = $this->Gig_model->getUpcomingGigs();
 
 		$this->load->view('gig/upcoming', $data);

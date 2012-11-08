@@ -48,13 +48,12 @@ class Gig_model extends CI_Model
 		$this->db->where('g.start_time < DATE_ADD(CURDATE(), INTERVAL '.$days.' DAY)');
 	
 		$query = $this->db->get('gigs g');
-	
+
+		// prefill days of calendar
+		$calendar = array_pad(array(), $days, null);
+		
 		if ($query->num_rows() > 0) 
 		{
-
-			// prefill days of calendar
-			$calendar = array_pad(array(), $days, null);
-	
 			// insert each gig in calendar according to how many days away they are from now
 			foreach ($query->result() as $gig) 
 			{
@@ -69,9 +68,9 @@ class Gig_model extends CI_Model
 
 				$calendar[$offset][] = $gig;
 			}
-	
-			return $calendar;
 		}
+
+		return $calendar;
 	}
 
 	public function getGigsByDate($date)
