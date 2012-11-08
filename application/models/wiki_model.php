@@ -9,7 +9,7 @@ class Wiki_model extends CI_Model
 	{
 		$this->db->select('p.title, p.stub, h.id as edit_id, UNIX_TIMESTAMP(h.created) as created, h.user_id, u.username, md5(u.email) as gravatar_id');
 		
-		$this->db->join('wiki_history h', 'p.id = h.page_id', 'left outer');
+		$this->db->join('wiki_history h', 'p.id = h.page_id');
 		$this->db->join('users u', 'u.id = h.user_id', 'left outer');
 		
 		$this->db->order_by('h.created', 'desc');
