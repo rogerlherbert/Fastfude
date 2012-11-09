@@ -101,7 +101,7 @@ span.form_error {display:block; color:#f00}
 
 .posts .post_author time {display:block}
 
-.posts .post_content {padding:1em 0}
+.posts .post_content {padding:1em 0; color: #ccc;}
 
 
 /* PRIVATE MESSAGES */
@@ -111,6 +111,9 @@ span.form_error {display:block; color:#f00}
 .messages .avatar {margin-left:-4em; float:left}
 
 .messages .meta {font-size:75%; margin-top:0.5em}
+
+.messages .post_content {color: #ccc;}
+
 
 /* GIGS */
 
@@ -132,5 +135,11 @@ span.form_error {display:block; color:#f00}
 .edit_history .meta {font-size:75%; margin-top:0.5em}
 
 .edit_history .meta a {color:#999}
+
+.wiki_text { margin-bottom: 1em; color: #ccc}
+
+.wiki_meta p {font-size:75%; margin-top:0.5em}
+
+.wiki_meta p a {color:#999}
 
 

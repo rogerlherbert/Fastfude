@@ -47,7 +47,7 @@ class Wiki_model extends CI_Model
 	
 	public function getPageEdit($edit_id)
 	{
-		$this->db->select('p.*, h.*, u.username, md5(u.email) as gravatar_id');
+		$this->db->select('p.id as page_id, p.stub, p.title, h.id as edit_id, UNIX_TIMESTAMP(h.created) as created, h.page_text, u.id as user_id, u.username, MD5(u.email) as gravatar_id');
 	
 		$this->db->where('h.id', $edit_id);
 	
