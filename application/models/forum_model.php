@@ -7,6 +7,7 @@ class Forum_model extends CI_Model
 {
 	private $forums = array(
 		 0 => 'all',
+		 9 => 'general',
 		13 => 'news',
 		 8 => 'gigs',
 		 4 => 'market',
