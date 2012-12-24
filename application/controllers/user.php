@@ -88,9 +88,7 @@ class User extends CI_Controller
 			else
 			{
 				// create user and sign in
-				$input = array_merge($this->input->post(), array('email' => $email));
-
-				$user_id = $this->User_model->createUser($input);
+				$user_id = $this->User_model->createUser($this->input->post('username'), $this->input->post('password'), $email);
 				$this->session->set_userdata('user_id', $user_id);
 
 				redirect('/');

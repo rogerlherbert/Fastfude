@@ -100,15 +100,15 @@ Fastfude');
 		}
 	}
 
-	public function createUser(array $input)
+	public function createUser($username, $password, $email)
 	{
 		$fields = array(
-			'username' => $input['username'], 
-			'password' => $this->encryptPassword($input['password']), 
-			'email' => $input['email']
+			'username' => $username, 
+			'password' => $this->encryptPassword($password), 
+			'email' => $email
 		);
 
-		$this->db->delete('users_pending', array('email' => $input['email']));
+		$this->db->delete('users_pending', array('email' => $email));
 		$this->db->insert('users', $fields);
 
 		return $this->db->insert_id();
