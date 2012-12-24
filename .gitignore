@@ -8,6 +8,9 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
+application/config/development/*
+!application/config/development/index.html
+
 application/config/testing/*
 !application/config/testing/index.html
 
