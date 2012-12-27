@@ -39,6 +39,47 @@ class User extends CI_Controller
 
 		$this->load->view('user/id', $data);
 	}
+	
+	public function posts($id, $yearmonth = NULL)
+	{
+		if (!preg_match('/^[0-9]+$/', $id)) 
+		{
+			show_error('Bad user id');
+		}
+
+		$data['profile'] = $this->User_model->getUser($id);
+		
+		if (is_null($data['profile'])) 
+		{
+			show_404();
+		}
+
+		if (isset($yearmonth)) 
+		{
+			if (!preg_match('/^[0-9]{4}-[0-9]{1,2}+$/', $yearmonth)) 
+			{
+				show_error('Date should be in yyyy-mm format');
+			}
+
+			// show post list for the month
+			$ym_params = explode('-', $yearmonth);
+
+			$data['posts'] = $this->User_model->getPostsByMonth($id, $ym_params[0], $ym_params[1]);
+			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+			$data['title'] = $data['profile']->username .' posts for '. $ym_params[0] .'-'. $ym_params[1];
+
+			$this->load->view('user/posts', $data);
+		}
+		else
+		{
+			// show archive table
+			$data['archive'] = $this->User_model->getPostsArchive($id);
+			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
+			$data['title'] = $data['profile']->username .' posts';
+			
+			$this->load->view('user/archive', $data);
+		}
+	}
 
 	public function register()
 	{

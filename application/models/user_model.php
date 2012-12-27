@@ -28,6 +28,47 @@ class User_model extends CI_Model
 		}
 	}
 	
+	public function getPostsByMonth($user_id, $year, $month)
+	{
+		$this->db->select('p.id, p.user_id, UNIX_TIMESTAMP(p.post_time) as post_time, UNIX_TIMESTAMP(p.edit_time) as edit_time, p.post_text, p.topic_id, t.title');
+		$this->db->join('topics t', 't.id = p.topic_id');
+		$this->db->order_by('post_time', 'desc');
+		$this->db->where('p.user_id', $user_id);
+		$this->db->where('YEAR(p.post_time)', $year);
+		$this->db->where('MONTH(p.post_time)', $month);
+
+		$query = $this->db->get_where('posts p');
+
+		if ($query->num_rows > 0) 
+		{
+			return $query->result();
+		}
+	}
+	
+	public function getPostsArchive($user_id)
+	{
+		$this->db->select('YEAR(post_time) as theyear, MONTH(post_time) as themonth, COUNT(*) as posts');
+		$this->db->group_by(array('theyear','themonth'));
+		$this->db->order_by('theyear desc, themonth asc');
+
+		$query = $this->db->get_where('posts', array('user_id' => $user_id));
+		
+		if ($query->num_rows > 0) 
+		{
+			$archive = array();
+
+			for ($i = date('Y'); $i > 1999; $i--) { 
+				$archive[$i] = array_pad(array(), 12, 0);
+			}
+
+			foreach ($query->result() as $row) {
+				$archive[$row->theyear][$row->themonth - 1] = (int) $row->posts;
+			}
+
+			return $archive;
+		}
+	}
+	
 	public function createPendingUser($email)
 	{
 		$this->load->helper('string');

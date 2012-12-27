@@ -14,6 +14,7 @@
 
 <div class="controls">
 	<?php echo anchor('user/mute/'.$profile->id, 'Mute user', ' class="button icon-volume-off"'); ?>
+	<?php echo anchor('user/posts/'.$profile->id, 'View posts', ' class="button icon-list"'); ?>
 </div>
 <?php } ?>
 
