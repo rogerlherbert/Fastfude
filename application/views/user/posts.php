@@ -2,6 +2,7 @@
 
 <div class="controls">
 	<?php echo anchor('user/id/'.$profile->id, 'User profile', ' class="button icon-user"'); ?>
+	<?php echo anchor('user/posts/'.$profile->id, 'View posts', ' class="button icon-list"'); ?>
 </div>
 
 <?php if (isset($posts)) { ?>

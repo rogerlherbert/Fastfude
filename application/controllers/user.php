@@ -65,7 +65,7 @@ class User extends CI_Controller
 			$ym_params = explode('-', $yearmonth);
 
 			$data['posts'] = $this->User_model->getPostsByMonth($id, $ym_params[0], $ym_params[1]);
-			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+			$data['bodyclass'] = strtolower(__CLASS__ . ' user_posts');
 			$data['title'] = $data['profile']->username .' posts for '. $ym_params[0] .'-'. $ym_params[1];
 
 			$this->load->view('user/posts', $data);
