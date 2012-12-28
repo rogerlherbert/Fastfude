@@ -115,7 +115,17 @@ class Topic_model extends CI_Model
 		// update!
 		$this->db->update('topics', $fields, array('id' => $topic_id));
 	}
+	
+	public function watchTopic($topic_id, $user_id)
+	{
+		$this->db->insert('topics_watchlist', array('topic_id' => $topic_id, 'user_id' => $user_id));
+	}
 
+	public function unwatchTopic($topic_id, $user_id)
+	{
+		$this->db->delete('topics_watchlist', array('topic_id' => $topic_id, 'user_id' => $user_id));
+	}
+	
 	public function isWatched($topic_id, $user_id)
 	{
 		$this->db->where(array('topic_id' => $topic_id, 'user_id' => $user_id));

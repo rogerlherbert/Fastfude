@@ -109,6 +109,30 @@ class Topic extends CI_Controller
 		}
 	}
 	
+	public function watch($topic_id)
+	{
+		if (!$this->session->userdata('user_id')) 
+		{
+			redirect('user/sign_in');
+		}
+
+		$this->Topic_model->watchTopic($topic_id, $this->session->userdata('user_id'));
+
+		redirect('topic/id/'.$topic_id);
+	}
+	
+	public function unwatch($topic_id)
+	{
+		if (!$this->session->userdata('user_id')) 
+		{
+			redirect('user/sign_in');
+		}
+	
+		$this->Topic_model->unwatchTopic($topic_id, $this->session->userdata('user_id'));
+	
+		redirect('topic/id/'.$topic_id);
+	}
+	
 	public function _is_not_locked($topic_id)
 	{
 		$this->db->where(array('id' => $topic_id, 'is_locked' => 0));
