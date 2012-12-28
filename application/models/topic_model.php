@@ -73,7 +73,9 @@ class Topic_model extends CI_Model
 		$post_id = $this->db->insert_id();
 
 		$this->updateTopic($topic_id);
-		
+
+		$this->notifyWatchers($topic_id);
+
 		return $post_id;
 	}
 
@@ -131,10 +133,53 @@ class Topic_model extends CI_Model
 		$this->db->where(array('topic_id' => $topic_id, 'user_id' => $user_id));
 		$this->db->from('topics_watchlist');
 
-		if ($this->db->count_all_results() > 0) {
+		if ($this->db->count_all_results() > 0) 
+		{
 			return TRUE;
 		}
 
 		return FALSE;
+	}
+	
+	public function notifyWatchers($topic_id)
+	{
+		$this->db->select('user_id');
+		$query_1 = $this->db->get_where('topics_watchlist', array('topic_id' => $topic_id));
+		
+		if ($query_1->num_rows() > 0) 
+		{
+			$in = array();
+
+			foreach($query_1->result() as $user) 
+			{
+				$in[] = $user->user_id;
+			}
+
+			$this->db->select('id, email');
+			$this->db->where_in('id', $in);
+			$query_2 = $this->db->get('users');
+
+			if ($query_2->num_rows() > 0) 
+			{
+				$bcc = array();
+
+				foreach ($query_2->result() as $email) 
+				{
+					$bcc[] = $email->email;
+				}
+				
+				$this->load->library('email');
+				
+				$this->email->from('notifications@fastfude.org', 'Fastfude');
+				$this->email->to('notifications@fastfude.org'); 
+				$this->email->bcc($bcc); 
+				
+				$this->email->subject('x replied to a topic you watch on Fastfude');
+				$this->email->message('Testing the email class.');	
+				
+				$this->email->send();
+
+			}
+		}
 	}
 }
