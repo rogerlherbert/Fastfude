@@ -62,7 +62,7 @@ class Message extends CI_Controller
 
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('user_id', 'User ID', 'trim|required|is_natural_no_zero|callback_valid_userid');
+		$this->form_validation->set_rules('user_id', 'User ID', 'trim|required|is_natural_no_zero|callback__valid_userid');
 		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required');
 
 		if ($this->form_validation->run() == FALSE)
@@ -99,7 +99,7 @@ class Message extends CI_Controller
 		}
 	}
 	
-	public function valid_userid($user_id)
+	public function _valid_userid($user_id)
 	{
 		$this->db->where('id', $user_id);
 

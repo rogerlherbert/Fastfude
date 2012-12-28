@@ -56,8 +56,8 @@ class Gig extends CI_Controller
 	
 		$this->load->library('form_validation');
 	
-		$this->form_validation->set_rules('start_time_1', 'Date', 'trim|required|callback_valid_date');
-		$this->form_validation->set_rules('start_time_2', 'Time', 'trim|required|callback_valid_time');
+		$this->form_validation->set_rules('start_time_1', 'Date', 'trim|required|callback__valid_date');
+		$this->form_validation->set_rules('start_time_2', 'Time', 'trim|required|callback__valid_time');
 		$this->form_validation->set_rules('location', 'Venue', 'trim|required');
 		$this->form_validation->set_rules('lineup', 'Lineup', 'trim|required|min_length[4]');
 		$this->form_validation->set_rules('subject', 'Topic Subject', 'trim|required|min_length[4]');
@@ -82,7 +82,7 @@ class Gig extends CI_Controller
 		}
 	}
 	
-	public function valid_date($str)
+	public function _valid_date($str)
 	{
 		if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $str)) {
 
@@ -101,7 +101,7 @@ class Gig extends CI_Controller
 		return FALSE;
 	}
 
-	public function valid_time($str)
+	public function _valid_time($str)
 	{
 		if (preg_match('/^[0-9]{2}:[0-9]{2}$/', $str)) {
 			
