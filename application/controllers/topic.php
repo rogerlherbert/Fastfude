@@ -63,7 +63,7 @@ class Topic extends CI_Controller
 
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('topic_id', 'Topic ID', 'trim|required|is_natural_no_zero');
+		$this->form_validation->set_rules('topic_id', 'Topic ID', 'trim|required|is_natural_no_zero|callback__is_not_locked');
 		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required');
 		
 		if ($this->form_validation->run() == FALSE)
@@ -105,5 +105,18 @@ class Topic extends CI_Controller
 			$this->Topic_model->addTopic($this->input->post('forum_id'), $this->session->userdata('user_id'), $this->input->post('subject'), $this->input->post('post_text'));
 			redirect('/');
 		}
+	}
+	
+	public function _is_not_locked($topic_id)
+	{
+		$this->db->where(array('id' => $topic_id, 'is_locked' => 0));
+		$this->db->from('topics');
+		
+		if ($this->db->count_all_results() > 0) {
+			return TRUE;
+		}
+
+		$this->form_validation->set_message('_is_not_locked', 'This topic is locked and can\'t be posted to');
+		return FALSE;
 	}
 }
