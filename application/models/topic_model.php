@@ -115,4 +115,16 @@ class Topic_model extends CI_Model
 		// update!
 		$this->db->update('topics', $fields, array('id' => $topic_id));
 	}
+
+	public function isWatched($topic_id, $user_id)
+	{
+		$this->db->where(array('topic_id' => $topic_id, 'user_id' => $user_id));
+		$this->db->from('topics_watchlist');
+
+		if ($this->db->count_all_results() > 0) {
+			return TRUE;
+		}
+
+		return FALSE;
+	}
 }
