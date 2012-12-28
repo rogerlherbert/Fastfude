@@ -57,14 +57,14 @@ class Topic_model extends CI_Model
 		return $topic_id;
 	}
 
-	public function addPost($topic_id, $user_id, $post_text)
+	public function addPost($topic_id, $user_id, $user_ip, $post_text)
 	{
-		$ip = ip2long($this->input->ip_address());
+		$ip_int = ip2long($user_ip);
 	
 		$fields = array(
 			'topic_id' => $topic_id,
 			'user_id' => $user_id,
-			'user_ip' => $ip,
+			'user_ip' => $ip_int,
 			'post_text' => $post_text
 		);
 	

@@ -74,7 +74,7 @@ class Topic extends CI_Controller
 		}
 		else
 		{
-			$this->Topic_model->addPost($this->input->post('topic_id'), $this->session->userdata('user_id'), $this->input->post('post_text'));
+			$this->Topic_model->addPost($this->input->post('topic_id'), $this->session->userdata('user_id'), $this->input->ip_address(), $this->input->post('post_text'));
 
 			redirect('/');
 		}
