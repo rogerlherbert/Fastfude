@@ -26,6 +26,24 @@ class Forum extends CI_Controller
 		$this->load->view('forum/index', $data);
 	}
 
+	public function watchlist()
+	{
+		if (!$this->session->userdata('user_id')) 
+		{
+			redirect('user/sign_in');
+		}
+		
+		$this->load->helper('date');
+	
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['forums'] = $this->Forum_model->getForums();
+		$data['topics'] = $this->Forum_model->getWatchedTopics($this->session->userdata('user_id'));
+
+		$data['title'] = "Topics you're watching";
+
+		$this->load->view('forum/watchlist', $data);
+	}
+	
 	public function id($id)
 	{
 		if (!preg_match('/^[0-9]+$/', $id)) 
