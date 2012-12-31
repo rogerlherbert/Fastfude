@@ -1,7 +1,7 @@
 <?php $this->load->view('common/header'); ?>
 
 <div class="controls">
-	<?php echo ($watch_status) ? anchor('topic/unwatch/'.$topic->id, "Stop Watching", ' class="button icon-eye-close"') : anchor('topic/watch/'.$topic->id, "Watch", ' class="button icon-eye-open"'); ?>
+	<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, "Stop Watching", ' class="button icon-eye-close"') : anchor('topic/watch/'.$topic->id, "Watch", ' class="button icon-eye-open"'); ?>
 </div>
 
 <?php if (isset($gig)) {

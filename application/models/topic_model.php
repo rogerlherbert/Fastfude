@@ -138,7 +138,7 @@ class Topic_model extends CI_Model
 			return TRUE;
 		}
 
-		return FALSE;
+		return NULL;
 	}
 	
 	public function notifyWatchers($topic_id)

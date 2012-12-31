@@ -44,11 +44,11 @@ class Topic extends CI_Controller
 		$data['title'] = $data['topic']->title;
 		$data['posts'] = $this->Topic_model->getPosts($id);
 
-		// muted users
 		if ($this->session->userdata('user_id')) 
 		{
 			$data['watch_status'] = $this->Topic_model->isWatched($id, $this->session->userdata('user_id'));
 
+			// muted users
 			$this->load->model('User_model');
 			$data['muted'] = $this->User_model->getMutedUsers($this->session->userdata('user_id'));
 		}
