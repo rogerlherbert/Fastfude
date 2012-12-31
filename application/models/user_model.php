@@ -186,6 +186,12 @@ Fastfude');
 			return $column;
 		}
 	}
+	
+	public function changeUsername($user_id, $new_name)
+	{
+		$this->db->where('id', $user_id);
+		$this->db->update('users', array('username' => $new_name));
+	}
 
 	public function getUserID($username, $password)
 	{
@@ -239,5 +245,36 @@ Fastfude');
 	public function encryptPassword($str)
 	{
 		return crypt($str, $this->config->item('encryption_key'));
+	}
+	
+	public function getCommonPasswords()
+	{
+		return array(
+			'111111',
+			'123123',
+			'123456',
+			'1234567',
+			'12345678',
+			'abc123',
+			'ashley',
+			'baseball',
+			'dragon',
+			'football',
+			'iloveyou',
+			'letmein',
+			'master',
+			'michael',
+			'monkey',
+			'mustang',
+			'password',
+			'password1',
+			'password12',
+			'password123',
+			'qwerty',
+			'shadow',
+			'sunshine',
+			'trustno1',
+			'welcome'
+		);
 	}
 }

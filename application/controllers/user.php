@@ -117,7 +117,7 @@ class User extends CI_Controller
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[32]|is_unique[users.username]');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[passconf]');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[passconf]|callback__is_valid_password');
 			$this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required');
 			
 			if ($this->form_validation->run() == FALSE)
@@ -222,7 +222,7 @@ class User extends CI_Controller
 
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[passconf]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[passconf]|callback__is_valid_password');
 		$this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required');
 		
 		if ($this->form_validation->run() == FALSE)
@@ -271,5 +271,70 @@ class User extends CI_Controller
 		$this->User_model->unmuteUser($this->session->userdata('user_id'), $id);
 
 		redirect('user/id/'.$id);
+	}
+
+	public function change_name()
+	{
+		if (!$this->session->userdata('user_id')) 
+		{
+			redirect('user/sign_in');
+		}
+		
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[32]|is_unique[users.username]');
+		
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['title'] = "Change Your Username";
+			
+			$this->load->view('user/change_name', $data);
+		}
+		else
+		{
+			$this->User_model->changeUsername($this->session->userdata('user_id'), $this->input->post('username'));
+
+			redirect('user/id/'.$this->session->userdata('user_id'));
+		}
+	}
+	
+	public function change_password()
+	{
+		if (!$this->session->userdata('user_id')) 
+		{
+			redirect('user/sign_in');
+		}
+		
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[passconf]|callback__is_valid_password');
+		$this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required');
+				
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['title'] = "Change Your Password";
+			
+			$this->load->view('user/change_password', $data);
+		}
+		else
+		{
+			$this->User_model->resetPassword($this->session->userdata('user_id'), $this->input->post('password'));
+		
+			redirect('user/id/'.$this->session->userdata('user_id'));
+		}
+	}
+	
+	public function _is_valid_password($str)
+	{
+		if (in_array(strtolower($str), $this->User_model->getCommonPasswords())) {
+			$this->form_validation->set_message('_is_valid_password', 'You shoudn\'t use common or easily-guessed passwords');
+			return FALSE;
+		}
+		
+		return TRUE;
 	}
 }
