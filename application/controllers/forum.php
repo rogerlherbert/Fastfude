@@ -18,6 +18,7 @@ class Forum extends CI_Controller
 		$this->load->helper('date');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['topics'] = $this->Forum_model->getRecentTopics();
 
@@ -36,6 +37,7 @@ class Forum extends CI_Controller
 		$this->load->helper('date');
 	
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['topics'] = $this->Forum_model->getWatchedTopics($this->session->userdata('user_id'));
 
@@ -54,6 +56,7 @@ class Forum extends CI_Controller
 		$this->load->helper('date');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['topics'] = $this->Forum_model->getRecentTopics($id);
 		$data['title'] = $data['forums'][$id];

@@ -35,6 +35,7 @@ class User extends CI_Controller
 		}
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['title'] = $data['profile']->username;
 
 		$this->load->view('user/id', $data);
@@ -66,6 +67,7 @@ class User extends CI_Controller
 
 			$data['posts'] = $this->User_model->getPostsByMonth($id, $ym_params[0], $ym_params[1]);
 			$data['bodyclass'] = strtolower(__CLASS__ . ' user_posts');
+			$data['breadcrumbs'] = array(__CLASS__, 'posts');
 			$data['title'] = $data['profile']->username .' posts for '. $ym_params[0] .'-'. $ym_params[1];
 
 			$this->load->view('user/posts', $data);
@@ -75,6 +77,7 @@ class User extends CI_Controller
 			// show archive table
 			$data['archive'] = $this->User_model->getPostsArchive($id);
 			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
+			$data['breadcrumbs'] = array(__CLASS__, 'archive');
 			$data['title'] = $data['profile']->username .' posts';
 			
 			$this->load->view('user/archive', $data);
@@ -87,6 +90,7 @@ class User extends CI_Controller
 		$this->form_validation->set_rules('email', 'Email', 'trim|strtolower|required|valid_email');
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['title'] = "Register";
 
 		if ($this->form_validation->run() == FALSE)
@@ -107,6 +111,7 @@ class User extends CI_Controller
 		$email = $this->User_model->getPendingEmail($auth_key);
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 
 		if (!$email)
 		{
@@ -145,6 +150,7 @@ class User extends CI_Controller
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -192,6 +198,7 @@ class User extends CI_Controller
 		$this->form_validation->set_rules('username', 'Username', 'required');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -228,6 +235,7 @@ class User extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 			$data['title'] = "Choose a new password";
 			// failed form validation
 			$this->load->view('user/recover', $data);
@@ -285,6 +293,7 @@ class User extends CI_Controller
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[32]|is_unique[users.username]');
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -313,6 +322,7 @@ class User extends CI_Controller
 		$this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required');
 				
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		
 		if ($this->form_validation->run() == FALSE)
 		{

@@ -30,5 +30,7 @@
 <body class="<?php echo html_escape($bodyclass); ?>">
 <div id="content">
 
+<div id="breadcrumbs">home > <?php echo strtolower(implode(' > ', $breadcrumbs)); ?>:</div>
+
 <h1><?php echo html_escape($title); ?></h1>
 

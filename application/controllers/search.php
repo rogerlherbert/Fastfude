@@ -31,6 +31,7 @@ class Search extends CI_Controller
 		$this->load->model('Forum_model');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['forums'] = $this->Forum_model->getForums();
 
 		$forum_id = array_search($forum, $data['forums']);

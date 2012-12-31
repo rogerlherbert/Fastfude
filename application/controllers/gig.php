@@ -16,6 +16,7 @@ class Gig extends CI_Controller
 		$this->load->helper('date');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['title'] = 'Gig Calendar';
 		$data['calendar'] = $this->Gig_model->getUpcomingGigs();
@@ -40,6 +41,7 @@ class Gig extends CI_Controller
 		$this->load->model('Forum_model');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['title'] = 'Gigs on '. $date;
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['gigs'] = $this->Gig_model->getGigsByDate($date);
@@ -66,6 +68,7 @@ class Gig extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 			$data['title'] = 'Create A Gig';
 			$this->load->view('gig/create', $data);
 		}
