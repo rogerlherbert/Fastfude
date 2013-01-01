@@ -17,7 +17,7 @@ class Topic_model extends CI_Model
 
 	public function getPosts($topic_id)
 	{
-		$this->db->select('p.id, p.user_id, u.username, MD5(u.email) as gravatar_id, UNIX_TIMESTAMP(p.post_time) as post_time, UNIX_TIMESTAMP(p.edit_time) as edit_time, p.post_text');
+		$this->db->select('p.id, p.user_id, u.username, MD5(u.email) as avatar_hash, (SELECT us.value FROM users_settings us WHERE us.user_id = u.id AND us.key = "avatar") as avatar_service, UNIX_TIMESTAMP(p.post_time) as post_time, UNIX_TIMESTAMP(p.edit_time) as edit_time, p.post_text');
 		$this->db->from('posts p');
 		$this->db->join('users u', 'u.id = p.user_id');
 		$this->db->where('p.topic_id', $topic_id);
@@ -26,6 +26,22 @@ class Topic_model extends CI_Model
 	
 		if ($query->num_rows() > 0) 
 		{
+			foreach ($query->result() as $row) {
+				switch ($row->avatar_service) {
+					case 'gravatar':
+						$row->avatar_url = 'http://www.gravatar.com/avatar/'.$row->avatar_hash.'?s=96&r=pg';
+						break;
+					
+					case 'unicornify':
+						$row->avatar_url = 'http://unicornify.appspot.com/avatar/'.$row->avatar_hash.'?s=96';
+						break;
+					
+					default:
+						$row->avatar_url = 'assets/img/avatar.png';
+						break;
+				}
+			}
+
 			return $query->result();
 		}
 	}

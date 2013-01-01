@@ -8,12 +8,29 @@ class User_model extends CI_Model
 
 	public function getUser($id)
 	{
-		$this->db->select('id, username, MD5(email) as gravatar_id, UNIX_TIMESTAMP(created) as created');
-		$query = $this->db->get_where('users', array('id' => $id));
+		$this->db->select('id, username, MD5(email) as avatar_hash, (SELECT us.value FROM users_settings us WHERE us.user_id = u.id AND us.key = "avatar") as avatar_service, UNIX_TIMESTAMP(created) as created');
+		$query = $this->db->get_where('users u', array('id' => $id));
 
 		if ($query->num_rows > 0) 
 		{
-			return $query->row();
+			$row = $query->row();
+
+				switch ($row->avatar_service) 
+				{
+					case 'gravatar':
+						$row->avatar_url = 'http://www.gravatar.com/avatar/'.$row->avatar_hash.'?s=128&r=pg';
+						break;
+					
+					case 'unicornify':
+						$row->avatar_url = 'http://unicornify.appspot.com/avatar/'.$row->avatar_hash.'?s=128';
+						break;
+					
+					default:
+						$row->avatar_url = 'assets/img/avatar.png';
+						break;
+				}
+
+			return $row;
 		}
 	}
 
@@ -204,6 +221,38 @@ Fastfude');
 		{
 			$row = $query->row();
 			return $row->id;
+		}
+	}
+
+	public function setUserSetting($user_id, $key, $value)
+	{
+		$this->db->delete('users_settings', array(
+			'user_id' => $user_id,
+			'key' => $key
+		));
+
+		if ($value != '') 
+		{
+			$this->db->insert('users_settings', array(
+				'user_id' => $user_id,
+				'key' => $key,
+				'value' => $value
+			));
+		}
+	}
+	
+	public function getUserSettings($user_id)
+	{
+		$query = $this->db->get_where('users_settings', array('user_id' => $user_id));
+		
+		if ($query->num_rows > 0) 
+		{
+			$settings = array();
+			foreach ($query->result() as $row) 
+			{
+				$settings[$row->key] = $row->value;
+			}
+			return $settings;
 		}
 	}
 	

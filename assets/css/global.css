@@ -58,11 +58,11 @@ a.button:hover {text-decoration:none; background-color:#444}
 /* FORMS */
 
 button,
-input {font:normal normal normal 1em/1.5 'MuseoSlab-500',serif; background-color:#fff; border:none; padding:0.25em; max-width:100%; -webkit-appearance:none; -moz-appearance:none; -ms-appearance:none; -o-appearance:none; appearance:none}
+input {font:normal normal normal 1em/1.5 'MuseoSlab-500',serif; background-color:#fff; border:none; padding:0.25em; max-width:100%;}
 
 button,
 input[type="button"],
-input[type="submit"] {background-color:#333; color:#fff; border-radius:0.5em; line-height:1; padding:0.6667em 0.75em 0.3333em; text-transform:capitalize; cursor:pointer}
+input[type="submit"] {background-color:#333; color:#fff; border-radius:0.5em; line-height:1; padding:0.6667em 0.75em 0.3333em; text-transform:capitalize; cursor:pointer; -webkit-appearance:none; -moz-appearance:none; -ms-appearance:none; -o-appearance:none; appearance:none}
 
 button:hover,
 input[type="button"]:hover,
@@ -99,7 +99,7 @@ span.form_error {display:block; color:#f00}
 
 .posts .post_author a {}
 
-.posts .post_author a img {margin-left:-4em; float:left}
+.posts .post_author a img {margin-left:-4em; float:left; width: 3em; height: 3em}
 
 .posts .post_author time {display:block}
 
@@ -154,5 +154,16 @@ span.form_error {display:block; color:#f00}
 .archive .month a { display: block; padding: 0.5em 0;}
 
 .archive .month .no_posts { display: block; padding: 0.5em 0}
+
+
+/* SETTINGS */
+
+.avatar ul#avatars { margin-bottom: 1em;}
+
+.avatar li.field { padding: 1em 0 1em 1em; border-bottom: 1px solid #333}
+
+.avatar li.field input[type="radio"] { margin-right: 1em;}
+
+.avatar li.field img { width: 3em; height: 3em; margin-right: 1em; vertical-align: middle}
 
 

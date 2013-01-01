@@ -12,7 +12,7 @@
 <?php foreach ($posts as $post) { ?>
 	<li id="post_<?php echo $post->id; ?>">
 		<div class="post_author">
-			<?php echo anchor('user/id/'.$post->user_id, img('http://www.gravatar.com/avatar/'.$post->gravatar_id.'?s=48') . html_escape($post->username)); ?>
+			<?php echo anchor('user/id/'.$post->user_id, img($post->avatar_url) . html_escape($post->username)); ?>
 			<time datetime="<?php echo date("c", $post->post_time); ?>" class="comment_date"><?php echo date("D jS M Y, g:i a", $post->post_time); ?></time>
 		</div>
 		<div class="post_content">

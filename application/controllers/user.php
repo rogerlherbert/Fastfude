@@ -169,7 +169,8 @@ class User extends CI_Controller
 
 				$this->session->set_userdata('user_id', $user_id);
 				$this->session->set_userdata('username', $user->username);
-				$this->session->set_userdata('gravatar_id', $user->gravatar_id);
+				$this->session->set_userdata('avatar_hash', $user->gravatar_id);
+				$this->session->set_userdata($this->User_model->getUserSettings($user_id));
 
 				redirect('/');
 			}
