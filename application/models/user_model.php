@@ -220,6 +220,23 @@ Fastfude');
 		$this->db->delete('users_pending', array('email' => $new_email));
 	}
 
+	public function changeNotifications($user_id, array $notifications)
+	{
+		$this->db->delete('users_settings', array('user_id' => $user_id, 'key' => 'notifications'));
+
+		if (count($notifications) > 0) 
+		{
+			$insert = array();
+			
+			foreach ($notifications as $row) 
+			{
+				$insert[] = array('user_id' => $user_id, 'key' => 'notifications', 'value' => $row);
+			}
+			
+			$this->db->insert_batch('users_settings', $insert);
+		}
+	}
+
 	public function getUserID($username, $password)
 	{
 		$enc_pass = $this->encryptPassword($password);
@@ -264,6 +281,23 @@ Fastfude');
 			}
 			return $settings;
 		}
+	}
+	
+	public function getNotificationsSettings($user_id)
+	{
+		$query = $this->db->get_where('users_settings', array('user_id' => $user_id, 'key' => 'notifications'));
+
+		$settings = array();
+
+		if ($query->num_rows > 0) 
+		{
+			foreach ($query->result() as $row) 
+			{
+				$settings[] = $row->value;
+			}
+		}
+
+		return $settings;
 	}
 	
 	public function createPasswordResetKey($user_id)

@@ -5,6 +5,7 @@
 */
 class Settings extends CI_Controller
 {
+	private $notifications;
 
 	function __construct() 
 	{
@@ -17,6 +18,11 @@ class Settings extends CI_Controller
 
 		$this->load->model('User_model');
 		$this->load->library('form_validation');
+
+		$this->notifications = array(
+			'watchlist' => 'replies to your watchlist',
+			'messages' => 'new private messages'
+		);
 
 		$this->output->enable_profiler(TRUE);
 	}
@@ -129,13 +135,49 @@ class Settings extends CI_Controller
 		}
 	}
 	
+	public function notifications()
+	{
+		$this->form_validation->set_rules('notifications[]', 'Notifications', 'trim|alpha|callback__is_valid_notification_type');
+		
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['title'] = "Change Your Notifications";
+			$data['options'] = $this->notifications;
+			$data['settings'] = $this->User_model->getNotificationsSettings($this->session->userdata('user_id'));
+			
+			$this->load->view('settings/notifications', $data);
+		}
+		else
+		{
+			$notifications = ($this->input->post('notifications')) ? $this->input->post('notifications') : array();
+
+			$this->User_model->changeNotifications($this->session->userdata('user_id'), $notifications);
+			redirect('settings');
+		}
+	}
+	
 	public function _is_valid_password($str)
 	{
-		if (in_array(strtolower($str), $this->User_model->getCommonPasswords())) {
+		if (in_array(strtolower($str), $this->User_model->getCommonPasswords())) 
+		{
 			$this->form_validation->set_message('_is_valid_password', 'You shoudn\'t use common or easily-guessed passwords');
 			return FALSE;
 		}
 		
 		return TRUE;
+	}
+	
+	public function _is_valid_notification_type($str)
+	{
+		if ($str == '' || array_key_exists($str, $this->notifications)) 
+		{
+			return TRUE;
+		}
+		
+		$this->form_validation->set_message('_is_valid_notification_type', "'$str'".' is not a valid notification type');
+		return FALSE;
 	}
 }
