@@ -169,7 +169,7 @@ class User extends CI_Controller
 
 				$this->session->set_userdata('user_id', $user_id);
 				$this->session->set_userdata('username', $user->username);
-				$this->session->set_userdata('avatar_hash', $user->gravatar_id);
+				$this->session->set_userdata('avatar_hash', $user->avatar_hash);
 				$this->session->set_userdata($this->User_model->getUserSettings($user_id));
 
 				redirect('/');
@@ -282,63 +282,6 @@ class User extends CI_Controller
 		redirect('user/id/'.$id);
 	}
 
-	public function change_name()
-	{
-		if (!$this->session->userdata('user_id')) 
-		{
-			redirect('user/sign_in');
-		}
-		
-		$this->load->library('form_validation');
-		
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[32]|is_unique[users.username]');
-		
-		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-
-		if ($this->form_validation->run() == FALSE)
-		{
-			$data['title'] = "Change Your Username";
-			
-			$this->load->view('user/change_name', $data);
-		}
-		else
-		{
-			$this->User_model->changeUsername($this->session->userdata('user_id'), $this->input->post('username'));
-
-			redirect('user/id/'.$this->session->userdata('user_id'));
-		}
-	}
-	
-	public function change_password()
-	{
-		if (!$this->session->userdata('user_id')) 
-		{
-			redirect('user/sign_in');
-		}
-		
-		$this->load->library('form_validation');
-		
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[passconf]|callback__is_valid_password');
-		$this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required');
-				
-		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-		
-		if ($this->form_validation->run() == FALSE)
-		{
-			$data['title'] = "Change Your Password";
-			
-			$this->load->view('user/change_password', $data);
-		}
-		else
-		{
-			$this->User_model->resetPassword($this->session->userdata('user_id'), $this->input->post('password'));
-		
-			redirect('user/id/'.$this->session->userdata('user_id'));
-		}
-	}
-	
 	public function _is_valid_password($str)
 	{
 		if (in_array(strtolower($str), $this->User_model->getCommonPasswords())) {

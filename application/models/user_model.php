@@ -74,11 +74,13 @@ class User_model extends CI_Model
 		{
 			$archive = array();
 
-			for ($i = date('Y'); $i > 1999; $i--) { 
+			for ($i = date('Y'); $i > 1999; $i--) 
+			{ 
 				$archive[$i] = array_pad(array(), 12, 0);
 			}
 
-			foreach ($query->result() as $row) {
+			foreach ($query->result() as $row) 
+			{
 				$archive[$row->theyear][$row->themonth - 1] = (int) $row->posts;
 			}
 
@@ -99,23 +101,23 @@ class User_model extends CI_Model
 		$this->db->delete('users_pending', array('email' => $email));
 		$this->db->insert('users_pending', $fields);
 		
-		$this->sendRegistrationEmail($email, $auth_key);
+		$this->sendConfirmationEmail($email, $auth_key);
 	}
 	
-	public function sendRegistrationEmail($email, $auth_key)
+	public function sendConfirmationEmail($email, $auth_key)
 	{
 		$this->load->library('email');
 		
 		$this->email->from('admin@fastfude.org', 'Fastfude');
 		$this->email->to($email); 
 		
-		$this->email->subject('Confirm Your Registration');
-		$this->email->message('Hi there, this is a confirmation email for your registration to '.base_url().'
-Please confirm you\'d like to register by clicking the link below:
+		$this->email->subject('Confirm your email address');
+		$this->email->message('Hi there, this is a confirmation email for your account on '.base_url().'
+Please confirm your email address is valid by clicking the link below:
 
 {unwrap}'.site_url('user/confirm/'.$auth_key).'{/unwrap}
 
-If you didn\'t try to register, you can safely ignore this email.
+If you didn\'t try to register or change your address, you can safely ignore this email.
 
 all the best,
 
@@ -131,7 +133,7 @@ Fastfude');
 		$this->email->from('admin@fastfude.org', 'Fastfude');
 		$this->email->to($email); 
 
-		$this->email->subject('Confirm Your Registration');
+		$this->email->subject('Reset your password');
 		$this->email->message('Hi there, this email was sent in response to a forgot password claim for your username at '.base_url().'
 Please confirm you\'d like to reset your password by clicking the link below:
 
@@ -208,6 +210,14 @@ Fastfude');
 	{
 		$this->db->where('id', $user_id);
 		$this->db->update('users', array('username' => $new_name));
+	}
+	
+	public function changeEmail($user_id, $new_email)
+	{
+		$this->db->where('id', $user_id);
+		$this->db->update('users', array('email' => $new_email));
+
+		$this->db->delete('users_pending', array('email' => $new_email));
 	}
 
 	public function getUserID($username, $password)
