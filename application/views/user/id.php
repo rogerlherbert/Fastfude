@@ -17,7 +17,6 @@
 	<?php echo anchor('user/posts/'.$profile->id, 'View posts', ' class="button icon-list"'); ?>
 </div>
 
-<pre><?php var_dump($settings); ?></pre>
 <?php } ?>
 
 <?php $this->load->view('common/footer'); ?>
