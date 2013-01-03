@@ -2,22 +2,15 @@
 <?php echo form_open(); ?>
 
 	<ul id="avatars">
+		<?php foreach ($options as $key => $service) { ?>
 		<li class="field">
-			<?php echo form_radio('avatar', '', TRUE); ?>
-			<?php echo form_label('None', 'avatar'); ?>
+			<?php $checked = ($this->session->userdata('avatar') && $key == $this->session->userdata('avatar')) ? TRUE : FALSE; ?>
+			<?php echo form_radio('avatar', $service['value'], $checked); ?>
+			<?php echo ($service['url'] != '') ? img(sprintf($service['url'], $this->session->userdata('avatar_hash'))) : ''; ?>
+			<?php echo form_label(ucfirst($key), 'avatar'); ?>
 		</li>
-	
-		<li class="field">
-			<?php echo form_radio('avatar', 'gravatar'); ?>
-			<?php echo img('http://www.gravatar.com/avatar/'.$this->session->userdata('avatar_hash').'?s=96&r=pg'); ?>
-			<?php echo form_label('Gravatar', 'avatar'); ?>
-		</li>
-		
-		<li class="field">
-			<?php echo form_radio('avatar', 'unicornify'); ?>
-			<?php echo img('http://unicornify.appspot.com/avatar/'.$this->session->userdata('avatar_hash').'?s=96'); ?>
-			<?php echo form_label('Unicornify', 'avatar'); ?>
-		</li>
+
+		<?php } ?>
 	</ul>
 			<?php echo form_error('avatar','<span class="form_error">','</span>'); ?>
 

@@ -267,7 +267,7 @@ Fastfude');
 			));
 		}
 	}
-	
+
 	public function getUserSettings($user_id)
 	{
 		$query = $this->db->get_where('users_settings', array('user_id' => $user_id));
@@ -277,7 +277,24 @@ Fastfude');
 			$settings = array();
 			foreach ($query->result() as $row) 
 			{
-				$settings[$row->key] = $row->value;
+				if (isset($settings[$row->key])) 
+				{
+					if (is_array($settings[$row->key])) 
+					{
+						// already an array, so just push new value
+						$settings[$row->key][] = $row->value;
+					}
+					else
+					{
+						// convert existing value to array then push new one
+						$settings[$row->key] = array($settings[$row->key], $row->value);
+					}
+				}
+				else
+				{
+					// single value
+					$settings[$row->key] = $row->value;
+				}
 			}
 			return $settings;
 		}

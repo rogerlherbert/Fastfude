@@ -6,6 +6,7 @@
 class Settings extends CI_Controller
 {
 	private $notifications;
+	private $avatar_services;
 
 	function __construct() 
 	{
@@ -24,6 +25,12 @@ class Settings extends CI_Controller
 			'messages' => 'new private messages'
 		);
 
+		$this->avatar_services = array(
+			'none' => array('value' => '', 'url' => ''),
+			'gravatar' => array('value' => 'gravatar', 'url' => 'http://www.gravatar.com/avatar/%s?s=96&r=pg'),
+			'unicornify' => array('value' => 'unicornify', 'url' => 'http://unicornify.appspot.com/avatar/%s?s=96')
+		);
+		
 		$this->output->enable_profiler(TRUE);
 	}
 	
@@ -42,16 +49,20 @@ class Settings extends CI_Controller
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-		$data['title'] = "Choose an Avatar";
 		
 		if ($this->form_validation->run() == FALSE)
 		{
-			// first load or failed form validation
+			$data['title'] = "Choose an Avatar";
+			$data['options'] = $this->avatar_services;
+
 			$this->load->view('settings/avatar', $data);
 		}
 		else
 		{
 			$this->User_model->setUserSetting($this->session->userdata('user_id'), 'avatar', $this->input->post('avatar'));
+
+			$this->session->unset_userdata('avatar');
+			$this->session->set_userdata($this->User_model->getUserSettings($this->session->userdata('user_id')));
 
 			redirect('settings');
 		}
@@ -81,6 +92,8 @@ class Settings extends CI_Controller
 		if($email = $this->User_model->getPendingEmail($auth_key))
 		{
 			$this->User_model->changeEmail($this->session->userdata('user_id'), $email);
+			$this->session->set_userdata('avatar_hash', md5($email));
+
 			redirect('settings');
 		}
 		else
@@ -108,7 +121,8 @@ class Settings extends CI_Controller
 		else
 		{
 			$this->User_model->changeUsername($this->session->userdata('user_id'), $this->input->post('username'));
-	
+			$this->session->set_userdata('username', $this->input->post('username'));
+
 			redirect('settings');
 		}
 	}
@@ -155,6 +169,9 @@ class Settings extends CI_Controller
 			$notifications = ($this->input->post('notifications')) ? $this->input->post('notifications') : array();
 
 			$this->User_model->changeNotifications($this->session->userdata('user_id'), $notifications);
+			$this->session->unset_userdata('notifications');
+			$this->session->set_userdata($this->User_model->getUserSettings($this->session->userdata('user_id')));
+
 			redirect('settings');
 		}
 	}
