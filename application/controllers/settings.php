@@ -176,6 +176,80 @@ class Settings extends CI_Controller
 		}
 	}
 	
+	public function delete()
+	{
+		$this->form_validation->set_rules('confirm', 'Delete', 'trim|required');
+		
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['title'] = "Delete your account";
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('settings/delete', $data);
+		}
+		else
+		{
+			$this->User_model->createPendingUser($this->User_model->getUserEmail($this->session->userdata('user_id')));
+			$this->load->view('settings/delete_email', $data);
+		}
+	}
+	
+	public function delete_confirm($auth_key)
+	{
+		$email = $this->User_model->getPendingEmail($auth_key);
+
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['title'] = "Delete your account";
+		
+		if (!$email)
+		{
+			$data['title'] = "Onoes!";
+			$this->load->view('user/register_auth', $data);
+		}
+		else
+		{
+			$this->form_validation->set_rules('confirm', 'Delete', 'trim|required');
+			
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->load->view('settings/delete_confirm', $data);
+			}
+			else
+			{
+				/*
+				Arise! Arise, Riders of Theoden! 
+				Fell deeds awake, fire and slaughter! 
+				Spears shall be shaken! Shields shall be splintered! 
+				A sword day! A red day! Ere the sun rises! 
+				Ride now! Ride now! Ride!
+				Ride for ruin, and the world’s ending! 
+				Death! Death! Death! 
+				*/
+				
+				$user_id = $this->session->userdata('user_id');
+				
+				// private messages
+				$this->load->model('Message_model');
+				$this->Message_model->deleteUserSentItems($user_id);
+				
+				// post IP addresses
+				$this->load->model('Topic_model');
+				$this->Topic_model->eraseUserIPData($user_id);
+				$this->Topic_model->eraseWatchlist($user_id);
+				
+				// scrub user profile
+				$this->User_model->deleteUserSettings($user_id);
+				$this->User_model->eraseUserProfile($user_id);
+				
+				// destroy session
+				$this->session->sess_destroy();
+				redirect('/');
+			}
+		}
+	}
+	
 	public function _is_valid_password($str)
 	{
 		if (in_array(strtolower($str), $this->User_model->getCommonPasswords())) 
