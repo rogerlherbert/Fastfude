@@ -13,7 +13,8 @@ class Message_model extends CI_Model
 				u.username, 
 				UNIX_TIMESTAMP(MAX(m.post_time)) as post_time, 
 				m.is_read, 
-				md5(email) as gravatar_id, 
+				md5(email) as avatar_hash, 
+				(SELECT us.value FROM users_settings us WHERE us.user_id = m.from_id AND us.key = 'avatar') as avatar_service,
 				'from' as dir
 			FROM private_messages m
 			JOIN users u ON u.id = m.from_id
@@ -25,7 +26,8 @@ class Message_model extends CI_Model
 				u.username, 
 				UNIX_TIMESTAMP(MAX(m.post_time)) as post_time, 
 				m.is_read, 
-				null as gravatar_id, 
+				null as avatar_hash,
+				null as avatar_service, 
 				'to' as dir
 			FROM private_messages m
 			JOIN users u ON u.id = m.to_id
@@ -51,7 +53,7 @@ class Message_model extends CI_Model
 							'username' => $row->username, 
 							'post_time' => $row->post_time,
 							'is_read' => $row->is_read,
-							'gravatar_id' => $row->gravatar_id,
+							'avatar_url' => $this->_avatar_url($row->avatar_service, $row->avatar_hash),
 							'dir' => $row->dir
 						);
 					}
@@ -63,7 +65,7 @@ class Message_model extends CI_Model
 						'username' => $row->username, 
 						'post_time' => $row->post_time,
 						'is_read' => $row->is_read,
-						'gravatar_id' => $row->gravatar_id,
+						'avatar_url' => $this->_avatar_url($row->avatar_service, $row->avatar_hash),
 						'dir' => $row->dir
 					);
 				}
@@ -82,7 +84,8 @@ class Message_model extends CI_Model
 				UNIX_TIMESTAMP(post_time) as post_time, 
 				u.id as user_id, 
 				u.username, 
-				MD5(u.email) as gravatar_id, 
+				MD5(u.email) as avatar_hash, 
+				(SELECT us.value FROM users_settings us WHERE us.user_id = u.id AND us.key = 'avatar') as avatar_service,
 				m.post_text
 			FROM private_messages m
 			JOIN users u ON u.id = m.from_id
@@ -93,7 +96,8 @@ class Message_model extends CI_Model
 				UNIX_TIMESTAMP(post_time) as post_time, 
 				u.id as user_id, 
 				u.username, 
-				MD5(u.email) as gravatar_id, 
+				MD5(u.email) as avatar_hash, 
+				(SELECT us.value FROM users_settings us WHERE us.user_id = u.id AND us.key = 'avatar') as avatar_service,
 				m.post_text
 			FROM private_messages m
 			JOIN users u ON u.id = m.from_id
@@ -106,6 +110,7 @@ class Message_model extends CI_Model
 			foreach ($query->result() as $row) 
 			{
 				$row->post_text = $this->encrypt->decode($row->post_text);
+				$row->avatar_url = $this->_avatar_url($row->avatar_service, $row->avatar_hash);
 			}
 
 			return $query->result();
@@ -150,6 +155,26 @@ class Message_model extends CI_Model
 		}
 
 		return null;
+	}
+	
+	private function _avatar_url($service, $hash)
+	{
+		switch ($service) 
+		{
+			case 'gravatar':
+				$avatar_url = 'http://www.gravatar.com/avatar/'.$hash.'?s=128&r=pg';
+				break;
+			
+			case 'unicornify':
+				$avatar_url = 'http://unicornify.appspot.com/avatar/'.$hash.'?s=128';
+				break;
+			
+			default:
+				$avatar_url = 'assets/img/avatar.png';
+				break;
+		}
+		
+		return $avatar_url;
 	}
 }
 

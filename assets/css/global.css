@@ -110,7 +110,7 @@ span.form_error {display:block; color:#f00}
 
 .messages li {padding-left:4em; margin-bottom:1em; overflow:hidden; padding-top:1em; border-top:1px solid #333}
 
-.messages .avatar {margin-left:-4em; float:left}
+.messages .avatar {margin-left:-4em; float:left; width: 3em; height: 3em}
 
 .messages .meta {font-size:75%; margin-top:0.5em}
 

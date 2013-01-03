@@ -11,7 +11,7 @@
 	<?php $class = ($msg['is_read'] == 0) ? ' class="unread"' : ''; ?>
 
 	<li<?php echo $class; ?>>
-		<?php echo anchor('message/with/'.$user_id, img(array('src' => 'http://www.gravatar.com/avatar/'.$msg['gravatar_id'].'?s=48', 'class' => 'avatar')) . html_escape($msg['username'])); ?>
+		<?php echo anchor('message/with/'.$user_id, img(array('src' => $msg['avatar_url'], 'class' => 'avatar')) . html_escape($msg['username'])); ?>
 		<p class="meta"><?php echo timespan($msg['post_time'], time(), 2); ?></p>
 	</li>
 
