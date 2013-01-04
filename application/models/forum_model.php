@@ -70,4 +70,32 @@ class Forum_model extends CI_Model
 			return $query->result();
 		}
 	}
+	
+	public function getSitemapIndex()
+	{
+		$this->db->select('YEAR(post_time_first) as loc');
+		$this->db->group_by('loc');
+		$this->db->order_by('loc', 'asc');
+		
+		$query = $this->db->get('topics');
+
+		if ($query->num_rows() > 0) 
+		{
+			return $query->result();
+		}
+	}
+	
+	public function getSitemapYear($year)
+	{
+		$this->db->select('id, DATE_FORMAT(post_time_last, "%Y-%m-%dT%TZ") as lastmod', FALSE);
+		$this->db->where('YEAR(post_time_first)', $year);
+		$this->db->order_by('post_time_first', 'asc');
+		
+		$query = $this->db->get('topics');
+		
+		if ($query->num_rows() > 0) 
+		{
+			return $query->result();
+		}
+	}
 }
