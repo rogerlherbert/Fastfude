@@ -313,6 +313,27 @@ Fastfude');
 		}
 	}
 	
+	public function deleteUserSettings($user_id, $key)
+	{
+		$this->db->where('user_id', $user_id);
+
+		if ($key != 'all') {
+			$this->db->where('key', $key);
+		}
+		
+		$this->db->delete('users_settings');
+	}
+	
+	public function eraseUserProfile($user_id)
+	{
+		$this->db->where('id', $user_id);
+		$this->db->update('users', array(
+			'username' => 'user_'.$user_id,
+			'email' => 'user+'.$user_id.'@fastfude.org',
+			'password' => $this->encryptPassword(random_string('unique'))
+		));
+	}
+	
 	public function getNotificationsSettings($user_id)
 	{
 		$query = $this->db->get_where('users_settings', array('user_id' => $user_id, 'key' => 'notifications'));

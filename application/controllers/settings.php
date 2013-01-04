@@ -230,17 +230,16 @@ class Settings extends CI_Controller
 				
 				$user_id = $this->session->userdata('user_id');
 				
-				// private messages
+				// delete sent private messages
 				$this->load->model('Message_model');
 				$this->Message_model->deleteUserSentItems($user_id);
 				
-				// post IP addresses
+				// zero out post IP addresses
 				$this->load->model('Topic_model');
 				$this->Topic_model->eraseUserIPData($user_id);
-				$this->Topic_model->eraseWatchlist($user_id);
 				
-				// scrub user profile
-				$this->User_model->deleteUserSettings($user_id);
+				// overwrite user profile
+				$this->User_model->deleteUserSettings($user_id, 'all');
 				$this->User_model->eraseUserProfile($user_id);
 				
 				// destroy session
