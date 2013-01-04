@@ -134,20 +134,10 @@ class Topic_model extends CI_Model
 		$this->db->update('topics', $fields, array('id' => $topic_id));
 	}
 	
-	public function watchTopic($topic_id, $user_id)
-	{
-		$this->db->insert('topics_watchlist', array('topic_id' => $topic_id, 'user_id' => $user_id));
-	}
-
-	public function unwatchTopic($topic_id, $user_id)
-	{
-		$this->db->delete('topics_watchlist', array('topic_id' => $topic_id, 'user_id' => $user_id));
-	}
-	
 	public function isWatched($topic_id, $user_id)
 	{
-		$this->db->where(array('topic_id' => $topic_id, 'user_id' => $user_id));
-		$this->db->from('topics_watchlist');
+		$this->db->where(array('user_id' => $user_id, 'key' => 'watch_topic', 'value' => $topic_id));
+		$this->db->from('users_settings');
 
 		if ($this->db->count_all_results() > 0) 
 		{
@@ -160,7 +150,9 @@ class Topic_model extends CI_Model
 	public function notifyWatchers($topic_id)
 	{
 		$this->db->select('user_id');
-		$query_1 = $this->db->get_where('topics_watchlist', array('topic_id' => $topic_id));
+		$this->db->where(array('key' => 'watch_topic', 'value' => $topic_id));
+
+		$query_1 = $this->db->get('users_settings');
 		
 		if ($query_1->num_rows() > 0) 
 		{

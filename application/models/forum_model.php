@@ -57,9 +57,8 @@ class Forum_model extends CI_Model
 		$this->db->select('u2.username as username_last, t.user_id_last');
 		$this->db->join('users u2', 'u2.id = t.user_id_last', 'left outer');
 
-		$this->db->join('topics_watchlist w', 'w.topic_id = t.id', 'left outer');
-		
-		$this->db->where('w.user_id', $user_id);
+		$this->db->join('users_settings us', 'us.value = t.id', 'left outer');
+		$this->db->where('us.user_id = '.$user_id.' AND us.key = "watch_topic"');
 
 		$this->db->order_by('t.post_id_last', 'desc');
 		$this->db->limit(50);

@@ -119,7 +119,8 @@ class Topic extends CI_Controller
 			redirect('user/sign_in');
 		}
 
-		$this->Topic_model->watchTopic($topic_id, $this->session->userdata('user_id'));
+		$this->load->model('User_model');
+		$this->User_model->setUserSetting($this->session->userdata('user_id'), 'watch_topic', $topic_id);
 
 		redirect('topic/id/'.$topic_id);
 	}
@@ -131,8 +132,9 @@ class Topic extends CI_Controller
 			redirect('user/sign_in');
 		}
 	
-		$this->Topic_model->unwatchTopic($topic_id, $this->session->userdata('user_id'));
-	
+		$this->load->model('User_model');
+		$this->User_model->deleteUserSettings($this->session->userdata('user_id'), 'watch_topic', $topic_id);
+		
 		redirect('topic/id/'.$topic_id);
 	}
 	

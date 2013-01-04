@@ -313,12 +313,16 @@ Fastfude');
 		}
 	}
 	
-	public function deleteUserSettings($user_id, $key)
+	public function deleteUserSettings($user_id, $key, $value = null)
 	{
 		$this->db->where('user_id', $user_id);
 
 		if ($key != 'all') {
 			$this->db->where('key', $key);
+		}
+		
+		if ($value) {
+			$this->db->where('value', $value);
 		}
 		
 		$this->db->delete('users_settings');
