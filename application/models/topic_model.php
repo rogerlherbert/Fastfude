@@ -198,4 +198,11 @@ class Topic_model extends CI_Model
 			}
 		}
 	}
+	
+	public function eraseUserIPData($user_id)
+	{
+		$this->db->set('user_ip', 0);
+		$this->db->where('user_id', $user_id);
+		$this->db->update('posts');
+	}
 }

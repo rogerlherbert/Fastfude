@@ -157,6 +157,11 @@ class Message_model extends CI_Model
 		return null;
 	}
 	
+	public function deleteUserSentItems($from_id)
+	{
+		$this->db->delete('private_messages', array('from_id' => $from_id));
+	}
+	
 	private function _avatar_url($service, $hash)
 	{
 		switch ($service) 
