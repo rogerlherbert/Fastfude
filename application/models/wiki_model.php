@@ -108,4 +108,17 @@ class Wiki_model extends CI_Model
 		
 		return $this->db->insert_id();
 	}
+	
+	public function getSitemapWiki()
+	{
+		$this->db->select('w.stub, (SELECT DATE_FORMAT(MAX(h.created), "%Y-%m-%dT%TZ") FROM wiki_history h WHERE h.page_id = w.id) as lastmod', FALSE);
+		$this->db->order_by('lastmod', 'asc');
+		
+		$query = $this->db->get('wiki_pages w');
+		
+		if ($query->num_rows() > 0) 
+		{
+			return $query->result();
+		}
+	}
 }

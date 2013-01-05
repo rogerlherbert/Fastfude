@@ -10,7 +10,6 @@ class Sitemap extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('Forum_model');
-		$this->load->helper('xml');
 	}
 
 	public function index()
@@ -21,16 +20,26 @@ class Sitemap extends CI_Controller
 		$this->load->view('sitemap/index', $data);
 	}
 	
-	public function year($year)
+	public function topics($year)
 	{
-		if (!preg_match('/^[0-9]{4}+$/', $year)) 
+		if (!preg_match('/^[0-9]{4}+$/', $year) || $year < 1997 || $year > date('Y'))
 		{
-			show_error('Bad year');
+			show_404();
 		}
 		
 		$data['topics'] = $this->Forum_model->getSitemapYear($year);
 		
 		$this->output->set_content_type('text/xml');
-		$this->load->view('sitemap/year', $data);
+		$this->load->view('sitemap/topics', $data);
+	}
+	
+	public function wiki()
+	{
+		$this->load->model('Wiki_model');
+
+		$data['wiki'] = $this->Wiki_model->getSitemapWiki();
+		
+		$this->output->set_content_type('text/xml');
+		$this->load->view('sitemap/wiki', $data);
 	}
 }
