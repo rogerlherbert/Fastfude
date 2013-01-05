@@ -98,4 +98,23 @@ class Forum_model extends CI_Model
 			return $query->result();
 		}
 	}
+
+	public function getFeedTopics($forum_id)
+	{
+		$this->db->select('t.id, t.title, DATE_FORMAT(t.post_time_first, "%Y-%m-%dT%TZ") as post_time, 
+		DATE_FORMAT(p.edit_time, "%Y-%m-%dT%TZ") as post_edit_time, p.post_text, 
+		t.user_id_first as user_id, u.username', FALSE);
+		$this->db->join('posts p', 't.post_id_first = p.id');
+		$this->db->join('users u', 't.user_id_first = u.id');
+		$this->db->where('t.forum_id', $forum_id);
+		$this->db->order_by('post_time_first', 'desc');
+		$this->db->limit(25,0);
+		
+		$query = $this->db->get('topics t');
+		
+		if ($query->num_rows() > 0) 
+		{
+			return $query->result();
+		}
+	}
 }

@@ -10,7 +10,6 @@ class Forum extends CI_Controller
 		parent::__construct();
 	
 		$this->load->model('Forum_model');
-		$this->output->enable_profiler(TRUE);
 	}
 
 	public function index()
@@ -62,5 +61,27 @@ class Forum extends CI_Controller
 		$data['title'] = $data['forums'][$id];
 
 		$this->load->view('forum/id', $data);
+	}
+
+	public function feed($forum_id)
+	{
+		if (!preg_match('/^[0-9]+$/', $forum_id)) 
+		{
+			show_404();
+		}
+
+		$forums = $this->Forum_model->getForums();
+
+		$data['entries'] = $this->Forum_model->getFeedTopics($forum_id);
+
+		$data['feed'] = array(
+			'title' => 'New ' . $forums[$forum_id] . ' topics',
+			'forum_id' => $forum_id,
+			'lastmod' => $data['entries'][0]->post_time,
+			'category' => $forums[$forum_id]
+		);
+	
+		$this->output->cache(60);
+		$this->load->view('forum/feed', $data);
 	}
 }

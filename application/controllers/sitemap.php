@@ -10,13 +10,15 @@ class Sitemap extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('Forum_model');
+
+		$this->output->cache(1440);
+		$this->output->set_content_type('text/xml');
 	}
 
 	public function index()
 	{
 		$data['sitemaps'] = $this->Forum_model->getSitemapIndex();
 
-		$this->output->set_content_type('text/xml');
 		$this->load->view('sitemap/index', $data);
 	}
 	
@@ -29,7 +31,6 @@ class Sitemap extends CI_Controller
 		
 		$data['topics'] = $this->Forum_model->getSitemapYear($year);
 		
-		$this->output->set_content_type('text/xml');
 		$this->load->view('sitemap/topics', $data);
 	}
 	
@@ -39,7 +40,6 @@ class Sitemap extends CI_Controller
 
 		$data['wiki'] = $this->Wiki_model->getSitemapWiki();
 		
-		$this->output->set_content_type('text/xml');
 		$this->load->view('sitemap/wiki', $data);
 	}
 }
