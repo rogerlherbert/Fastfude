@@ -48,6 +48,11 @@ class Gig extends CI_Controller
 
 		$this->load->view('gig/on', $data);
 	}
+	
+	public function test()
+	{
+		var_dump($this->Gig_model->getUpcomingGigs());
+	}
 
 	public function create()
 	{

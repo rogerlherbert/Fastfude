@@ -57,16 +57,17 @@ class Gig_model extends CI_Model
 			// insert each gig in calendar according to how many days away they are from now
 			foreach ($query->result() as $gig) 
 			{
-				$timediff = $gig->start_time - time();
-	
-				$offset = ($timediff <= 0) ? 0 : ceil($timediff / 86400);
+				$today = new DateTime('today');
+				$gigdate = new DateTime('@'.$gig->start_time);
+
+				$interval = $today->diff($gigdate);
 
 				if ($gig->lineup != '') 
 				{
 					$gig->lineup = implode(' + ', unserialize($gig->lineup));
 				}
 
-				$calendar[$offset][] = $gig;
+				$calendar[$interval->days][] = $gig;
 			}
 		}
 
