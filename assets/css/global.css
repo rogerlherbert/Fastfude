@@ -105,6 +105,10 @@ span.form_error {display:block; color:#f00}
 
 .posts .post_content {padding:1em 0; color: #ccc;}
 
+.posts .post_edit {font-size:75%; color: #666}
+
+.topic.edit_post textarea { height: 8em; margin-bottom: 1em; padding: 1em}
+
 
 /* PRIVATE MESSAGES */
 
@@ -115,6 +119,8 @@ span.form_error {display:block; color:#f00}
 .messages .meta {font-size:75%; margin-top:0.5em}
 
 .messages .post_content {color: #ccc;}
+
+.message.with .reply textarea { height: 8em; margin-bottom: 1em; padding: 1em}
 
 
 /* GIGS */

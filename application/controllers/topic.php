@@ -84,6 +84,44 @@ class Topic extends CI_Controller
 		}
 	}
 	
+	public function edit_post($post_id)
+	{
+		if (!$this->session->userdata('user_id')) 
+		{
+			redirect('user/sign_in');
+		}
+		
+		if (!preg_match('/^[0-9]+$/', $post_id)) 
+		{
+			show_error('Bad post id');
+		}
+		
+		$data['post'] = $this->Topic_model->getPostByUser($post_id, $this->session->userdata('user_id'));
+		
+		if (is_null($data['post'])) 
+		{
+			show_404();
+		}
+		
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required');
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['title'] = 'Edit Post';
+			$this->load->view('topic/edit_post', $data);
+		}
+		else
+		{
+			$this->Topic_model->editPost($post_id, $this->input->post('post_text'));
+		
+			redirect('topic/id/'.$data['post']->topic_id.'#post_'.$post_id);
+		}
+	}
+	
 	public function create()
 	{
 		if (!$this->session->userdata('user_id')) 

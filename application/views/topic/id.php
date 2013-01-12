@@ -21,7 +21,15 @@
 			} else {
 				echo nl2br(html_escape($post->post_text));
 			}?>
+			<?php if ($post->edit_time != '') { ?>
+				<p class="post_edit">last edited on <time><?php echo date('D jS M Y, g:i a', $post->edit_time); ?></time></p>
+			<?php } ?>
 		</div>
+		<?php if ($this->session->userdata('user_id') == $post->user_id) { ?>
+		<div class="controls">
+			<?php echo anchor('topic/edit_post/'.$post->id, "Edit", ' class="button"'); ?>
+		</div>
+		<?php } ?>
 	</li>
 
 <?php } ?>

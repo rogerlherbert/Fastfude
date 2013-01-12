@@ -46,9 +46,9 @@ class Topic_model extends CI_Model
 		}
 	}
 
-	public function getPost($id)
+	public function getPostByUser($id, $user_id)
 	{
-		$query = $this->db->get_where('posts', array('id' => $id));
+		$query = $this->db->get_where('posts', array('id' => $id, 'user_id' => $user_id));
 
 		if ($query->num_rows() > 0) 
 		{
@@ -93,6 +93,12 @@ class Topic_model extends CI_Model
 		$this->notifyWatchers($topic_id);
 
 		return $post_id;
+	}
+	
+	public function editPost($post_id, $post_text)
+	{
+		$this->db->where('id', $post_id);
+		$this->db->update('posts', array('post_text' => $post_text, 'edit_time' => date('Y-m-d H:i:s')));
 	}
 
 	public function updateTopic($topic_id)
