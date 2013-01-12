@@ -76,7 +76,7 @@ class Gig extends CI_Controller
 		{
 			$this->load->model('Topic_model');
 
-			$topic_id = $this->Topic_model->addTopic(8, $this->session->userdata('user_id'), $this->input->post('subject'), $this->input->post('post_text'));
+			$topic_id = $this->Topic_model->addTopic(8, $this->session->userdata('user_id'), $this->input->ip_address(), $this->input->post('subject'), $this->input->post('post_text'));
 			$start_time = strtotime($this->input->post('start_time_1') . " " . $this->input->post('start_time_2'));
 
 			$this->Gig_model->addGig($topic_id, $start_time, $this->input->post('subject'), $this->input->post('location'), '', $this->input->post('lineup'));

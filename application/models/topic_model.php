@@ -56,7 +56,7 @@ class Topic_model extends CI_Model
 		}
 	}
 
-	public function addTopic($forum_id, $user_id, $title, $post_text)
+	public function addTopic($forum_id, $user_id, $user_ip, $title, $post_text)
 	{
 		$fields = array(
 			'forum_id' => $forum_id,
@@ -68,7 +68,7 @@ class Topic_model extends CI_Model
 
 		$topic_id = $this->db->insert_id();
 
-		$this->addPost($topic_id, $user_id, $post_text);
+		$this->addPost($topic_id, $user_id, $user_ip, $post_text);
 		
 		return $topic_id;
 	}
