@@ -9,13 +9,13 @@
 		<?php echo form_input(array('name' => 'q', 'type' => 'search', 'placeholder' => 'Search Forums')); ?>
 		<?php echo form_close(); ?>
 	
-		<ul class="icons">
+		<ul class="nav nav-list">
 			<li><?php echo anchor('/', '<i class="icon-home"></i>Home', 'id="home" rel="home"'); ?></li>
 			<li><?php echo anchor('gigs', '<i class="icon-music"></i>Gig Calendar', 'id="nav_gigs"'); ?></li>
 			<li><?php echo anchor('wiki', '<i class="icon-book"></i>Wiki', 'id="nav_wiki"'); ?></li>
 			<li><?php echo anchor('messages', '<i class="icon-envelope-alt"></i>Private Messages', 'id="nav_messages"'); ?></li>
 			<?php if ($this->session->userdata('user_id')) { ?>
-			<li><?php echo anchor('user/id/'.$this->session->userdata('user_id'), '<i class="icon-user"></i>Profile', 'id="user"'); ?></li>
+			<li><?php echo anchor('settings', '<i class="icon-cog"></i>Settings', 'id="settings"'); ?></li>
 			<li><?php echo anchor('user/sign_out', '<i class="icon-user"></i>Sign Out', 'id="signout"'); ?></li>
 			<?php } else { ?>
 			<li><?php echo anchor('user/sign_in', '<i class="icon-user"></i>Sign In', 'id="user"'); ?></li>

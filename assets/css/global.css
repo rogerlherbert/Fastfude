@@ -38,9 +38,9 @@ nav .menu i { margin-right: 0.5em;}
 nav #nav-wrapper { display:none; }
 /* nav:hover { width: auto; height: auto;} */
 /* nav:hover #nav-wrapper {display: block} */
-nav ul.icons a { display: block; padding: 0.5em 0 0.5em 0.5em}
-nav ul.icons a:hover {text-decoration: none; background-color: #003b4f; color: #fff}
-nav ul.icons a i { margin-right: 0.5em}
+nav ul.nav a { display: block; padding: 0.5em 0 0.5em 0.5em}
+nav ul.nav a:hover {text-decoration: none; background-color: #003b4f; color: #fff}
+nav ul.nav a i { margin-right: 0.5em}
 
 nav input[type="search"] { width: 16em; margin: 1em 0 1em 1em; }
 
@@ -48,7 +48,7 @@ div#content {margin:0 5%}
 
 .controls {margin-bottom:1em}
 
-a.button {display:inline-block; line-height:1; padding:0.6667em 0.75em 0.3333em; background-color:#333; color:#fff; border-radius:0.5em}
+a.button {display:inline-block; line-height:1; padding:0.5em 0.75em; background-color:#333; color:#fff; border-radius:0.5em}
 
 a.button:before {margin-right:0.5em}
 
