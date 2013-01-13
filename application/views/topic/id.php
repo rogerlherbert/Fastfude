@@ -11,24 +11,30 @@
 <ol class="posts">
 <?php foreach ($posts as $post) { ?>
 	<li id="post_<?php echo $post->id; ?>">
+		<?php if (in_array($post->user_id, $muted)) { ?>
+			<p>You have muted <?php echo anchor('user/id/'.$post->user_id, $post->username); ?>.</p>
+		<?php } elseif (in_array($post->id, $flagged)) { ?>
+			<p>The community has muted this post by <?php echo anchor('user/id/'.$post->user_id, $post->username); ?></p>
+		<?php } else { ?>
+
 		<div class="post_author">
 			<?php echo anchor('user/id/'.$post->user_id, img($post->avatar_url) . html_escape($post->username)); ?>
 			<time datetime="<?php echo date("c", $post->post_time); ?>" class="comment_date"><?php echo date("D jS M Y, g:i a", $post->post_time); ?></time>
 		</div>
 		<div class="post_content">
-			<?php if (isset($muted) && in_array($post->user_id, $muted)) {
-				echo nl2br(html_escape("you have muted this user"));
-			} else {
-				echo nl2br(html_escape($post->post_text));
-			}?>
+			<?php echo nl2br(html_escape($post->post_text)); ?>
 			<?php if ($post->edit_time != '') { ?>
-				<p class="post_edit">last edited on <time><?php echo date('D jS M Y, g:i a', $post->edit_time); ?></time></p>
+			<p class="post_edit">last edited on <time><?php echo date('D jS M Y, g:i a', $post->edit_time); ?></time></p>
 			<?php } ?>
 		</div>
-		<?php if ($this->session->userdata('user_id') == $post->user_id) { ?>
 		<div class="controls">
+		<?php if ($this->session->userdata('user_id') == $post->user_id) { ?>
 			<?php echo anchor('topic/edit_post/'.$post->id, "Edit", ' class="button"'); ?>
+		<?php } else { ?>
+			<?php echo anchor('topic/flag_post/'.$post->id, "Flag", ' class="button"'); ?>
+		<?php } ?>
 		</div>
+
 		<?php } ?>
 	</li>
 

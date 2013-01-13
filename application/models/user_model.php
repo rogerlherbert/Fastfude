@@ -206,17 +206,17 @@ Fastfude');
 		$this->db->select('muted_user_id');
 		$query = $this->db->get_where('users_muted', array('user_id' => $user_id));
 		
+		$muted = array();
+
 		if ($query->num_rows > 0) 
 		{
-			$column = array();
-
 			foreach ($query->result() as $row) 
 			{
-				$column[] = $row->muted_user_id;
+				$muted[] = $row->muted_user_id;
 			}
-
-			return $column;
 		}
+
+		return $muted;
 	}
 	
 	public function changeUsername($user_id, $new_name)

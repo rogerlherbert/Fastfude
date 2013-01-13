@@ -46,9 +46,15 @@ class Topic_model extends CI_Model
 		}
 	}
 
-	public function getPostByUser($id, $user_id)
+	public function getPost($id, $user_id = null)
 	{
-		$query = $this->db->get_where('posts', array('id' => $id, 'user_id' => $user_id));
+		$this->db->where('id', $id);
+		
+		if (isset($user_id)) {
+			$this->db->where('user_id', $user_id);
+		}
+
+		$query = $this->db->get('posts');
 
 		if ($query->num_rows() > 0) 
 		{
@@ -99,6 +105,14 @@ class Topic_model extends CI_Model
 	{
 		$this->db->where('id', $post_id);
 		$this->db->update('posts', array('post_text' => $post_text, 'edit_time' => date('Y-m-d H:i:s')));
+	}
+	
+	public function flagPost($post_id, $user_id)
+	{
+		$insert_query = $this->db->insert_string('users_actions', array('user_id' => $user_id, 'action' => 'flag_post', 'object_id' => $post_id));
+		$insert_query = str_replace('INSERT INTO','INSERT IGNORE INTO', $insert_query);
+
+		$this->db->query($insert_query);
 	}
 
 	public function updateTopic($topic_id)
@@ -151,6 +165,29 @@ class Topic_model extends CI_Model
 		}
 
 		return NULL;
+	}
+	
+	public function getFlaggedPosts($topic_id)
+	{
+		$this->db->select('p.id');
+		$this->db->join('users_actions a', 'a.object_id = p.id');
+		$this->db->where('a.action', 'flag_post');
+		$this->db->where('p.topic_id', $topic_id);
+		$this->db->group_by('p.id');
+
+		$query = $this->db->get('posts p');
+		
+		$posts = array();
+		
+		if ($query->num_rows() > 0) 
+		{
+			foreach ($query->result() as $row) 
+			{
+				$posts[] = $row->id;
+			}
+		}
+
+		return $posts;
 	}
 	
 	public function notifyWatchers($topic_id)

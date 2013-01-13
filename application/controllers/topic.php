@@ -44,6 +44,7 @@ class Topic extends CI_Controller
 		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['title'] = $data['topic']->title;
 		$data['posts'] = $this->Topic_model->getPosts($id);
+		$data['flagged'] = $this->Topic_model->getFlaggedPosts($id);
 
 		if ($this->session->userdata('user_id')) 
 		{
@@ -96,7 +97,7 @@ class Topic extends CI_Controller
 			show_error('Bad post id');
 		}
 		
-		$data['post'] = $this->Topic_model->getPostByUser($post_id, $this->session->userdata('user_id'));
+		$data['post'] = $this->Topic_model->getPost($post_id, $this->session->userdata('user_id'));
 		
 		if (is_null($data['post'])) 
 		{
@@ -117,6 +118,44 @@ class Topic extends CI_Controller
 		else
 		{
 			$this->Topic_model->editPost($post_id, $this->input->post('post_text'));
+		
+			redirect('topic/id/'.$data['post']->topic_id.'#post_'.$post_id);
+		}
+	}
+	
+	public function flag_post($post_id)
+	{
+		if (!$this->session->userdata('user_id')) 
+		{
+			redirect('user/sign_in');
+		}
+		
+		if (!preg_match('/^[0-9]+$/', $post_id)) 
+		{
+			show_error('Bad post id');
+		}
+		
+		$data['post'] = $this->Topic_model->getPost($post_id);
+		
+		if (is_null($data['post'])) 
+		{
+			show_404();
+		}
+		
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('post', 'Flag Post', 'trim|required');
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['title'] = 'Flag Post';
+			$this->load->view('topic/flag_post', $data);
+		}
+		else
+		{
+			$this->Topic_model->flagPost($post_id, $this->session->userdata('user_id'));
 		
 			redirect('topic/id/'.$data['post']->topic_id.'#post_'.$post_id);
 		}
