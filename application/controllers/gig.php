@@ -85,6 +85,50 @@ class Gig extends CI_Controller
 		}
 	}
 	
+	public function edit($gig_id)
+	{
+		if (!$this->session->userdata('user_id')) 
+		{
+			redirect('user/sign_in');
+		}
+	
+		if (!preg_match('/^[0-9]+$/', $gig_id)) 
+		{
+			show_error('Bad gig id');
+		}
+
+		$data['gig'] = $this->Gig_model->getGig($gig_id);
+
+		if (is_null($data['gig'])) 
+		{
+			show_error('No such gig');
+		}
+
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('start_time_1', 'Date', 'trim|required|callback__valid_date');
+		$this->form_validation->set_rules('start_time_2', 'Time', 'trim|required|callback__valid_time');
+		$this->form_validation->set_rules('location', 'Venue', 'trim|required');
+		$this->form_validation->set_rules('lineup', 'Lineup', 'trim|required|min_length[4]');
+		$this->form_validation->set_rules('subject', 'Topic Subject', 'trim|required|min_length[4]');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['title'] = 'Edit A Gig';
+			$this->load->view('gig/edit', $data);
+		}
+		else
+		{
+			$start_time = strtotime($this->input->post('start_time_1') . " " . $this->input->post('start_time_2'));
+
+			$this->Gig_model->editGig($gig_id, $start_time, $this->input->post('subject'), $this->input->post('location'), '', $this->input->post('lineup'));
+
+			redirect('topic/id/'.$data['gig']->topic_id);
+		}
+	}
+	
 	public function _valid_date($str)
 	{
 		if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $str)) {
@@ -100,7 +144,7 @@ class Gig extends CI_Controller
 			}
 		}
 
-		$this->form_validation->set_message('valid_date', 'The %s field should be a near-future date in the format yyyy-mm-dd');
+		$this->form_validation->set_message('_valid_date', 'The %s field should be a near-future date in the format yyyy-mm-dd');
 		return FALSE;
 	}
 
@@ -119,7 +163,7 @@ class Gig extends CI_Controller
 			}
 		}
 
-		$this->form_validation->set_message('valid_time', 'The %s field should be a time in the 24-hour format hh:mm');
+		$this->form_validation->set_message('_valid_time', 'The %s field should be a time in the 24-hour format hh:mm');
 		return FALSE;
 	}
 }

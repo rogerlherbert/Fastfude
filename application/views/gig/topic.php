@@ -13,4 +13,7 @@
 		<?php } ?>
 		</dd>
 	</dl>
+	<div class="controls">
+		<?php echo anchor('gig/edit/'.$gig->id, "Edit Gig", ' class="button icon-edit"'); ?>
+	</div>
 </section>

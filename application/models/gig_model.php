@@ -7,7 +7,7 @@ class Gig_model extends CI_Model
 {
 	public function getGigByTopicID($topic_id)
 	{
-		$this->db->select('UNIX_TIMESTAMP(start_time) as start_time, gig_title, location, lineup');
+		$this->db->select('id, UNIX_TIMESTAMP(start_time) as start_time, gig_title, location, lineup');
 		$query = $this->db->get_where('gigs', array('topic_id' => $topic_id));
 		
 		if ($query->num_rows() > 0) 
@@ -17,6 +17,24 @@ class Gig_model extends CI_Model
 			if ($gig->lineup != '') 
 			{
 				$gig->lineup = unserialize($gig->lineup);
+			}
+			
+			return $gig;
+		}
+	}
+	
+	public function getGig($id)
+	{
+		$this->db->select('id, topic_id, UNIX_TIMESTAMP(start_time) as start_time, gig_title, location, lineup');
+		$query = $this->db->get_where('gigs', array('id' => $id));
+		
+		if ($query->num_rows() > 0) 
+		{
+			$gig = $query->row();
+			
+			if ($gig->lineup != '') 
+			{
+				$gig->lineup = implode(' + ', unserialize($gig->lineup));
 			}
 			
 			return $gig;
@@ -37,6 +55,20 @@ class Gig_model extends CI_Model
 		$this->db->insert('gigs', $fields);
 
 		return $this->db->insert_id();
+	}
+
+	public function editGig($id, $start_time, $title, $location, $reference_token, $lineup)
+	{
+		$fields = array(
+			'start_time' => date('Y-m-d H:i:s', $start_time),
+			'gig_title' => $title,
+			'location' => $location,
+			'reference_token' => $reference_token,
+			'lineup' => serialize($this->parseLineupStr($lineup))
+		);
+
+		$this->db->where('id', $id);
+		$this->db->update('gigs', $fields);
 	}
 
 	public function getUpcomingGigs($days = 90)
