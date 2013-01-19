@@ -1,12 +1,8 @@
 <?php $this->load->view('common/header'); ?>
 
-<?php echo form_open(); ?>
+<p>To: <?php echo anchor('user/id/'.$user->id, img($user->avatar_url) . html_escape($user->username)); ?></p>
 
-<div class="field dropdown">
-	<?php echo form_label('User', 'user_id'); ?>
-	<?php echo form_input(array('name' => 'user_id', 'value' => set_value('user_id', $user_id), 'type' => 'number')); ?>
-	<?php echo form_error('user_id','<span class="form_error">','</span>'); ?>
-</div>
+<?php echo form_open(); ?>
 
 <div class="field">
 	<?php echo form_label('Text', 'post_text'); ?>

@@ -1,9 +1,5 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="controls">
-	<?php echo anchor('message/create', "Create a Private Message", ' class="button icon-plus"'); ?>
-</div>
-
 <?php if (count($messages) > 0) { ?>
 
 <ol class="messages">
@@ -12,7 +8,7 @@
 
 	<li<?php echo $class; ?>>
 		<?php echo anchor('message/with/'.$user_id, img(array('src' => $msg['avatar_url'], 'class' => 'avatar')) . html_escape($msg['username'])); ?>
-		<p class="meta"><?php echo timespan($msg['post_time'], time(), 2); ?></p>
+		<p class="meta"><?php echo timespan($msg['post_time'], time(), 2); ?> ago</p>
 	</li>
 
 	<?php } ?>

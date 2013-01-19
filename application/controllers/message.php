@@ -8,6 +8,7 @@ class Message extends CI_Controller
 
 		// $this->output->enable_profiler(TRUE);
 
+		$this->load->model('User_model');
 		$this->load->model('Message_model');
 		
 		// all these pages require a logged in user
@@ -36,12 +37,12 @@ class Message extends CI_Controller
 			show_error('Bad user id');
 		}
 
-		$this->load->model('User_model');
-
 		$user = $this->User_model->getUser($user_id);
-		/*
-			TODO check user exists!
-		*/
+
+		if (is_null($user)) 
+		{
+			show_error('No such user');
+		}
 
 		$this->Message_model->markConversationAsRead($user_id, $this->session->userdata('user_id'));
 
@@ -55,16 +56,22 @@ class Message extends CI_Controller
 		$this->load->view('message/with', $data);
 	}
 
-	public function create($user_id = 0)
+	public function to($user_id)
 	{
 		if (!preg_match('/^[0-9]+$/', $user_id)) 
 		{
 			show_error('Bad user id');
 		}
 
+		$user = $this->User_model->getUser($user_id);
+
+		if (is_null($user)) 
+		{
+			show_error('No such user');
+		}
+
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('user_id', 'User ID', 'trim|required|is_natural_no_zero|callback__valid_userid');
 		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required');
 
 		if ($this->form_validation->run() == FALSE)
@@ -72,12 +79,12 @@ class Message extends CI_Controller
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 			$data['title'] = 'Create A Private Message';
-			$data['user_id'] = $user_id;
-			$this->load->view('message/create', $data);
+			$data['user'] = $user;
+			$this->load->view('message/to', $data);
 		}
 		else
 		{
-			$this->Message_model->sendMessage($this->session->userdata('user_id'), $this->input->post('user_id'), $this->input->post('post_text'));
+			$this->Message_model->sendMessage($this->session->userdata('user_id'), $user_id, $this->input->post('post_text'));
 			redirect('messages');
 		}
 	}

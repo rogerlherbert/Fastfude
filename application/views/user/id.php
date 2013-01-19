@@ -13,6 +13,7 @@
 <?php echo img($profile->avatar_url); ?>
 
 <div class="controls">
+	<?php echo anchor('message/to/'.$profile->id, 'Send a message', ' class="button icon-envelope"'); ?>
 	<?php echo anchor('user/mute/'.$profile->id, 'Mute user', ' class="button icon-volume-off"'); ?>
 	<?php echo anchor('user/posts/'.$profile->id, 'View posts', ' class="button icon-list"'); ?>
 </div>
