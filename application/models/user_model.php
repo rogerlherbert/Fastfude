@@ -426,3 +426,6 @@ Fastfude');
 		);
 	}
 }
+
+/* End of file user_model.php */
+/* Location: ./application/models/user_model.php */

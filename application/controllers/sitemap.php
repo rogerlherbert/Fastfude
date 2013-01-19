@@ -43,3 +43,6 @@ class Sitemap extends CI_Controller
 		$this->load->view('sitemap/wiki', $data);
 	}
 }
+
+/* End of file sitemap.php */
+/* Location: ./application/controllers/sitemap.php */

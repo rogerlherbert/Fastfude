@@ -34,3 +34,6 @@ class Search_model extends CI_Model
 		}
 	}
 }
+
+/* End of file search_model.php */
+/* Location: ./application/models/search_model.php */

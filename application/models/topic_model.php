@@ -241,3 +241,6 @@ class Topic_model extends CI_Model
 		$this->db->update('posts');
 	}
 }
+
+/* End of file topic_model.php */
+/* Location: ./application/models/topic_model.php */

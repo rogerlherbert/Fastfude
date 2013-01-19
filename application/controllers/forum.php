@@ -85,3 +85,6 @@ class Forum extends CI_Controller
 		$this->load->view('forum/feed', $data);
 	}
 }
+
+/* End of file forum.php */
+/* Location: ./application/controllers/forum.php */

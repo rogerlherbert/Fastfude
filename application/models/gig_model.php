@@ -156,3 +156,6 @@ class Gig_model extends CI_Model
 		}
 	}
 }
+
+/* End of file gig_model.php */
+/* Location: ./application/models/gig_model.php */

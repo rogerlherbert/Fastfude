@@ -183,4 +183,5 @@ class Message_model extends CI_Model
 	}
 }
 
-?>
+/* End of file message_model.php */
+/* Location: ./application/models/message_model.php */

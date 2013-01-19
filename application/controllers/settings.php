@@ -271,3 +271,6 @@ class Settings extends CI_Controller
 		return FALSE;
 	}
 }
+
+/* End of file settings.php */
+/* Location: ./application/controllers/settings.php */

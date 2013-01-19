@@ -228,3 +228,6 @@ class Topic extends CI_Controller
 		return FALSE;
 	}
 }
+
+/* End of file topic.php */
+/* Location: ./application/controllers/topic.php */

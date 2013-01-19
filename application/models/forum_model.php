@@ -118,3 +118,6 @@ class Forum_model extends CI_Model
 		}
 	}
 }
+
+/* End of file forum_model.php */
+/* Location: ./application/models/forum_model.php */

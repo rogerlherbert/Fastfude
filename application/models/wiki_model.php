@@ -122,3 +122,6 @@ class Wiki_model extends CI_Model
 		}
 	}
 }
+
+/* End of file wiki_model.php */
+/* Location: ./application/models/wiki_model.php */

@@ -49,3 +49,6 @@ class Search extends CI_Controller
 		$this->load->view('search/forum', $data);
 	}
 }
+
+/* End of file search.php */
+/* Location: ./application/controllers/search.php */

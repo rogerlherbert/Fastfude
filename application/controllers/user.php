@@ -292,3 +292,6 @@ class User extends CI_Controller
 		return TRUE;
 	}
 }
+
+/* End of file user.php */
+/* Location: ./application/controllers/user.php */

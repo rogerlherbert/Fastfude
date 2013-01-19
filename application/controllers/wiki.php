@@ -152,3 +152,6 @@ class Wiki extends CI_Controller
 		$this->load->view('wiki/history', $data);
 	}
 }
+
+/* End of file wiki.php */
+/* Location: ./application/controllers/wiki.php */
