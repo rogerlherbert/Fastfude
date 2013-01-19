@@ -48,6 +48,7 @@ class Wiki extends CI_Controller
 			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 			$data['title'] = 'Wiki page not found';
 			
+			$this->output->set_status_header('404');
 			$this->load->view('wiki/404', $data);
 		}
 		else
