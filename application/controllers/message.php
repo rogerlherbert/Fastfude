@@ -24,7 +24,7 @@ class Message extends CI_Controller
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-		$data['title'] = 'Private Messages';
+		$data['title'] = 'Messages';
 		$data['messages'] = $this->Message_model->getAllMessages($this->session->userdata('user_id'));
 
 		$this->load->view('message/index', $data);
@@ -49,7 +49,7 @@ class Message extends CI_Controller
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['muted'] = $this->User_model->getMutedUsers($this->session->userdata('user_id'));
-		$data['title'] = 'Private Messages with '.$user->username;
+		$data['title'] = 'Messages with '.$user->username;
 		$data['user'] = $user;
 		$data['messages'] = $this->Message_model->getConversationWith($this->session->userdata('user_id'), $user_id);
 
@@ -78,7 +78,7 @@ class Message extends CI_Controller
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-			$data['title'] = 'Create A Private Message';
+			$data['title'] = 'Create A Message';
 			$data['user'] = $user;
 			$this->load->view('message/to', $data);
 		}
@@ -100,7 +100,7 @@ class Message extends CI_Controller
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-			$data['title'] = 'Reply To Private Message';
+			$data['title'] = 'Reply To Message';
 			$this->load->view('message/reply', $data);
 		}
 		else

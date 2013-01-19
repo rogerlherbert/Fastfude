@@ -16,7 +16,7 @@ class Message_model extends CI_Model
 				md5(email) as avatar_hash, 
 				(SELECT us.value FROM users_settings us WHERE us.user_id = m.from_id AND us.key = 'avatar') as avatar_service,
 				'from' as dir
-			FROM private_messages m
+			FROM messages m
 			JOIN users u ON u.id = m.from_id
 			WHERE m.to_id = $user_id
 			GROUP BY m.from_id
@@ -29,7 +29,7 @@ class Message_model extends CI_Model
 				null as avatar_hash,
 				null as avatar_service, 
 				'to' as dir
-			FROM private_messages m
+			FROM messages m
 			JOIN users u ON u.id = m.to_id
 			WHERE m.from_id = $user_id
 			GROUP BY m.to_id
@@ -87,7 +87,7 @@ class Message_model extends CI_Model
 				MD5(u.email) as avatar_hash, 
 				(SELECT us.value FROM users_settings us WHERE us.user_id = u.id AND us.key = 'avatar') as avatar_service,
 				m.post_text
-			FROM private_messages m
+			FROM messages m
 			JOIN users u ON u.id = m.from_id
 			WHERE m.to_id = $my_id AND m.from_id = $user_id
 
@@ -99,7 +99,7 @@ class Message_model extends CI_Model
 				MD5(u.email) as avatar_hash, 
 				(SELECT us.value FROM users_settings us WHERE us.user_id = u.id AND us.key = 'avatar') as avatar_service,
 				m.post_text
-			FROM private_messages m
+			FROM messages m
 			JOIN users u ON u.id = m.from_id
 			WHERE m.to_id = $user_id AND m.from_id = $my_id
 
@@ -121,21 +121,21 @@ class Message_model extends CI_Model
 	{
 		$this->db->set('is_read', 1);
 		$this->db->where(array('from_id' => $from_id, 'to_id' => $to_id));
-		$this->db->update('private_messages');
+		$this->db->update('messages');
 	}
 	
 	public function markAllConversationsAsRead($to_id)
 	{
 		$this->db->set('is_read', 1);
 		$this->db->where('to_id', $to_id);
-		$this->db->update('private_messages');
+		$this->db->update('messages');
 	}
 
 	public function sendMessage($from_id, $to_id, $post_text)
 	{
 		$this->load->library('encrypt');
 
-		$this->db->insert('private_messages', array(
+		$this->db->insert('messages', array(
 			'post_text' => $this->encrypt->encode($post_text),
 			'from_id' => $from_id,
 			'to_id' => $to_id
@@ -146,7 +146,7 @@ class Message_model extends CI_Model
 	{
 		$this->db->select('UNIX_TIMESTAMP(MAX(post_time)) as post_time');
 
-		$query = $this->db->get_where('private_messages', array('from_id' => $user_id));
+		$query = $this->db->get_where('messages', array('from_id' => $user_id));
 
 		if ($query->num_rows() > 0)
 		{
@@ -159,7 +159,7 @@ class Message_model extends CI_Model
 	
 	public function deleteUserSentItems($from_id)
 	{
-		$this->db->delete('private_messages', array('from_id' => $from_id));
+		$this->db->delete('messages', array('from_id' => $from_id));
 	}
 	
 	private function _avatar_url($service, $hash)
