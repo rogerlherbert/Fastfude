@@ -54,6 +54,10 @@ class Topic extends CI_Controller
 			$this->load->model('User_model');
 			$data['muted'] = $this->User_model->getMutedUsers($this->session->userdata('user_id'));
 		}
+		else
+		{
+			$data['muted'] = array();
+		}
 
 		$this->load->view('topic/id', $data);
 	}
