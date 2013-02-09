@@ -130,13 +130,10 @@ class Forum_model extends CI_Model
 	
 	public function getTopicsByMonth($forum_id, $year, $month)
 	{
-		$this->db->select('t.id, t.forum_id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_last) as post_time_last');
+		$this->db->select('t.id, t.forum_id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_first) as post_time_first');
 
 		$this->db->select('u1.username as username_first, t.user_id_first');
 		$this->db->join('users u1', 'u1.id = t.user_id_first', 'left outer');
-
-		$this->db->select('u2.username as username_last, t.user_id_last');
-		$this->db->join('users u2', 'u2.id = t.user_id_last', 'left outer');
 
 		$this->db->where('forum_id', $forum_id);
 		$this->db->where('YEAR(t.post_time_first)', $year);

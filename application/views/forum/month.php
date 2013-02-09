@@ -12,8 +12,8 @@
 		<p class="topic_title"><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></p>
 		<p class="meta">
 			<?php echo ($topic->replies == 1) ? '1 reply' : $topic->replies.' replies'; ?> |
-			last post by <?php echo anchor('user/id/'.$topic->user_id_last, html_escape($topic->username_last)); ?>, 
-			<?php echo timespan($topic->post_time_last); ?> ago
+			started by <?php echo anchor('user/id/'.$topic->user_id_first, html_escape($topic->username_first)); ?> 
+			at <?php echo date('g:ia \o\n D jS M, Y', $topic->post_time_first); ?>
 		</p>
 	</li>
 <?php } ?>

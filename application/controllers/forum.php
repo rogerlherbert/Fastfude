@@ -51,9 +51,9 @@ class Forum extends CI_Controller
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-		$data['forums'] = $this->Forum_model->getForums();
+		$data['forum'] = $this->Forum_model->getForum($id);
 		$data['topics'] = $this->Forum_model->getRecentTopics($id);
-		$data['title'] = $data['forums'][$id];
+		$data['title'] = $data['forum']['title'];
 
 		$this->load->view('forum/id', $data);
 	}
@@ -95,7 +95,7 @@ class Forum extends CI_Controller
 			$data['archive'] = $this->Forum_model->getTopicsArchive($id);
 			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
 			$data['breadcrumbs'] = array(__CLASS__, 'archive');
-			$data['title'] = 'Forum archive';
+			$data['title'] = $data['forum']['title'] . ' Forum archive';
 			
 			$this->load->view('forum/archive', $data);
 		}

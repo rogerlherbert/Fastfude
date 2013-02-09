@@ -21,4 +21,6 @@
 
 <?php } ?>
 
+<p><?php echo anchor('forum/archive/'.$forum['id'], 'Browse the archive'); ?></p>
+
 <?php $this->load->view('common/footer'); ?>
