@@ -387,7 +387,7 @@ Fastfude');
 		$this->db->update('users', array('password' => $this->encryptPassword($password)));
 		
 		$this->db->where('user_id', $user_id);
-		$this->db->delete('users_forgot_pw');
+		$this->db->delete(array('users_forgot_pw','users_old'));
 	}
 
 	public function encryptPassword($str)
@@ -424,6 +424,26 @@ Fastfude');
 			'trustno1',
 			'welcome'
 		);
+	}
+	
+	public function hasOldPassword($username, $password)
+	{
+		$this->db->select('user_id');
+
+		$query = $this->db->get_where('users_old', array(
+			'username' => $username,
+			'old_password' => md5($password)
+		));
+
+		if ($query->num_rows() > 0) 
+		{
+			$row = $query->row();
+			return $row->user_id;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
 

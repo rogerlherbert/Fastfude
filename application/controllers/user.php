@@ -160,9 +160,17 @@ class User extends CI_Controller
 		}
 		else
 		{
+			// check if user is signing in for first time and needs to migrate password to new encryption
+			if ($user_id = $this->User_model->hasOldPassword($this->input->post('username'), $this->input->post('password')))
+			{
+				$this->User_model->resetPassword($user_id, $this->input->post('password'));
+			}
+			else
+			{
+				$user_id = $this->User_model->getUserID($this->input->post('username'), $this->input->post('password'));
+			}
+
 			// sign in user
-			$user_id = $this->User_model->getUserID($this->input->post('username'), $this->input->post('password'));
-			
 			if ($user_id) 
 			{
 				$user = $this->User_model->getUser($user_id);
