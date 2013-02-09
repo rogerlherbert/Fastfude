@@ -10,12 +10,11 @@ class Forum extends CI_Controller
 		parent::__construct();
 	
 		$this->load->model('Forum_model');
+		$this->load->helper('date');
 	}
 
 	public function index()
 	{
-		$this->load->helper('date');
-
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['forums'] = $this->Forum_model->getForums();
@@ -32,8 +31,6 @@ class Forum extends CI_Controller
 		{
 			redirect('user/sign_in');
 		}
-		
-		$this->load->helper('date');
 	
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
@@ -52,8 +49,6 @@ class Forum extends CI_Controller
 			show_error('Bad forum id');
 		}
 
-		$this->load->helper('date');
-
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['forums'] = $this->Forum_model->getForums();
@@ -61,6 +56,49 @@ class Forum extends CI_Controller
 		$data['title'] = $data['forums'][$id];
 
 		$this->load->view('forum/id', $data);
+	}
+
+	public function archive($id, $yearmonth = NULL)
+	{
+		if (!preg_match('/^[0-9]+$/', $id)) 
+		{
+			show_error('Bad forum id');
+		}
+
+		$data['forum'] = $this->Forum_model->getForum($id);
+
+		if ( ! isset($data['forum'])) 
+		{
+			show_404();
+		}
+
+		if (isset($yearmonth)) 
+		{
+			if (!preg_match('/^[0-9]{4}-[0-9]{1,2}+$/', $yearmonth)) 
+			{
+				show_error('Date should be in yyyy-mm format');
+			}
+
+			// show post list for the month
+			$ym_params = explode('-', $yearmonth);
+
+			$data['topics'] = $this->Forum_model->getTopicsByMonth($id, $ym_params[0], $ym_params[1]);
+			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
+			$data['breadcrumbs'] = array(__CLASS__, 'archive');
+			$data['title'] = 'Topics started in '. date('M', $ym_params[1]) .' '. $ym_params[0];
+
+			$this->load->view('forum/month', $data);
+		}
+		else
+		{
+			// show archive table
+			$data['archive'] = $this->Forum_model->getTopicsArchive($id);
+			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
+			$data['breadcrumbs'] = array(__CLASS__, 'archive');
+			$data['title'] = 'Forum archive';
+			
+			$this->load->view('forum/archive', $data);
+		}
 	}
 
 	public function feed($forum_id)

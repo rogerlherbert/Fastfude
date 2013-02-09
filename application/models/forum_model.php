@@ -24,6 +24,16 @@ class Forum_model extends CI_Model
 		return $this->forums;
 	}
 
+	public function getForum($forum_id)
+	{
+		if (array_key_exists($forum_id, $this->forums)) {
+			return array(
+				'id' => $forum_id,
+				'title' => $this->forums[$forum_id]
+			);
+		}
+	}
+
 	public function getRecentTopics($forum_id = 0)
 	{
 		$this->db->select('t.id, t.forum_id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_last) as post_time_last');
@@ -115,6 +125,56 @@ class Forum_model extends CI_Model
 		if ($query->num_rows() > 0) 
 		{
 			return $query->result();
+		}
+	}
+	
+	public function getTopicsByMonth($forum_id, $year, $month)
+	{
+		$this->db->select('t.id, t.forum_id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_last) as post_time_last');
+
+		$this->db->select('u1.username as username_first, t.user_id_first');
+		$this->db->join('users u1', 'u1.id = t.user_id_first', 'left outer');
+
+		$this->db->select('u2.username as username_last, t.user_id_last');
+		$this->db->join('users u2', 'u2.id = t.user_id_last', 'left outer');
+
+		$this->db->where('forum_id', $forum_id);
+		$this->db->where('YEAR(t.post_time_first)', $year);
+		$this->db->where('MONTH(t.post_time_first)', $month);
+
+		$this->db->order_by('t.post_time_first', 'asc');
+
+		$query = $this->db->get('topics t');
+
+		if ($query->num_rows > 0) 
+		{
+			return $query->result();
+		}
+	}
+	
+	public function getTopicsArchive($forum_id)
+	{
+		$this->db->select('YEAR(post_time_first) as theyear, MONTH(post_time_first) as themonth, COUNT(*) as topics');
+		$this->db->group_by(array('theyear','themonth'));
+		$this->db->order_by('theyear desc, themonth asc');
+
+		$query = $this->db->get_where('topics', array('forum_id' => $forum_id));
+		
+		if ($query->num_rows > 0) 
+		{
+			$archive = array();
+
+			for ($i = date('Y'); $i > 1999; $i--) 
+			{ 
+				$archive[$i] = array_pad(array(), 12, 0);
+			}
+
+			foreach ($query->result() as $row) 
+			{
+				$archive[$row->theyear][$row->themonth - 1] = (int) $row->topics;
+			}
+
+			return $archive;
 		}
 	}
 }

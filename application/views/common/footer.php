@@ -11,9 +11,9 @@
 	
 		<ul class="nav nav-list">
 			<li><?php echo anchor('/', '<i class="icon-home"></i>Home', 'id="home" rel="home"'); ?></li>
-			<li><?php echo anchor('gigs', '<i class="icon-music"></i>Gig Calendar', 'id="nav_gigs"'); ?></li>
+			<li><?php echo anchor('gigs', '<i class="icon-music"></i>Gigs', 'id="nav_gigs"'); ?></li>
 			<li><?php echo anchor('wiki', '<i class="icon-book"></i>Wiki', 'id="nav_wiki"'); ?></li>
-			<li><?php echo anchor('messages', '<i class="icon-envelope-alt"></i>Private Messages', 'id="nav_messages"'); ?></li>
+			<li><?php echo anchor('messages', '<i class="icon-envelope-alt"></i>Messages', 'id="nav_messages"'); ?></li>
 			<?php if ($this->session->userdata('user_id')) { ?>
 			<li><?php echo anchor('settings', '<i class="icon-cog"></i>Settings', 'id="settings"'); ?></li>
 			<li><?php echo anchor('user/sign_out', '<i class="icon-user"></i>Sign Out', 'id="signout"'); ?></li>
