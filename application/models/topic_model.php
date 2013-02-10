@@ -62,6 +62,22 @@ class Topic_model extends CI_Model
 		}
 	}
 
+	public function getPostSummary($id)
+	{
+		$this->db->select('p.id, UNIX_TIMESTAMP(p.post_time) as post_time, t.id as topic_id, t.title, u.id as user_id, u.username');
+		$this->db->where('p.id', $id);
+		
+		$this->db->join('topics t', 'p.topic_id = t.id');
+		$this->db->join('users u', 'p.user_id = u.id');
+
+		$query = $this->db->get('posts p');
+
+		if ($query->num_rows() > 0) 
+		{
+			return $query->row();
+		}
+	}
+
 	public function addTopic($forum_id, $user_id, $user_ip, $title, $post_text)
 	{
 		$fields = array(

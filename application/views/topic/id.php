@@ -1,9 +1,5 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="controls">
-	<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, "Stop Watching", ' class="button icon-eye-close"') : anchor('topic/watch/'.$topic->id, "Watch", ' class="button icon-eye-open"'); ?>
-</div>
-
 <?php if (isset($gig)) {
 	$this->load->view('gig/topic');
 } ?>
@@ -12,14 +8,17 @@
 <?php foreach ($posts as $post) { ?>
 	<li id="post_<?php echo $post->id; ?>">
 		<?php if (in_array($post->user_id, $muted)) { ?>
-			<p>You have muted <?php echo anchor('user/id/'.$post->user_id, $post->username); ?>.</p>
+			<p class="muted self">You have muted posts by <?php echo anchor('user/id/'.$post->user_id, $post->username); ?>.</p>
 		<?php } elseif (in_array($post->id, $flagged)) { ?>
-			<p>The community has muted this post by <?php echo anchor('user/id/'.$post->user_id, $post->username); ?></p>
+			<p class="muted community">The community has muted this post by <?php echo anchor('user/id/'.$post->user_id, $post->username); ?></p>
 		<?php } else { ?>
 
 		<div class="post_author">
+			<?php if ($this->session->userdata('user_id')) { ?>
+				<?php echo anchor('topic/post_settings/'.$post->id, '<i class="icon-cog"></i>', 'title="post settings" class="post_settings"'); ?>
+			<?php } ?>
 			<?php echo anchor('user/id/'.$post->user_id, img($post->avatar_url) . html_escape($post->username)); ?>
-			<time datetime="<?php echo date("c", $post->post_time); ?>" class="comment_date"><?php echo date("D jS M Y, g:i a", $post->post_time); ?></time>
+			<time datetime="<?php echo date("c", $post->post_time); ?>" class="comment_date meta"><?php echo date("D jS M Y, g:i a", $post->post_time); ?></time>
 		</div>
 		<div class="post_content">
 			<?php echo nl2br(html_escape($post->post_text)); ?>
@@ -27,20 +26,12 @@
 			<p class="post_edit">last edited on <time><?php echo date('D jS M Y, g:i a', $post->edit_time); ?></time></p>
 			<?php } ?>
 		</div>
-		<div class="controls">
-		<?php if ($this->session->userdata('user_id') == $post->user_id) { ?>
-			<?php echo anchor('topic/edit_post/'.$post->id, "Edit", ' class="button"'); ?>
-		<?php } else { ?>
-			<?php echo anchor('topic/flag_post/'.$post->id, "Flag", ' class="button"'); ?>
-		<?php } ?>
-		</div>
 
 		<?php } ?>
 	</li>
 
 <?php } ?>
 </ol>
-
 
 <section class="reply">
 
@@ -52,5 +43,9 @@
 	<?php echo form_submit('post', 'Post'); ?>
 	<?php echo form_close(); ?>
 </section>
+
+<div class="controls">
+	<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="button"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Add topic to watchlist', ' class="button"'); ?>
+</div>
 
 <?php $this->load->view('common/footer'); ?>

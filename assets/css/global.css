@@ -11,7 +11,7 @@
 
 html {-webkit-text-size-adjust:100%; font-size:100%}
 
-body {font:normal normal normal 16px/1.5 'MuseoSlab-500',serif; background:#1a1a1a url('../img/black_denim.png') repeat scroll top center; color:#666; padding-top: 4em}
+body {font:normal normal normal 16px/1.5 'MuseoSlab-500',serif; background: #000 url('') repeat scroll top center; color:#666; padding-top: 4em}
 
 ol,ul,li {list-style-type:none}
 
@@ -44,11 +44,11 @@ nav ul.nav a i { margin-right: 0.5em}
 
 nav input[type="search"] { width: 16em; margin: 1em 0 1em 1em; }
 
-div#content {margin:0 5%}
+div#content {}
 
-.controls {margin-bottom:1em}
+.controls {width: 16em; margin: 0 auto;}
 
-a.button {display:inline-block; line-height:1; padding:0.5em 0.75em; background-color:#333; color:#fff; border-radius:0.5em}
+a.button {display:block; line-height:1; padding:0.5em 0.75em; margin-bottom: 1em; background-color:#333; color:#fff; border: 3px outset #333; border-radius:0.25em}
 
 a.button:before {margin-right:0.5em}
 
@@ -62,11 +62,11 @@ input {font:normal normal normal 1em/1.5 'MuseoSlab-500',serif; background-color
 
 button,
 input[type="button"],
-input[type="submit"] {background-color:#333; color:#fff; border-radius:0.5em; line-height:1; padding:0.6667em 0.75em 0.3333em; text-transform:capitalize; cursor:pointer; -webkit-appearance:none; -moz-appearance:none; -ms-appearance:none; -o-appearance:none; appearance:none}
+input[type="submit"] { display: block; width: 16em; margin: 0 auto; background-color:#333; color:#fff; border: 3px outset #333; border-radius:0.25em; line-height:1; padding:0.6667em 0.75em 0.3333em; text-transform:capitalize; cursor:pointer; -webkit-appearance:none; -moz-appearance:none; -ms-appearance:none; -o-appearance:none; appearance:none}
 
 button:hover,
 input[type="button"]:hover,
-input[type="submit"]:hover {background-color:#444}
+input[type="submit"]:hover {background-color:#444; border-color: #444;}
 
 textarea {font:normal normal normal 16px/1.5 'MuseoSlab-500',serif; width:100%}
 
@@ -81,7 +81,7 @@ span.form_error {display:block; color:#f00}
 
 .topics {border-top:1px dotted #333}
 
-.topics li {padding:1em 0 1em; border-bottom:1px dotted #333}
+.topics li {padding: 1em; border-bottom:1px dotted #333}
 
 .topics .meta {font-size:75%; margin-top:0.5em}
 
@@ -91,9 +91,15 @@ span.form_error {display:block; color:#f00}
 
 .topic.id .vevent dd {margin-bottom:0.5em; color:#ccc}
 
+.topic.id .reply {margin-bottom: 1em;}
+
 .topic.id .reply textarea { height: 8em; margin-bottom: 1em; padding: 1em}
 
-.posts li {margin-bottom:2em}
+.posts li {margin-bottom:2em; position: relative;}
+
+.posts a.post_settings {position: absolute; color: #666; padding: 0.5em; line-height: 1; top: 0.5em; right: 0; text-decoration: none;}
+
+.posts a.post_settings:hover { background-color: #1a1a1a; color: #fff;}
 
 .posts .post_author {overflow:hidden; padding-left:4em}
 
@@ -103,9 +109,13 @@ span.form_error {display:block; color:#f00}
 
 .posts .post_author time {display:block}
 
-.posts .post_content {padding:1em 0; color: #ccc;}
+.posts .post_author .meta {font-size:75%; }
+
+.posts .post_content {padding: 1em; color: #ccc ; background-color: #1a1a1a;}
 
 .posts .post_edit {font-size:75%; color: #666}
+
+.posts .muted { text-align: center; padding: 0.5em; border-top: 1px dotted #333; border-bottom: 1px dotted #333;}
 
 .topic.edit_post textarea { height: 8em; margin-bottom: 1em; padding: 1em}
 

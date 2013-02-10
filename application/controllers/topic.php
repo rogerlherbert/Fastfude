@@ -165,6 +165,26 @@ class Topic extends CI_Controller
 		}
 	}
 	
+	public function post_settings($post_id)
+	{
+		if (!preg_match('/^[0-9]+$/', $post_id)) 
+		{
+			show_error('Bad post id');
+		}
+		
+		$data['post'] = $this->Topic_model->getPostSummary($post_id);
+		
+		if (is_null($data['post'])) 
+		{
+			show_404();
+		}
+		
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['title'] = 'Post Settings';
+		$this->load->view('topic/post_settings', $data);
+	}
+	
 	public function create()
 	{
 		if (!$this->session->userdata('user_id')) 
