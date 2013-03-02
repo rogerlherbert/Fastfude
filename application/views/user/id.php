@@ -4,11 +4,11 @@
 
 <p>You have muted this user</p>
 
-<?php echo anchor('user/unmute/'.$profile->id, 'Unmute user', ' class="btn icon-volume-up"'); ?>
+<?php echo anchor('user/unmute/'.$profile->id, 'Unmute user', ' class="btn btn-block"'); ?>
 
 <?php } else { ?>
 
-<p><?php echo img(array('src' => $profile->avatar_url, 'class' => 'img-polaroid')); ?></p>
+<p><?php echo img(array('src' => $profile->avatar_url, 'class' => 'img-polaroid avatar-large')); ?></p>
 
 <?php if($profile->post_count > 0) { ?>
 <p><?php echo anchor('user/posts/'.$profile->id, $profile->post_count . ' posts'); ?> since <?php echo date('M Y', $profile->first_post); ?></p>

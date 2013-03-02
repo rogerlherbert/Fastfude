@@ -2,7 +2,7 @@
 
 <?php if (isset($gigs)) { ?>
 	<?php if (count($gigs) > 0) { ?>
-		<ol class="vcalendar">
+		<ol class="vcalendar unstyled">
 
 		<?php foreach ($gigs as $gig) { ?>
 			<li class="vevent">

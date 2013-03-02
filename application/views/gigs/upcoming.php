@@ -1,7 +1,7 @@
 <?php $this->load->view('common/header'); ?>
 
 <div class="btn-group">
-	<?php echo anchor('gig/create', '<i class="icon-plus"></i> Create a gig', ' class="btn"'); ?>	
+	<?php echo anchor('gigs/create', '<i class="icon-plus"></i> Create a gig', ' class="btn"'); ?>	
 </div>
 
 <?php if (isset($calendar)) { ?>
@@ -9,10 +9,10 @@
 		<?php foreach ($calendar as $day_offset => $gigs) { ?>
 			<?php $offset_time = time() + 86400 * $day_offset; ?>
 
-			<?php echo heading(anchor('gig/on/'.date('Y-m-d', $offset_time), date('D d M', $offset_time)), 2) . "\n"; ?>
+			<?php echo heading(anchor('gigs/on/'.date('Y-m-d', $offset_time), date('D d M', $offset_time)), 2) . "\n"; ?>
 
 			<?php if (count($gigs) > 0) { ?>
-				<ol class="vcalendar unsytled">
+				<ol class="vcalendar unstyled">
 
 				<?php foreach ($gigs as $gig) { ?>
 				<li class="vevent">

@@ -2,10 +2,10 @@
 
 <?php if (isset($archive)) { ?>
 
-<ol id="archive">
+<ol class="unstyled">
 <?php foreach ($archive as $year => $month) { ?>
 	<li class="year"><h2><?php echo $year; ?></h2>
-	<ol>
+	<ol class="unstyled">
 	<?php foreach ($month as $key => $value) { ?>
 	<?php $monthtime = mktime(0,0,0,$key+1,1,$year); ?>
 	<li class="month">

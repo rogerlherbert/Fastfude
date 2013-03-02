@@ -1,6 +1,11 @@
 body { padding-top:40px; }
 
+footer { margin-top: 50px; text-align: center;}
+
 img.avatar { width: 48px; height: 48px;}
+img.avatar-large { width: 128px; height: 128px;}
+
+.user.id div[role="main"] { text-align: center;}
 
 @media (max-width:767px) { 
 

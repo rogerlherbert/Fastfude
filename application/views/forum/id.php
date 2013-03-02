@@ -1,7 +1,7 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="controls">
-	<?php echo anchor('topic/create', "Create a topic", ' class="button icon-plus"'); ?>
+<div class="btn-group pull-right">
+	<?php echo anchor('topic/create', '<i class="icon-plus"></i> Create a topic', ' class="btn"'); ?>
 </div>
 
 <?php if (count($topics) > 0) { ?>

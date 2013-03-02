@@ -1,8 +1,8 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="controls">
-	<?php echo anchor('user/id/'.$profile->id, 'User profile', ' class="button icon-user"'); ?>
-	<?php echo anchor('user/posts/'.$profile->id, 'View posts', ' class="button icon-list"'); ?>
+<div class="btn-group pull-right">
+	<?php echo anchor('user/id/'.$profile->id, 'User profile', ' class="btn"'); ?>
+	<?php echo anchor('user/posts/'.$profile->id, 'View posts', ' class="btn"'); ?>
 </div>
 
 <?php if (isset($posts)) { ?>

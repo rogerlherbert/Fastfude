@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Gig extends CI_Controller
+class Gigs extends CI_Controller
 {
 	function __construct()
 	{
@@ -10,7 +10,7 @@ class Gig extends CI_Controller
 		$this->load->model('Gig_model');
 	}
 
-	function upcoming()
+	function index()
 	{
 		$this->load->model('Forum_model');
 		$this->load->helper('date');
@@ -21,7 +21,7 @@ class Gig extends CI_Controller
 		$data['title'] = 'Gig Calendar';
 		$data['calendar'] = $this->Gig_model->getUpcomingGigs();
 
-		$this->load->view('gig/upcoming', $data);
+		$this->load->view('gigs/upcoming', $data);
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Gig extends CI_Controller
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['gigs'] = $this->Gig_model->getGigsByDate($date);
 
-		$this->load->view('gig/on', $data);
+		$this->load->view('gigs/on', $data);
 	}
 
 	public function create()
@@ -70,7 +70,7 @@ class Gig extends CI_Controller
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 			$data['title'] = 'Create A Gig';
-			$this->load->view('gig/create', $data);
+			$this->load->view('gigs/create', $data);
 		}
 		else
 		{
@@ -117,7 +117,7 @@ class Gig extends CI_Controller
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 			$data['title'] = 'Edit A Gig';
-			$this->load->view('gig/edit', $data);
+			$this->load->view('gigs/edit', $data);
 		}
 		else
 		{
@@ -168,5 +168,5 @@ class Gig extends CI_Controller
 	}
 }
 
-/* End of file gig.php */
-/* Location: ./application/controllers/gig.php */
+/* End of file gigs.php */
+/* Location: ./application/controllers/gigs.php */

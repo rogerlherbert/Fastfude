@@ -1,8 +1,12 @@
 <?php $this->load->view('common/header'); ?>
 
 <?php if (isset($gig)) {
-	$this->load->view('gig/topic');
+	$this->load->view('gigs/topic');
 } ?>
+
+<div class="btn-group pull-right">
+<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="btn"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Add topic to watchlist', ' class="btn"'); ?>
+</div>
 
 <ol class="media-list">
 <?php foreach ($posts as $post) { ?>
@@ -49,7 +53,7 @@
 	<div class="control-group<?php echo (form_error('post_text')) ? ' error' : '';?>">
 		<?php echo form_label('Text', 'post_text', array('class' => 'control-label')); ?>
 		<div class="controls">
-			<?php echo form_textarea(array('name' => 'post_text', 'value' => set_value('post_text'), 'rows' => '8', 'cols' => '')); ?>
+			<?php echo form_textarea(array('name' => 'post_text', 'value' => set_value('post_text'), 'rows' => '8', 'cols' => '', 'class' => 'span12')); ?>
 			<?php echo form_error('post_text','<span class="help-block">','</span>'); ?>
 		</div>
 	</div>
@@ -60,9 +64,5 @@
 
 	<?php echo form_close(); ?>
 </section>
-
-<div class="controls">
-	<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="button"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Add topic to watchlist', ' class="button"'); ?>
-</div>
 
 <?php $this->load->view('common/footer'); ?>

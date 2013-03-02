@@ -1,12 +1,12 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="controls">
-	<?php echo anchor('topic/create', "Create a topic", ' class="button icon-plus"'); ?>
+<div class="btn-group pull-right">
+	<?php echo anchor('topic/create', '<i class="icon-plus"></i> Create a topic', ' class="btn"'); ?>
 </div>
 
 <?php if (count($topics) > 0) { ?>
 
-<ol class="topics">
+<ol class="unstyled">
 <?php foreach ($topics as $topic) { ?>
 	<li>
 		<p class="topic_title"><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></p>
