@@ -6,7 +6,7 @@
 </div>
 
 <?php if (isset($posts)) { ?>
-<ol class="posts">
+<ol class="posts unstyled">
 <?php foreach ($posts as $post) { ?>
 	<li id="post_<?php echo $post->id; ?>">
 		<div class="post_meta">

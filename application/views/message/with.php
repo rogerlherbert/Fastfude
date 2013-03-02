@@ -1,13 +1,17 @@
 <?php $this->load->view('common/header'); ?>
 
-<ol class="posts">
+<ol class="posts unstyled media-list">
 <?php foreach ($messages as $post) { ?>
-	<li id="post_<?php echo $post->id; ?>">
-		<div class="post_author">
-			<?php echo anchor('user/id/'.$post->user_id, img($post->avatar_url) . html_escape($post->username)); ?>
-			<time datetime="<?php echo date("c", $post->post_time); ?>" class="comment_date"><?php echo date("D jS M Y, g:i a", $post->post_time); ?></time>
-		</div>
-		<div class="post_content">
+	<li id="post_<?php echo $post->id; ?>" class="media">
+
+		<?php echo img(array('src' => $post->avatar_url, 'class' => 'pull-left avatar img-polaroid')); ?>
+
+		<div class="media-body">
+			<h4 class="media-heading">
+				<?php echo anchor('user/id/'.$post->user_id, html_escape($post->username)); ?>
+				<small><time datetime="<?php echo date("c", $post->post_time); ?>" class="comment_date"><?php echo date("D jS M Y, g:i a", $post->post_time); ?></time></small>
+			</h4>
+
 			<?php if (isset($muted) && in_array($post->user_id, $muted)) {
 				echo nl2br(html_escape("you have muted this user"));
 			} else {

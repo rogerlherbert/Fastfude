@@ -4,19 +4,20 @@
 
 <p>You have muted this user</p>
 
-<div class="controls">
-	<?php echo anchor('user/unmute/'.$profile->id, 'Unmute user', ' class="button icon-volume-up"'); ?>
-</div>
+<?php echo anchor('user/unmute/'.$profile->id, 'Unmute user', ' class="btn icon-volume-up"'); ?>
 
 <?php } else { ?>
 
-<?php echo img($profile->avatar_url); ?>
+<p><?php echo img(array('src' => $profile->avatar_url, 'class' => 'img-polaroid')); ?></p>
 
-<div class="controls">
-	<?php echo anchor('message/to/'.$profile->id, 'Send a message', ' class="button icon-envelope"'); ?>
-	<?php echo anchor('user/mute/'.$profile->id, 'Mute user', ' class="button icon-volume-off"'); ?>
-	<?php echo anchor('user/posts/'.$profile->id, 'View posts', ' class="button icon-list"'); ?>
-</div>
+<?php if($profile->post_count > 0) { ?>
+<p><?php echo anchor('user/posts/'.$profile->id, $profile->post_count . ' posts'); ?> since <?php echo date('M Y', $profile->first_post); ?></p>
+<?php } else { ?>
+<p>hasn't posted yet</p>
+<?php } ?>
+
+<?php echo anchor('message/to/'.$profile->id, 'Send a message', ' class="btn btn-block btn-primary"'); ?>
+<?php echo anchor('user/mute/'.$profile->id, 'Mute user', ' class="btn btn-block btn-warning"'); ?>
 
 <?php } ?>
 

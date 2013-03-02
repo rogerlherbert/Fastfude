@@ -1,10 +1,10 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="controls">
-	<?php echo anchor('wiki/create', "Create a Wiki page", ' class="button icon-plus"'); ?>
+<div class="btn-group">
+	<?php echo anchor('wiki/create', '<i class="icon-plus"></i> Create a wiki page', ' class="btn"'); ?>	
 </div>
 
-<ol class="edit_history">
+<ol class="edit_history unstyled">
 <?php foreach ($history as $edit) { ?>
 	<li>
 		<p class="wiki_title"><?php echo anchor('wiki/page/'.$edit->stub.'/'.$edit->edit_id, '#'.$edit->edit_id . ': ' . $edit->title); ?></p>

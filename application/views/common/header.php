@@ -22,15 +22,26 @@
 
 	<?php echo link_tag('assets/css/font-awesome.min.css'); ?>
 
+	<?php echo link_tag('assets/css/global.css'); ?>
 
-	<script src="<?php echo base_url('assets/js/jquery-1.8.3.min.js'); ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
+
+	<script src="<?php echo base_url('assets/js/jquery-1.8.3.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/global.js'); ?>"></script>
 </head>
 
 <body class="<?php echo html_escape($bodyclass); ?>">
 <div class="container-fluid">
 
-<div id="breadcrumbs">home > <?php echo strtolower(implode(' > ', $breadcrumbs)); ?>:</div>
+	<header class="page-header">
+		<div class="breadcrumb">
+			<li><a href="#">Home</a> <span class="divider">/</span></li>
+			<?php foreach ($breadcrumbs as $crumb => $segments) { ?>
+			<li><a href="#"><?php echo $crumb ?></a> <span class="divider">/</span></li>
+			<?php } ?>
+		</div>
 
-<h1><?php echo html_escape($title); ?></h1>
-
+		<h1><?php echo html_escape($title); ?></h1>
+	</header>
+	
+	<div role="main">

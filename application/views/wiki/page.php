@@ -1,7 +1,7 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="controls">
-	<?php echo anchor('wiki/edit/'.$page->edit_id, "Edit this page", ' class="button icon-edit"'); ?>
+<div class="btn-group">
+	<?php echo anchor('wiki/edit/'.$page->edit_id, '<i class="icon-edit"></i> Edit this page', ' class="btn"'); ?>	
 </div>
 
 <div class="wiki_text">

@@ -2,10 +2,10 @@
 
 <?php if (count($topics) > 0) { ?>
 
-<ol class="topics">
+<ol class="topics unstyled">
 <?php foreach ($topics as $topic) { ?>
 	<li>
-		<p class="topic_title"><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></p>
+		<h3 class="topic_title"><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></h3>
 		<p class="meta">
 			<?php echo $topic->replies; ?> replies in <?php echo anchor('forum/id/'.$topic->forum_id, $forums[$topic->forum_id]); ?> | 
 			started by <?php echo anchor('user/id/'.$topic->user_id_first, html_escape($topic->username_first)); ?>, 

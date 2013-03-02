@@ -8,7 +8,7 @@ class User_model extends CI_Model
 
 	public function getUser($id)
 	{
-		$this->db->select('id, username, MD5(email) as avatar_hash, (SELECT us.value FROM users_settings us WHERE us.user_id = u.id AND us.key = "avatar") as avatar_service, UNIX_TIMESTAMP(created) as created');
+		$this->db->select('id, username, MD5(email) as avatar_hash, (SELECT us.value FROM users_settings us WHERE us.user_id = u.id AND us.key = "avatar") as avatar_service, (SELECT COUNT(*) FROM posts p WHERE p.user_id = u.id) as post_count, (SELECT UNIX_TIMESTAMP(MIN(post_time)) FROM posts p WHERE p.user_id = u.id) as first_post, UNIX_TIMESTAMP(created) as created');
 		$query = $this->db->get_where('users u', array('id' => $id));
 
 		if ($query->num_rows > 0) 

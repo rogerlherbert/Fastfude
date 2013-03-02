@@ -1,6 +1,6 @@
 <?php $this->load->view('common/header'); ?>
 
-<ol class="edit_history">
+<ol class="edit_history unstyled">
 <?php foreach ($history as $edit) { ?>
 	<li>
 		<p class="meta">

@@ -6,7 +6,7 @@
 
 <?php if (isset($archive)) { ?>
 
-<ol id="archive">
+<ol id="archive unstyled">
 <?php foreach ($archive as $year => $month) { ?>
 	<li class="year"><h2><?php echo $year; ?></h2>
 	<ol>
