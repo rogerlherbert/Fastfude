@@ -6,7 +6,9 @@
 
 <?php echo form_open(); ?>
 
-	<div class="field" id="submit"><?php echo form_submit(array('name' => 'confirm', 'value' => 'Yes, Delete My Account', 'class' => 'button')); ?></div>
+	<div class="form-actions">
+		<?php echo form_button(array('type' => 'submit', 'content' => 'Yes, Delete My Account', 'name' => 'confirm', 'class' => 'btn btn-danger')); ?>
+	</div>
 
 <?php echo form_close(); ?>
 

@@ -1,21 +1,27 @@
 <?php $this->load->view('common/header'); ?>
 <?php echo form_open(); ?>
 
-	<?php if(isset($error)) { echo "<span class=\"form_error\">".$error."</span>"; } ?>
+	<?php if(isset($error)) { echo "<span class=\"help-block\">".$error."</span>"; } ?>
 
-	<div class="field" id="username">
-		<?php echo form_label('username', 'username'); ?>
-		<?php echo form_input('username', set_value('username')); ?>
-		<?php echo form_error('username','<span class="form_error">','</span>'); ?>
+	<div class="control-group<?php echo (form_error('username')) ? ' error' : '';?>">
+		<?php echo form_label('username', 'username', array('class' => 'control-label')); ?>
+		<div class="controls">
+			<?php echo form_input('username', set_value('username')); ?>
+			<?php echo form_error('username','<span class="help-block">','</span>'); ?>
+		</div>
 	</div>
 
-	<div class="field" id="password">
-		<?php echo form_label('password', 'password'); ?>
-		<?php echo form_password('password', set_value('password')); ?>
-		<?php echo form_error('password','<span class="form_error">','</span>'); ?>
+	<div class="control-group<?php echo (form_error('password')) ? ' error' : '';?>">
+		<?php echo form_label('password', 'password', array('class' => 'control-label')); ?>
+		<div class="controls">
+			<?php echo form_password('password', set_value('password')); ?>
+			<?php echo form_error('password','<span class="help-block">','</span>'); ?>
+		</div>
 	</div>
 
-	<div class="field" id="submit"><?php echo form_submit(array('name' => 'sign_in', 'value' => 'sign in', 'class' => 'button')); ?></div>
+	<div class="form-actions">
+		<?php echo form_button(array('type' => 'submit', 'content' => 'Sign In', 'name' => 'sign_in', 'class' => 'btn btn-primary')); ?>
+	</div>
 
 	<?php echo anchor('user/forgot', 'Forgot Password'); ?>
 <?php echo form_close(); ?>

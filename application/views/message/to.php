@@ -4,13 +4,17 @@
 
 <?php echo form_open(); ?>
 
-<div class="field">
-	<?php echo form_label('Text', 'post_text'); ?>
-	<?php echo form_textarea('post_text', set_value('post_text')); ?>
-	<?php echo form_error('post_text','<span class="form_error">','</span>'); ?>
+<div class="control-group<?php echo (form_error('post_text')) ? ' error' : '';?>">
+	<?php echo form_label('Text', 'post_text', array('class' => 'control-label')); ?>
+	<div class="controls">
+		<?php echo form_textarea(array('name' => 'post_text', 'value' => set_value('post_text'), 'rows' => '8', 'cols' => '')); ?>
+		<?php echo form_error('post_text','<span class="help-block">','</span>'); ?>
+	</div>
 </div>
 
-<div class="field" id="submit"><?php echo form_submit(array('name' => 'confirm', 'value' => 'Send Private Message', 'class' => 'button')); ?></div>
+<div class="form-actions">
+	<?php echo form_button(array('type' => 'submit', 'content' => 'Send Message', 'name' => 'confirm', 'class' => 'btn btn-primary')); ?>
+</div>
 
 <?php echo form_close(); ?>
 

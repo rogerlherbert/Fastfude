@@ -14,7 +14,9 @@
 
 <?php echo form_open(); ?>
 
-	<div class="field" id="submit"><?php echo form_submit(array('name' => 'confirm', 'value' => 'Email Me A Delete Confirmation', 'class' => 'button')); ?></div>
+	<div class="form-actions">
+		<?php echo form_button(array('type' => 'submit', 'content' => 'Email Me A Delete Confirmation', 'name' => 'confirm', 'class' => 'btn btn-primary')); ?>
+	</div>
 
 <?php echo form_close(); ?>
 

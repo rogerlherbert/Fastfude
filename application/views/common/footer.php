@@ -4,9 +4,9 @@
 	<div class="menu"><i class="icon-reorder"></i>Fastfude</div>
 
 	<div id="nav-wrapper">
-		<?php echo form_open('search', array('id' => 'search')); ?>
+		<?php echo form_open('search', array('class' => 'form-search')); ?>
 		<?php echo form_hidden('type', 'forums'); ?>
-		<?php echo form_input(array('name' => 'q', 'type' => 'search', 'placeholder' => 'Search Forums')); ?>
+		<?php echo form_input(array('name' => 'q', 'type' => 'search', 'placeholder' => 'Search Forums', 'class' => 'search-query')); ?>
 		<?php echo form_close(); ?>
 	
 		<ul class="nav nav-list">

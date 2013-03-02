@@ -1,20 +1,25 @@
 <?php $this->load->view('common/header'); ?>
 <?php echo form_open(); ?>
 
-	<ul id="avatars">
+	<ul id="avatars" class="unstyled">
 		<?php foreach ($options as $key => $service) { ?>
 		<li class="field">
-			<?php $checked = ($this->session->userdata('avatar') && $key == $this->session->userdata('avatar')) ? TRUE : FALSE; ?>
-			<?php echo form_radio('avatar', $service['value'], $checked); ?>
-			<?php echo ($service['url'] != '') ? img(sprintf($service['url'], $this->session->userdata('avatar_hash'))) : ''; ?>
-			<?php echo form_label(ucfirst($key), 'avatar'); ?>
+			<?php 
+			$checked = ($this->session->userdata('avatar') && $key == $this->session->userdata('avatar')) ? TRUE : FALSE; 
+			$label = form_radio('avatar', $service['value'], $checked);
+			$label .= ($service['url'] != '') ? img(sprintf($service['url'], $this->session->userdata('avatar_hash'))) : '';
+			$label .= ucfirst($key);
+			?>
+			<?php echo form_label($label, 'avatar', array('class' => 'radio')); ?>
 		</li>
 
 		<?php } ?>
 	</ul>
 			<?php echo form_error('avatar','<span class="form_error">','</span>'); ?>
 
-	<div class="field" id="submit"><?php echo form_submit(array('name' => 'confirm', 'value' => 'Save', 'class' => 'button')); ?></div>
+	<div class="form-actions">
+		<?php echo form_button(array('type' => 'submit', 'content' => 'Save', 'name' => 'confirm', 'class' => 'btn btn-primary')); ?>
+	</div>
 
 <?php echo form_close(); ?>
 <?php $this->load->view('common/footer'); ?>

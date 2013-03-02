@@ -16,19 +16,19 @@
 
 	<?php echo link_tag(array('href' => 'assets/img/touch-icon-144.png', 'rel' => 'apple-touch-icon', 'sizes' => '144x144')); ?>
 
+	<?php echo link_tag('assets/css/bootstrap.css'); ?>
 
-	<?php echo link_tag('assets/css/global.css'); ?>
+	<?php echo link_tag('assets/css/bootstrap-responsive.css'); ?>
 
 	<?php echo link_tag('assets/css/font-awesome.min.css'); ?>
 
 
 	<script src="<?php echo base_url('assets/js/jquery-1.8.3.min.js'); ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/global.js'); ?>" type="text/javascript"></script>
-	<script type="text/javascript">$(document).ready(function() {global.init();});</script>
+	<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
 </head>
 
 <body class="<?php echo html_escape($bodyclass); ?>">
-<div id="content">
+<div class="container-fluid">
 
 <div id="breadcrumbs">home > <?php echo strtolower(implode(' > ', $breadcrumbs)); ?>:</div>
 

@@ -1,13 +1,17 @@
 <?php $this->load->view('common/header'); ?>
 <?php echo form_open(); ?>
 
-	<div class="field" id="username">
-		<?php echo form_label('username', 'username'); ?>
-		<?php echo form_input('username', set_value('username')); ?>
-		<?php echo form_error('username','<span class="form_error">','</span>'); ?>
+	<div class="control-group<?php echo (form_error('username')) ? ' error' : '';?>">
+		<?php echo form_label('username', 'username', array('class' => 'control-label')); ?>
+		<div class="controls">
+			<?php echo form_input('username', set_value('username')); ?>
+			<?php echo form_error('username','<span class="help-block">','</span>'); ?>
+		</div>
 	</div>
 
-	<div class="field" id="submit"><?php echo form_submit(array('name' => 'comfirm', 'value' => 'Email a reset link', 'class' => 'button')); ?></div>
+	<div class="form-actions">
+		<?php echo form_button(array('type' => 'submit', 'content' => 'Email a reset link', 'name' => 'confirm', 'class' => 'btn btn-primary')); ?>
+	</div>
 
 <?php echo form_close(); ?>
 <?php $this->load->view('common/footer'); ?>

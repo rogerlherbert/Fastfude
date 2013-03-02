@@ -38,9 +38,21 @@
 	<h2>Post A Reply</h2>
 
 	<?php echo form_open('topic/reply'); ?>
+
 	<?php echo form_hidden('topic_id', $topic->id); ?>
-	<?php echo form_textarea(array('name' => 'post_text', 'rows' => '', 'cols' => '')); ?>
-	<?php echo form_submit('post', 'Post'); ?>
+
+	<div class="control-group<?php echo (form_error('post_text')) ? ' error' : '';?>">
+		<?php echo form_label('Text', 'post_text', array('class' => 'control-label')); ?>
+		<div class="controls">
+			<?php echo form_textarea(array('name' => 'post_text', 'value' => set_value('post_text'), 'rows' => '8', 'cols' => '')); ?>
+			<?php echo form_error('post_text','<span class="help-block">','</span>'); ?>
+		</div>
+	</div>
+
+	<div class="form-actions">
+		<?php echo form_button(array('type' => 'submit', 'content' => 'Post', 'name' => 'post', 'class' => 'btn btn-primary')); ?>
+	</div>
+
 	<?php echo form_close(); ?>
 </section>
 
