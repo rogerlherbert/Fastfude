@@ -20,8 +20,6 @@
 
 	<?php echo link_tag('assets/css/bootstrap-responsive.css'); ?>
 
-	<?php echo link_tag('assets/css/font-awesome.min.css'); ?>
-
 	<?php echo link_tag('assets/css/global.css'); ?>
 
 
@@ -36,8 +34,8 @@
 	<header class="page-header">
 		<div class="breadcrumb">
 			<li><a href="#">Home</a> <span class="divider">/</span></li>
-			<?php foreach ($breadcrumbs as $crumb => $segments) { ?>
-			<li><a href="#"><?php echo $crumb ?></a> <span class="divider">/</span></li>
+			<?php foreach ($breadcrumbs as $crumb => $segment) { ?>
+			<li><a href="#"><?php echo $segment; ?></a> <span class="divider">/</span></li>
 			<?php } ?>
 		</div>
 

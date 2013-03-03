@@ -1,20 +1,12 @@
-body { padding-top:40px; }
+body { padding-top: 40px; }
 
-footer { margin-top: 50px; text-align: center;}
+h1,
+h2,
+h3 { text-transform: uppercase; font-size: 20px;}
 
-img.avatar { width: 48px; height: 48px;}
-img.avatar-large { width: 128px; height: 128px;}
-
-.user.id div[role="main"] { text-align: center;}
-
-@media (max-width:767px) { 
-
-	body { padding-right:20px; padding-left:20px; }
-
-	.navbar-fixed-top,
-	.navbar-fixed-bottom { position:fixed; }
-
-	.navbar-fixed-top,
-	.navbar-fixed-bottom,
-	.navbar-static-top { margin-right:0;margin-left:0; }
+.navbar-fixed-top, .navbar-fixed-bottom {
+position: fixed;
+margin: 0;
 }
+
+.navbar .brand { font-family: 'Century Gothic', Verdana, sans-serif; text-transform: uppercase; }
