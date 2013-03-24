@@ -23,7 +23,7 @@
 	<?php echo link_tag('assets/css/global.css'); ?>
 
 
-	<script src="<?php echo base_url('assets/js/jquery-1.8.3.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/jquery-1.9.1.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/global.js'); ?>"></script>
 </head>
