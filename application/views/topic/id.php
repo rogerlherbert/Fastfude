@@ -5,7 +5,7 @@
 } ?>
 
 <div class="btn-group pull-right">
-<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="btn"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Add topic to watchlist', ' class="btn"'); ?>
+<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="btn"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Watch topic', ' class="btn"'); ?>
 </div>
 
 <ol class="media-list">
