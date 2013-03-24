@@ -1,7 +1,0 @@
-var global = 
-{
-	init: function() 
-	{
-
-	}
-}
