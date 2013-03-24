@@ -12,6 +12,9 @@ class Gigs extends CI_Controller
 
 	function index()
 	{
+		/*
+			TODO show next 7 days gigs, links to this month's archive and next month's for longer viewing
+		*/
 		$this->load->model('Forum_model');
 		$this->load->helper('date');
 

@@ -6,15 +6,15 @@
 
 <?php if (count($topics) > 0) { ?>
 
-<ol class="unstyled">
+<ol class="topic-list topic-archive unstyled">
 <?php foreach ($topics as $topic) { ?>
 	<li>
-		<p class="topic_title"><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></p>
-		<p class="meta">
+		<h3><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></h3>
+		<p><small>
 			<?php echo ($topic->replies == 1) ? '1 reply' : $topic->replies.' replies'; ?> |
 			started by <?php echo anchor('user/id/'.$topic->user_id_first, html_escape($topic->username_first)); ?> 
 			at <?php echo date('g:ia \o\n D jS M, Y', $topic->post_time_first); ?>
-		</p>
+		</small></p>
 	</li>
 <?php } ?>
 </ol>

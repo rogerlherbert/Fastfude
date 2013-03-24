@@ -5,7 +5,7 @@
 <ol class="unstyled">
 <?php foreach ($archive as $year => $month) { ?>
 	<li class="year"><h2><?php echo $year; ?></h2>
-	<ol class="unstyled">
+	<ol class="unstyled inline">
 	<?php foreach ($month as $key => $value) { ?>
 	<?php $monthtime = mktime(0,0,0,$key+1,1,$year); ?>
 	<li class="month">

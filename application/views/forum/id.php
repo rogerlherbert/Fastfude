@@ -6,15 +6,15 @@
 
 <?php if (count($topics) > 0) { ?>
 
-<ol class="unstyled">
+<ol class="topic-list unstyled">
 <?php foreach ($topics as $topic) { ?>
 	<li>
-		<h3 class="topic_title"><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></h3>
-		<p class="meta">
+		<h3><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></h3>
+		<p><small>
 			<?php echo ($topic->replies == 1) ? '1 reply' : $topic->replies.' replies'; ?> |
 			last post by <?php echo anchor('user/id/'.$topic->user_id_last, html_escape($topic->username_last)); ?>, 
 			<?php echo timespan($topic->post_time_last); ?> ago
-		</p>
+		</small></p>
 	</li>
 <?php } ?>
 </ol>
