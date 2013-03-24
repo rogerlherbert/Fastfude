@@ -13,7 +13,7 @@
 		<p><small>
 			<?php echo ($topic->replies == 1) ? '1 reply' : $topic->replies.' replies'; ?> |
 			last post by <?php echo anchor('user/id/'.$topic->user_id_last, html_escape($topic->username_last)); ?>, 
-			<?php echo timespan($topic->post_time_last); ?> ago
+			<?php echo timespan($topic->post_time_last, time(), 2); ?> ago
 		</small></p>
 	</li>
 <?php } ?>

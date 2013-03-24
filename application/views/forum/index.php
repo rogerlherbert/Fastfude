@@ -9,7 +9,7 @@
 		<p><small>
 			<?php echo $topic->replies; ?> replies in <?php echo anchor('forum/id/'.$topic->forum_id, $forums[$topic->forum_id]); ?> | 
 			last post by <?php echo anchor('user/id/'.$topic->user_id_last, html_escape($topic->username_last)); ?> 
-			<?php echo timespan($topic->post_time_last); ?> ago
+			<?php echo timespan($topic->post_time_last, time(), 2); ?> ago
 		</small></p>
 	</li>
 <?php } ?>
