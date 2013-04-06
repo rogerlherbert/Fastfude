@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <?php if (count($messages) > 0) { ?>
 
 <ol class="messages unstyled">
@@ -20,5 +28,7 @@
 	<p>No messages!</p>
 
 <?php } ?>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

@@ -1,8 +1,12 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="btn-group pull-right">
-	<?php echo anchor('topic/create', '<i class="icon-plus"></i> Create a topic', ' class="btn"'); ?>
+<div class="span3">
+	<div class="well sidebar-nav">
+		<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="btn"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Watch topic', ' class="btn"'); ?>
+	</div>
 </div>
+
+<div class="span9">
 
 <?php if (count($topics) > 0) { ?>
 
@@ -21,6 +25,6 @@
 
 <?php } ?>
 
-<p><?php echo anchor('forum/archive/'.$forum['id'], 'Browse the archive'); ?></p>
+</div>
 
 <?php $this->load->view('common/footer'); ?>

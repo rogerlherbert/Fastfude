@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <ol class="posts unstyled media-list">
 <?php foreach ($messages as $post) { ?>
 	<li id="post_<?php echo $post->id; ?>" class="media">
@@ -45,5 +53,7 @@
 
 	<?php echo form_close(); ?>
 </section>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

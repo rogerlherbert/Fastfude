@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <p>To: <?php echo anchor('user/id/'.$user->id, img($user->avatar_url) . html_escape($user->username)); ?></p>
 
 <?php echo form_open(); ?>
@@ -17,5 +25,7 @@
 </div>
 
 <?php echo form_close(); ?>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

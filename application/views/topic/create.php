@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <?php echo form_open(); ?>
 
 <div class="control-group<?php echo (form_error('forum_id')) ? ' error' : '';?>">
@@ -31,5 +39,7 @@
 </div>
 
 <?php echo form_close(); ?>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

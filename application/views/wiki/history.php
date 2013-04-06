@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <ol class="edit_history unstyled">
 <?php foreach ($history as $edit) { ?>
 	<li>
@@ -11,5 +19,7 @@
 	</li>
 <?php } ?>
 </ol>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

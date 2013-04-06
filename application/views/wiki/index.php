@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <div class="btn-group">
 	<?php echo anchor('wiki/create', '<i class="icon-plus"></i> Create a wiki page', ' class="btn"'); ?>	
 </div>
@@ -15,5 +23,7 @@
 	</li>
 <?php } ?>
 </ol>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

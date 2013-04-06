@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <div class="btn-group pull-right">
 	<?php echo anchor('user/id/'.$profile->id, 'User profile', ' class="btn"'); ?>
 </div>
@@ -22,5 +30,7 @@
 <?php } else { ?>
 <p>No posts made yet.</p>
 <?php } ?>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

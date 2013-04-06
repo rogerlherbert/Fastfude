@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <?php if (count($topics) > 0) { ?>
 
 <ol class="topic-list unstyled">
@@ -16,5 +24,7 @@
 </ol>
 
 <?php } ?>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

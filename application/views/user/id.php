@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <?php if (isset($muted) && in_array($profile->id, $muted)) { ?>
 
 <p>You have muted this user</p>
@@ -20,5 +28,7 @@
 <?php echo anchor('user/mute/'.$profile->id, 'Mute user', ' class="btn btn-block btn-warning"'); ?>
 
 <?php } ?>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

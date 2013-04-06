@@ -1,4 +1,13 @@
 <?php $this->load->view('common/header'); ?>
+
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <?php echo form_open(); ?>
 
 	<p>Get email notifications for:</p>
@@ -22,4 +31,7 @@
 	</div>
 
 <?php echo form_close(); ?>
+
+</div>
+
 <?php $this->load->view('common/footer'); ?>

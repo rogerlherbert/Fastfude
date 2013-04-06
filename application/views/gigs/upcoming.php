@@ -1,8 +1,12 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="btn-group">
-	<?php echo anchor('gigs/create', '<i class="icon-plus"></i> Create a gig', ' class="btn"'); ?>	
+<div class="span3">
+	<div class="well sidebar-nav">
+		<?php echo anchor('gigs/create', '<i class="icon-plus"></i> Create a gig', ' class="btn"'); ?>	
+	</div>
 </div>
+
+<div class="span9">
 
 <?php if (isset($calendar)) { ?>
 	<section class="calendar media-list">
@@ -39,5 +43,7 @@
 		<?php } ?>
 	</section>
 <?php } ?>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

@@ -1,5 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
+<div class="span3">
+	<div class="well sidebar-nav">
+		<?php echo anchor('topic/create', '<i class="icon-plus"></i> Create a topic', ' class="btn"'); ?>
+	</div>
+</div>
+
+<div class="span9">
+
 <?php if (count($topics) > 0) { ?>
 
 <ol class="topics">
@@ -16,5 +24,7 @@
 </ol>
 
 <?php } ?>
+
+</div>
 
 <?php $this->load->view('common/footer'); ?>

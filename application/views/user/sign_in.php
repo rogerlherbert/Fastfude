@@ -1,4 +1,13 @@
 <?php $this->load->view('common/header'); ?>
+
+<div class="span3">
+	<div class="well sidebar-nav">
+
+	</div>
+</div>
+
+<div class="span9">
+
 <?php echo form_open(); ?>
 
 	<?php if(isset($error)) { echo "<span class=\"help-block\">".$error."</span>"; } ?>
@@ -24,5 +33,9 @@
 	</div>
 
 	<?php echo anchor('user/forgot', 'Forgot Password'); ?>
+
 <?php echo form_close(); ?>
+
+</div>
+
 <?php $this->load->view('common/footer'); ?>

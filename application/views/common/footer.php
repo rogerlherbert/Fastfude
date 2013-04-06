@@ -1,3 +1,4 @@
+		</div>
 	</div>
 
 	<nav class="navbar navbar-fixed-top">
@@ -33,7 +34,8 @@
 							</ul>
 						</li>
 						<?php } else { ?>
-						<li><?php echo anchor('user/sign_in', 'Sign In', 'id="user"'); ?></li>
+						<li><?php echo anchor('user/sign_in', 'Sign In', 'id="signin"'); ?></li>
+						<li><?php echo anchor('user/register', 'Register', 'id="register"'); ?></li>
 						<?php } ?>
 					</ul>
 				</div>
@@ -41,7 +43,7 @@
 		</div>
 	</nav>
 
-	<footer>
+	<footer class="container-fluid">
 		<p id="linkage">Fastfude is on <?php echo anchor('https://twitter.com/fastfude', '<i class="icon-twitter-sign"></i>&nbsp;Twitter', 'rel="publisher"'); ?>, <?php echo anchor('https://facebook.com/fastfude', '<i class="icon-facebook-sign"></i>&nbsp;Facebook', 'rel="publisher"'); ?> &amp; <?php echo anchor('https://github.com/junap/Fastfude', '<i class="icon-github-sign"></i>&nbsp;Github', 'rel="publisher"'); ?></p>
 		<p id="blurb">Scenewrecking since 1997</p>
 	</footer>

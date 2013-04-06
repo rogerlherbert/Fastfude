@@ -18,7 +18,7 @@
 
 	<?php echo link_tag('assets/css/bootstrap.min.css'); ?>
 
-	<?php echo link_tag('assets/css/bootstrap-responsive.css'); ?>
+	<?php echo link_tag('assets/css/bootstrap-responsive.min.css'); ?>
 
 	<?php echo link_tag('assets/css/global.css'); ?>
 
@@ -28,9 +28,9 @@
 </head>
 
 <body class="<?php echo html_escape($bodyclass); ?>">
-<div class="container-fluid">
+<div>
 
-	<header class="page-header">
+	<header class="page-header container-fluid">
 		<div class="breadcrumb">
 			<li><a href="#">Home</a> <span class="divider">/</span></li>
 			<?php foreach ($breadcrumbs as $crumb => $segment) { ?>
@@ -41,4 +41,5 @@
 		<h1><?php echo html_escape($title); ?></h1>
 	</header>
 	
-	<div role="main">
+	<div role="main" class="container-fluid">
+		<div class="row-fluid">
