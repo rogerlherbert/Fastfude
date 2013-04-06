@@ -2,7 +2,7 @@
 
 <div class="span3">
 	<div class="well sidebar-nav">
-		<?php echo anchor('wiki/create', '<i class="icon-plus"></i> Create a wiki page', ' class="btn"'); ?>	
+		<?php echo anchor('wiki/create', '<i class="icon-plus"></i> Create a wiki page', ' class="btn btn-block"'); ?>	
 	</div>
 </div>
 

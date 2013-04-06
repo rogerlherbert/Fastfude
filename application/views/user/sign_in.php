@@ -2,7 +2,8 @@
 
 <div class="span3">
 	<div class="well sidebar-nav">
-
+		<p><?php echo anchor('user/forgot', 'I forgot my password'); ?></p>
+		<p><?php echo anchor('user/register', "Sign up for a new account"); ?></p>
 	</div>
 </div>
 
@@ -31,8 +32,6 @@
 	<div class="form-actions">
 		<?php echo form_button(array('type' => 'submit', 'content' => 'Sign In', 'name' => 'sign_in', 'class' => 'btn btn-primary')); ?>
 	</div>
-
-	<?php echo anchor('user/forgot', 'Forgot Password'); ?>
 
 <?php echo form_close(); ?>
 

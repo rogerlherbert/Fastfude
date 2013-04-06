@@ -2,7 +2,7 @@
 
 <div class="span3">
 	<div class="well sidebar-nav">
-		<?php echo anchor('topic/create', '<i class="icon-plus"></i> Create a topic', ' class="btn"'); ?>
+		<?php echo anchor('topic/create', '<i class="icon-plus"></i> Create a topic', ' class="btn btn-block"'); ?>
 	</div>
 </div>
 

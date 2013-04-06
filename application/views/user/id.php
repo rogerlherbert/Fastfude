@@ -2,7 +2,8 @@
 
 <div class="span3">
 	<div class="well sidebar-nav">
-
+		<?php echo anchor('message/to/'.$profile->id, 'Send a message', ' class="btn btn-block btn-primary"'); ?>
+		<?php echo anchor('user/mute/'.$profile->id, 'Mute user', ' class="btn btn-block"'); ?>
 	</div>
 </div>
 
@@ -23,9 +24,6 @@
 <?php } else { ?>
 <p>hasn't posted yet</p>
 <?php } ?>
-
-<?php echo anchor('message/to/'.$profile->id, 'Send a message', ' class="btn btn-block btn-primary"'); ?>
-<?php echo anchor('user/mute/'.$profile->id, 'Mute user', ' class="btn btn-block btn-warning"'); ?>
 
 <?php } ?>
 

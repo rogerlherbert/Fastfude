@@ -2,7 +2,7 @@
 
 <div class="span3">
 	<div class="well sidebar-nav">
-		<?php echo anchor('gigs/create', '<i class="icon-plus"></i> Create a gig', ' class="btn"'); ?>	
+		<?php echo anchor('gigs/create', '<i class="icon-plus"></i> Create a gig', ' class="btn btn-block"'); ?>	
 	</div>
 </div>
 

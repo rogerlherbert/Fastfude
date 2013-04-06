@@ -2,7 +2,7 @@
 
 <div class="span3">
 	<div class="well sidebar-nav">
-		<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="btn"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Watch topic', ' class="btn"'); ?>
+		<?php echo anchor('topic/create', '<i class="icon-plus"></i> Create a topic', ' class="btn btn-block"'); ?>	
 	</div>
 </div>
 
@@ -15,8 +15,8 @@
 	<li>
 		<h3><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></h3>
 		<p><small>
-			<?php echo ($topic->replies == 1) ? '1 reply' : $topic->replies.' replies'; ?> |
-			last post by <?php echo anchor('user/id/'.$topic->user_id_last, html_escape($topic->username_last)); ?>, 
+			<?php echo ($topic->replies == 1) ? '1 reply' : $topic->replies.' replies'; ?>
+			| last post by <?php echo anchor('user/id/'.$topic->user_id_last, html_escape($topic->username_last)); ?>, 
 			<?php echo timespan($topic->post_time_last, time(), 2); ?> ago
 		</small></p>
 	</li>

@@ -2,7 +2,7 @@
 
 <div class="span3">
 	<div class="well sidebar-nav">
-
+		<?php echo anchor('message/create', '<i class="icon-plus"></i> Create a message', ' class="btn btn-block"'); ?>	
 	</div>
 </div>
 

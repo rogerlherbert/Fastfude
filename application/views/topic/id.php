@@ -2,7 +2,7 @@
 
 <div class="span3">
 	<div class="well sidebar-nav">
-		<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="btn"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Watch topic', ' class="btn"'); ?>
+		<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="btn btn-block"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Watch topic', ' class="btn btn-block"'); ?>
 	</div>
 </div>
 
