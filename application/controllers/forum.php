@@ -16,7 +16,6 @@ class Forum extends CI_Controller
 	public function index()
 	{
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['topics'] = $this->Forum_model->getRecentTopics();
 
@@ -33,7 +32,11 @@ class Forum extends CI_Controller
 		}
 	
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, '/'),
+			array(__FUNCTION__)
+		);
+
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['topics'] = $this->Forum_model->getWatchedTopics($this->session->userdata('user_id'));
 
@@ -50,10 +53,13 @@ class Forum extends CI_Controller
 		}
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['forum'] = $this->Forum_model->getForum($id);
 		$data['topics'] = $this->Forum_model->getRecentTopics($id);
 		$data['title'] = $data['forum']['title'];
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, '/'),
+			array($data['forum']['title'])
+		);
 
 		$this->load->view('forum/id', $data);
 	}
@@ -84,7 +90,13 @@ class Forum extends CI_Controller
 
 			$data['topics'] = $this->Forum_model->getTopicsByMonth($id, $ym_params[0], $ym_params[1]);
 			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
-			$data['breadcrumbs'] = array(__CLASS__, 'archive');
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, '/'),
+				array($data['forum']['title'], 'forum/id/'.$id),
+				array(__FUNCTION__, 'forum/archive/'.$id),
+				array($yearmonth)
+			);
+
 			$data['title'] = 'Topics started in '. date('M', $ym_params[1]) .' '. $ym_params[0];
 
 			$this->load->view('forum/month', $data);
@@ -94,7 +106,12 @@ class Forum extends CI_Controller
 			// show archive table
 			$data['archive'] = $this->Forum_model->getTopicsArchive($id);
 			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
-			$data['breadcrumbs'] = array(__CLASS__, 'archive');
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, '/'),
+				array($data['forum']['title'], 'forum/id/'.$id),
+				array(__FUNCTION__)
+			);
+
 			$data['title'] = $data['forum']['title'] . ' Forum archive';
 			
 			$this->load->view('forum/archive', $data);

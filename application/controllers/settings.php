@@ -37,7 +37,10 @@ class Settings extends CI_Controller
 	public function index()
 	{
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__)
+		);
+
 		$data['title'] = "Settings";
 
 		$this->load->view('settings/index', $data);
@@ -48,8 +51,11 @@ class Settings extends CI_Controller
 		$this->form_validation->set_rules('avatar', 'Avatar', 'trim|alpha');
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-		
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, __CLASS__),
+			array(__FUNCTION__)
+		);
+
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['title'] = "Choose an Avatar";
@@ -73,7 +79,11 @@ class Settings extends CI_Controller
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, __CLASS__),
+			array(__FUNCTION__)
+		);
+
 		$data['title'] = "Change Your Email Address";
 		
 		if ($this->form_validation->run() == FALSE)
@@ -99,7 +109,11 @@ class Settings extends CI_Controller
 		else
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, __CLASS__),
+				array(__FUNCTION__)
+			);
+
 			$data['title'] = "Onoes!";
 			$this->load->view('user/register_auth', $data);
 		}
@@ -110,8 +124,11 @@ class Settings extends CI_Controller
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[32]|is_unique[users.username]');
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-	
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, __CLASS__),
+			array(__FUNCTION__)
+		);
+
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['title'] = "Change Your Username";
@@ -133,8 +150,11 @@ class Settings extends CI_Controller
 		$this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required');
 				
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-		
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, __CLASS__),
+			array(__FUNCTION__)
+		);
+
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['title'] = "Change Your Password";
@@ -154,8 +174,11 @@ class Settings extends CI_Controller
 		$this->form_validation->set_rules('notifications[]', 'Notifications', 'trim|alpha|callback__is_valid_notification_type');
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-		
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, __CLASS__),
+			array(__FUNCTION__)
+		);
+
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['title'] = "Change Your Notifications";
@@ -181,9 +204,12 @@ class Settings extends CI_Controller
 		$this->form_validation->set_rules('confirm', 'Delete', 'trim|required');
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['title'] = "Delete your account";
-		
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, __CLASS__),
+			array(__FUNCTION__)
+		);
+
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('settings/delete', $data);
@@ -200,9 +226,12 @@ class Settings extends CI_Controller
 		$email = $this->User_model->getPendingEmail($auth_key);
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
 		$data['title'] = "Delete your account";
-		
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, __CLASS__),
+			array(__FUNCTION__)
+		);
+
 		if (!$email)
 		{
 			$data['title'] = "Onoes!";

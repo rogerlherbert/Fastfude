@@ -19,7 +19,10 @@ class Gigs extends CI_Controller
 		$this->load->helper('date');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, '/')
+		);
+
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['title'] = 'Gig Calendar';
 		$data['calendar'] = $this->Gig_model->getUpcomingGigs();
@@ -44,7 +47,11 @@ class Gigs extends CI_Controller
 		$this->load->model('Forum_model');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, 'gigs'),
+			array($date)
+		);
+
 		$data['title'] = 'Gigs on '. DateTime::createFromFormat('Y-m-d', $date)->format('D jS M Y');
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['gigs'] = $this->Gig_model->getGigsByDate($date);
@@ -71,7 +78,11 @@ class Gigs extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, 'gigs'),
+				array(__FUNCTION__)
+			);
+
 			$data['title'] = 'Create A Gig';
 			$this->load->view('gigs/create', $data);
 		}
@@ -118,7 +129,11 @@ class Gigs extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, 'gigs'),
+				array(__FUNCTION__)
+			);
+
 			$data['title'] = 'Edit A Gig';
 			$this->load->view('gigs/edit', $data);
 		}

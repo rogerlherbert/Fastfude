@@ -23,7 +23,10 @@ class Message extends CI_Controller
 		$this->load->helper('date');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__)
+		);
+
 		$data['title'] = 'Messages';
 		$data['messages'] = $this->Message_model->getAllMessages($this->session->userdata('user_id'));
 
@@ -47,7 +50,11 @@ class Message extends CI_Controller
 		$this->Message_model->markConversationAsRead($user_id, $this->session->userdata('user_id'));
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array('Messages', __CLASS__),
+			array('with ' . $user->username)
+		);
+
 		$data['muted'] = $this->User_model->getMutedUsers($this->session->userdata('user_id'));
 		$data['title'] = 'Messages with '.$user->username;
 		$data['user'] = $user;
@@ -77,7 +84,11 @@ class Message extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array('Messages', __CLASS__),
+				array('to ' . $user->username)
+			);
+
 			$data['title'] = 'Create A Message';
 			$data['user'] = $user;
 			$this->load->view('message/to', $data);
@@ -99,7 +110,11 @@ class Message extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array('Messages', __CLASS__),
+				array(__FUNCTION__)
+			);
+
 			$data['title'] = 'Reply To Message';
 			$this->load->view('message/reply', $data);
 		}

@@ -20,7 +20,10 @@ class Wiki extends CI_Controller
 		
 		$data['history'] = $this->Wiki_model->getRecentEdits();
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__)
+		);
+
 		$data['title'] = 'Recent Wiki Edits';
 		
 		$this->load->view('wiki/index', $data);
@@ -45,7 +48,11 @@ class Wiki extends CI_Controller
 		if (is_null($data['page'])) 
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, 'Wiki'),
+				array('404')
+			);
+
 			$data['title'] = 'Wiki page not found';
 			
 			$this->output->set_status_header('404');
@@ -54,7 +61,11 @@ class Wiki extends CI_Controller
 		else
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, 'Wiki'),
+				array($data['page']->title)
+			);
+
 			$data['title'] = $data['page']->title;
 			
 			$this->load->view('wiki/page', $data);
@@ -76,7 +87,11 @@ class Wiki extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, 'Wiki'),
+				array('Create')
+			);
+
 			$data['title'] = 'Create A Wiki Page';
 			$this->load->view('wiki/create', $data);
 		}
@@ -120,7 +135,12 @@ class Wiki extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, 'Wiki'),
+				array($data['page']->title, 'wiki/page/'.$data['page']->stub),
+				array('Edit')
+			);
+
 			$data['title'] = 'Edit this wiki page';
 			$this->load->view('wiki/edit', $data);
 		}
@@ -146,7 +166,12 @@ class Wiki extends CI_Controller
 		$data['history'] = $this->Wiki_model->getPageHistory($data['page']->page_id);
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, 'Wiki'),
+			array($data['page']->title, 'wiki/page/'.$stub),
+			array('History')
+		);
+
 		$data['title'] = 'Edit history of '.$data['page']->title;
 		
 		$this->load->view('wiki/history', $data);

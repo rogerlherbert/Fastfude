@@ -41,7 +41,10 @@ class Topic extends CI_Controller
 		}
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__)
+		);
+
 		$data['title'] = $data['topic']->title;
 		$data['posts'] = $this->Topic_model->getPosts($id);
 		$data['flagged'] = $this->Topic_model->getFlaggedPosts($id);
@@ -77,7 +80,11 @@ class Topic extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, 'topic/id/'.$this->input->post('topic_id')),
+				array(__FUNCTION__)
+			);
+
 			$data['title'] = 'Reply To Topic';
 			$this->load->view('topic/reply', $data);
 		}
@@ -115,7 +122,11 @@ class Topic extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, 'topic/id/'.$data['post']->topic_id),
+				array('Edit Post ' . $post_id)
+			);
+
 			$data['title'] = 'Edit Post';
 			$this->load->view('topic/edit_post', $data);
 		}
@@ -153,7 +164,11 @@ class Topic extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(
+				array(__CLASS__, 'topic/id/'.$data['post']->topic_id),
+				array('Flag Post ' . $post_id)
+			);
+
 			$data['title'] = 'Flag Post';
 			$this->load->view('topic/flag_post', $data);
 		}
@@ -180,7 +195,11 @@ class Topic extends CI_Controller
 		}
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-		$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array(__CLASS__, 'topic/id/'.$data['post']->topic_id),
+			array('Post Settings ' . $post_id)
+		);
+
 		$data['title'] = 'Post Settings';
 		$this->load->view('topic/post_settings', $data);
 	}
