@@ -27,7 +27,7 @@
 						<li class="divider-vertical"></li>
 						<?php if ($this->session->userdata('user_id')) { ?>
 						<li class="dropdown">
-							<?php echo anchor('user/id/'.$this->session->userdata('user_id'), 'Username <b class="caret"></b>', 'class="dropdown-toggle" data-toggle="dropdown"'); ?>
+							<?php echo anchor('user/id/'.$this->session->userdata('user_id'), $this->session->userdata('username') . ' <b class="caret"></b>', 'class="dropdown-toggle" data-toggle="dropdown"'); ?>
 							<ul class="dropdown-menu">
 								<li><?php echo anchor('settings', 'Settings', 'id="settings"'); ?></li>
 								<li><?php echo anchor('user/sign_out', 'Sign Out', 'id="signout"'); ?></li>
