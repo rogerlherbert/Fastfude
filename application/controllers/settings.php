@@ -12,6 +12,8 @@ class Settings extends CI_Controller
 	{
 		parent::__construct();
 
+		// $this->output->enable_profiler(TRUE);
+
 		if (!$this->session->userdata('user_id')) 
 		{
 			redirect('user/sign_in');
@@ -30,8 +32,6 @@ class Settings extends CI_Controller
 			'gravatar' => array('value' => 'gravatar', 'url' => 'http://www.gravatar.com/avatar/%s?s=96&r=pg'),
 			'unicornify' => array('value' => 'unicornify', 'url' => 'http://unicornify.appspot.com/avatar/%s?s=96')
 		);
-		
-		$this->output->enable_profiler(TRUE);
 	}
 	
 	public function index()
