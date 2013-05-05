@@ -31,20 +31,7 @@
 <div>
 
 	<header class="page-header container-fluid">
-		<div class="breadcrumb">
-			<li><?php echo anchor('/', 'Home') ?> <span class="divider">/</span></li>
-			<?php if (isset($breadcrumbs)) { ?>
-			<?php $i = 1; ?>
-			<?php foreach ($breadcrumbs as $segment) { ?>
-			<?php if ($i == count($breadcrumbs)) { ?>
-			<li><?php echo $segment[0]; ?></li>
-			<?php } else { ?>
-			<li><?php echo anchor(strtolower($segment[1]), $segment[0]); ?> <span class="divider">/</span></li>
-			<?php } ?>
-			<?php $i++; ?>
-			<?php } ?>
-			<?php } ?>
-		</div>
+		<?php if (isset($breadcrumbs)) {$this->load->view('common/breadcrumbs');} ?>
 
 		<h1><?php echo html_escape($title); ?></h1>
 	</header>
