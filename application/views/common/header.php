@@ -21,7 +21,8 @@
 	<?php echo link_tag('assets/css/bootstrap-responsive.min.css'); ?>
 
 	<?php echo link_tag('assets/css/global.css'); ?>
-
+	
+	<?php echo (isset($canonical)) ? link_tag(array('href' => site_url($canonical), 'rel' => 'canonical')) : ''; ?>
 
 	<script src="<?php echo base_url('assets/js/jquery-1.9.1.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>

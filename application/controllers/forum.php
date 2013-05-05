@@ -16,6 +16,7 @@ class Forum extends CI_Controller
 	public function index()
 	{
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['canonical'] = '/';
 		$data['forums'] = $this->Forum_model->getForums();
 		$data['topics'] = $this->Forum_model->getRecentTopics();
 
@@ -32,6 +33,7 @@ class Forum extends CI_Controller
 		}
 	
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['canonical'] = 'forum/watchlist';
 		$data['breadcrumbs'] = array(
 			array(__CLASS__, '/'),
 			array(__FUNCTION__)
@@ -56,6 +58,7 @@ class Forum extends CI_Controller
 		$data['forum'] = $this->Forum_model->getForum($id);
 		$data['topics'] = $this->Forum_model->getRecentTopics($id);
 		$data['title'] = $data['forum']['title'];
+		$data['canonical'] = 'forum/id/'. $id;
 		$data['breadcrumbs'] = array(
 			array(__CLASS__, '/'),
 			array($data['forum']['title'])
@@ -90,6 +93,7 @@ class Forum extends CI_Controller
 
 			$data['topics'] = $this->Forum_model->getTopicsByMonth($id, $ym_params[0], $ym_params[1]);
 			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
+			$data['canonical'] = 'forum/archive/'. $id . '/' . $yearmonth;
 			$data['breadcrumbs'] = array(
 				array(__CLASS__, '/'),
 				array($data['forum']['title'], 'forum/id/'.$id),
@@ -106,6 +110,7 @@ class Forum extends CI_Controller
 			// show archive table
 			$data['archive'] = $this->Forum_model->getTopicsArchive($id);
 			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
+			$data['canonical'] = 'forum/archive/'. $id;
 			$data['breadcrumbs'] = array(
 				array(__CLASS__, '/'),
 				array($data['forum']['title'], 'forum/id/'.$id),

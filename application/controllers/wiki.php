@@ -19,6 +19,7 @@ class Wiki extends CI_Controller
 		$this->load->helper('date');
 		
 		$data['history'] = $this->Wiki_model->getRecentEdits();
+		$data['canonical'] = 'wiki';
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(
 			array(__CLASS__)
@@ -61,6 +62,7 @@ class Wiki extends CI_Controller
 		else
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+			$data['canonical'] = 'wiki/page/'.$data['page']->stub;
 			$data['breadcrumbs'] = array(
 				array(__CLASS__, 'Wiki'),
 				array($data['page']->title)
@@ -135,6 +137,7 @@ class Wiki extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+			$data['canonical'] = 'wiki/page/'.$data['page']->stub;
 			$data['breadcrumbs'] = array(
 				array(__CLASS__, 'Wiki'),
 				array($data['page']->title, 'wiki/page/'.$data['page']->stub),
@@ -164,7 +167,7 @@ class Wiki extends CI_Controller
 		}
 
 		$data['history'] = $this->Wiki_model->getPageHistory($data['page']->page_id);
-
+		$data['canonical'] = 'wiki/page/'. $stub;
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(
 			array(__CLASS__, 'Wiki'),

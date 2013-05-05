@@ -45,6 +45,7 @@ class Topic extends CI_Controller
 			array(__CLASS__)
 		);
 
+		$data['canonical'] = 'topic/id/'. $id;
 		$data['title'] = $data['topic']->title;
 		$data['posts'] = $this->Topic_model->getPosts($id);
 		$data['flagged'] = $this->Topic_model->getFlaggedPosts($id);
@@ -79,6 +80,7 @@ class Topic extends CI_Controller
 		
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['canonical'] = 'topic/id/'. $this->input->post('topic_id');
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['breadcrumbs'] = array(
 				array(__CLASS__, 'topic/id/'.$this->input->post('topic_id')),
@@ -121,6 +123,7 @@ class Topic extends CI_Controller
 		
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['canonical'] = 'topic/id/'. $data['post']->topic_id;
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['breadcrumbs'] = array(
 				array(__CLASS__, 'topic/id/'.$data['post']->topic_id),
@@ -163,6 +166,7 @@ class Topic extends CI_Controller
 		
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['canonical'] = 'topic/id/'. $data['post']->topic_id;
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['breadcrumbs'] = array(
 				array(__CLASS__, 'topic/id/'.$data['post']->topic_id),
@@ -194,6 +198,7 @@ class Topic extends CI_Controller
 			show_404();
 		}
 		
+		$data['canonical'] = 'topic/id/'. $data['post']->topic_id;
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(
 			array(__CLASS__, 'topic/id/'.$data['post']->topic_id),

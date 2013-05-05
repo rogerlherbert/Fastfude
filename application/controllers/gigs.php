@@ -19,6 +19,7 @@ class Gigs extends CI_Controller
 		$this->load->helper('date');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['canonical'] = 'gigs';
 		$data['breadcrumbs'] = array(
 			array(__CLASS__, '/')
 		);
@@ -47,6 +48,7 @@ class Gigs extends CI_Controller
 		$this->load->model('Forum_model');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['canonical'] = 'gigs/on/'.$date;
 		$data['breadcrumbs'] = array(
 			array(__CLASS__, 'gigs'),
 			array($date)

@@ -35,6 +35,7 @@ class User extends CI_Controller
 		}
 		
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['canonical'] = 'user/id/'. $id;
 		$data['breadcrumbs'] = array(
 			array(__CLASS__)
 		);
@@ -70,6 +71,7 @@ class User extends CI_Controller
 
 			$data['posts'] = $this->User_model->getPostsByMonth($id, $ym_params[0], $ym_params[1]);
 			$data['bodyclass'] = strtolower(__CLASS__ . ' user_posts');
+			$data['canonical'] = 'user/posts/'. $id . '/' . $yearmonth;
 			$data['breadcrumbs'] = array(
 				array(__CLASS__, '/'),
 				array($data['profile']->username, 'user/id/'.$id),
@@ -86,6 +88,7 @@ class User extends CI_Controller
 			// show archive table
 			$data['archive'] = $this->User_model->getPostsArchive($id);
 			$data['bodyclass'] = strtolower(__CLASS__ . ' archive');
+			$data['canonical'] = 'user/posts/'. $id;
 			$data['breadcrumbs'] = array(
 				array(__CLASS__, '/'),
 				array($data['profile']->username, 'user/id/'.$id),
