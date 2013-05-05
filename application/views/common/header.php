@@ -32,7 +32,7 @@
 
 	<header class="page-header container-fluid">
 		<div class="breadcrumb">
-			<li><a href="#">Home</a> <span class="divider">/</span></li>
+			<li><?php echo anchor('/', 'Home') ?> <span class="divider">/</span></li>
 			<?php if (isset($breadcrumbs)) { ?>
 			<?php $i = 1; ?>
 			<?php foreach ($breadcrumbs as $segment) { ?>
