@@ -28,7 +28,9 @@ class Install extends CI_Controller
 			'users_pending' => "`id` int(11) unsigned NOT NULL AUTO_INCREMENT, `email` varchar(255) NOT NULL DEFAULT '', `auth_key` varchar(255) NOT NULL DEFAULT '', `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`), KEY `auth_key` (`auth_key`)",
 			'users_settings' => "`id` int(10) unsigned NOT NULL AUTO_INCREMENT, `user_id` int(10) unsigned NOT NULL DEFAULT '0', `key` varchar(32) NOT NULL DEFAULT '', `value` varchar(255) DEFAULT NULL, PRIMARY KEY (`id`), KEY `user_id` (`user_id`,`key`)",
 			'wiki_history' => "`id` int(10) unsigned NOT NULL AUTO_INCREMENT, `page_id` int(10) unsigned NOT NULL, `user_id` int(10) unsigned NOT NULL, `page_text` text, `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`), KEY `page_id` (`page_id`)",
-			'wiki_pages' => "`id` int(10) unsigned NOT NULL AUTO_INCREMENT, `stub` varchar(255) NOT NULL DEFAULT '', `title` varchar(255) NOT NULL DEFAULT '', PRIMARY KEY (`id`), UNIQUE KEY `stub` (`stub`)"
+			'wiki_pages' => "`id` int(10) unsigned NOT NULL AUTO_INCREMENT, `stub` varchar(255) NOT NULL DEFAULT '', `title` varchar(255) NOT NULL DEFAULT '', PRIMARY KEY (`id`), UNIQUE KEY `stub` (`stub`)",
+			'tags' => '`id` int(11) unsigned NOT NULL AUTO_INCREMENT, `stub` varchar(255) NOT NULL DEFAULT '', PRIMARY KEY (`id`), UNIQUE KEY `stub` (`stub`)',
+			'topics_tags' => '`tag_id` int(11) unsigned NOT NULL, `topic_id` int(11) unsigned NOT NULL, KEY `topic_id` (`topic_id`), KEY `tag_id` (`tag_id`)'
 		);
 	}
 	

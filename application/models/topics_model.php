@@ -1,68 +1,13 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* Forum
+* Topics
 */
-class Forum_model extends CI_Model
+class Topics_model extends CI_Model
 {
-	private $forums = array(
-		 0 => 'all',
-		 9 => 'general',
-		13 => 'news',
-		 8 => 'gigs',
-		 4 => 'market',
-		 6 => 'equipment',
-		14 => 'recruitment',
-		 3 => 'services',
-		 7 => 'help',
-		 1 => 'miscellaneous',
-		15 => 'egregious'
-	);
-
-	public function getForums()
-	{
-		return $this->forums;
-	}
-
-	public function getForum($forum_id)
-	{
-		if (array_key_exists($forum_id, $this->forums)) {
-			return array(
-				'id' => $forum_id,
-				'title' => $this->forums[$forum_id]
-			);
-		}
-	}
-
-	public function getRecentTopics($forum_id = 0)
-	{
-		$this->db->select('t.id, t.forum_id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_last) as post_time_last');
-		
-		$this->db->select('u1.username as username_first, t.user_id_first');
-		$this->db->join('users u1', 'u1.id = t.user_id_first', 'left outer');
-		
-		$this->db->select('u2.username as username_last, t.user_id_last');
-		$this->db->join('users u2', 'u2.id = t.user_id_last', 'left outer');
-
-		if ($forum_id > 0) 
-		{
-			$this->db->where('forum_id', $forum_id);
-		}
-
-		$this->db->order_by('t.post_id_last', 'desc');
-		$this->db->limit(50);
-
-		$query = $this->db->get('topics t');
-
-		if ($query->num_rows() > 0) 
-		{
-			return $query->result();
-		}
-	}
-	
 	public function getWatchedTopics($user_id)
 	{
-		$this->db->select('t.id, t.forum_id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_last) as post_time_last');
+		$this->db->select('t.id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_last) as post_time_last');
 
 		$this->db->select('u2.username as username_last, t.user_id_last');
 		$this->db->join('users u2', 'u2.id = t.user_id_last', 'left outer');
@@ -109,14 +54,16 @@ class Forum_model extends CI_Model
 		}
 	}
 
-	public function getFeedTopics($forum_id)
+	public function getFeedTopics($tag)
 	{
 		$this->db->select('t.id, t.title, DATE_FORMAT(t.post_time_first, "%Y-%m-%dT%TZ") as post_time, 
 		DATE_FORMAT(p.edit_time, "%Y-%m-%dT%TZ") as post_edit_time, p.post_text, 
 		t.user_id_first as user_id, u.username', FALSE);
 		$this->db->join('posts p', 't.post_id_first = p.id');
 		$this->db->join('users u', 't.user_id_first = u.id');
-		$this->db->where('t.forum_id', $forum_id);
+		$this->db->join('topics_tags tt', 'tt.topic_id = t.id', 'left');
+		$this->db->join('tags ta', 'ta.id = tt.tag_id', 'left');
+		$this->db->where('ta.stub', $tag);
 		$this->db->order_by('post_time_first', 'desc');
 		$this->db->limit(25,0);
 		
@@ -128,14 +75,17 @@ class Forum_model extends CI_Model
 		}
 	}
 	
-	public function getTopicsByMonth($forum_id, $year, $month)
+	public function getTopicsByMonth($tag, $year, $month)
 	{
 		$this->db->select('t.id, t.forum_id, t.title, t.replies, UNIX_TIMESTAMP(t.post_time_first) as post_time_first');
 
 		$this->db->select('u1.username as username_first, t.user_id_first');
 		$this->db->join('users u1', 'u1.id = t.user_id_first', 'left outer');
 
-		$this->db->where('forum_id', $forum_id);
+		$this->db->join('topics_tags tt', 'tt.topic_id = t.id', 'left');
+		$this->db->join('tags ta', 'ta.id = tt.tag_id', 'left');
+
+		$this->db->where('ta.stub', $tag);
 		$this->db->where('YEAR(t.post_time_first)', $year);
 		$this->db->where('MONTH(t.post_time_first)', $month);
 
@@ -149,13 +99,16 @@ class Forum_model extends CI_Model
 		}
 	}
 	
-	public function getTopicsArchive($forum_id)
+	public function getTopicsArchive($tag)
 	{
-		$this->db->select('YEAR(post_time_first) as theyear, MONTH(post_time_first) as themonth, COUNT(*) as topics');
+		$this->db->select('YEAR(t.post_time_first) as theyear, MONTH(t.post_time_first) as themonth, COUNT(*) as topics');
 		$this->db->group_by(array('theyear','themonth'));
 		$this->db->order_by('theyear desc, themonth asc');
+		
+		$this->db->join('topics_tags tt', 'tt.topic_id = t.id', 'left');
+		$this->db->join('tags ta', 'ta.id = tt.tag_id', 'left');
 
-		$query = $this->db->get_where('topics', array('forum_id' => $forum_id));
+		$query = $this->db->get_where('topics t', array('ta.stub' => $tag));
 		
 		if ($query->num_rows > 0) 
 		{
@@ -176,5 +129,5 @@ class Forum_model extends CI_Model
 	}
 }
 
-/* End of file forum_model.php */
-/* Location: ./application/models/forum_model.php */
+/* End of file topics_model.php */
+/* Location: ./application/models/topics_model.php */

@@ -18,7 +18,7 @@
 	<?php $monthtime = mktime(0,0,0,$key+1,1,$year); ?>
 	<li class="month">
 		<span title="<?php echo date('F', mktime(0,0,0,$key+1,1,$year)); ?>"><?php echo date('M', $monthtime); ?></span> 
-		<?php echo ($value > 0) ? anchor('forum/archive/'.$forum['id'].'/'.$year.'-'.($key+1), $value) : '<span class="no_posts">0</span>'; ?>
+		<?php echo ($value > 0) ? anchor('topics/archive/'.$tag.'/'.$year.'-'.($key+1), $value) : '<span class="no_posts">0</span>'; ?>
 	</li>
 	<?php } ?>
 	</ol>

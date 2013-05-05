@@ -15,7 +15,7 @@ class Gigs extends CI_Controller
 		/*
 			TODO show next 7 days gigs, links to this month's archive and next month's for longer viewing
 		*/
-		$this->load->model('Forum_model');
+		$this->load->model('Topics_model');
 		$this->load->helper('date');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
@@ -24,7 +24,6 @@ class Gigs extends CI_Controller
 			array(__CLASS__, '/')
 		);
 
-		$data['forums'] = $this->Forum_model->getForums();
 		$data['title'] = 'Gig Calendar';
 		$data['calendar'] = $this->Gig_model->getUpcomingGigs();
 
@@ -45,7 +44,7 @@ class Gigs extends CI_Controller
 			show_error('Bad gig date');
 		}
 
-		$this->load->model('Forum_model');
+		$this->load->model('Topics_model');
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['canonical'] = 'gigs/on/'.$date;
@@ -55,7 +54,6 @@ class Gigs extends CI_Controller
 		);
 
 		$data['title'] = 'Gigs on '. DateTime::createFromFormat('Y-m-d', $date)->format('D jS M Y');
-		$data['forums'] = $this->Forum_model->getForums();
 		$data['gigs'] = $this->Gig_model->getGigsByDate($date);
 
 		$this->load->view('gigs/on', $data);

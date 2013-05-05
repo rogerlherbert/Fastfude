@@ -9,7 +9,7 @@ class Topic extends CI_Controller
 	{
 		parent::__construct();
 
-		$this->load->model('Forum_model');
+		$this->load->model('Topics_model');
 		$this->load->model('Topic_model');
 		// $this->output->enable_profiler(TRUE);
 	}
@@ -28,6 +28,7 @@ class Topic extends CI_Controller
 			show_404();
 		}
 
+		/*
 		switch ($data['topic']->forum_id) 
 		{
 			case 8:
@@ -39,6 +40,7 @@ class Topic extends CI_Controller
 				# don't do nathin' so it is
 				break;
 		}
+		*/
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(
@@ -218,7 +220,6 @@ class Topic extends CI_Controller
 
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('forum_id', 'Forum ID', 'required|is_natural_no_zero');
 		$this->form_validation->set_rules('subject', 'Topic Subject', 'trim|required|min_length[4]');
 		$this->form_validation->set_rules('post_text', 'Post Text', 'trim|required|min_length[30]');
 
@@ -226,13 +227,12 @@ class Topic extends CI_Controller
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
-			$data['forums'] = $this->Forum_model->getForums();
 			$data['title'] = 'Create A Topic';
 			$this->load->view('topic/create', $data);
 		}
 		else
 		{
-			$this->Topic_model->addTopic($this->input->post('forum_id'), $this->session->userdata('user_id'), $this->input->ip_address(), $this->input->post('subject'), $this->input->post('post_text'));
+			$this->Topic_model->addTopic($this->input->post('tags'), $this->session->userdata('user_id'), $this->input->ip_address(), $this->input->post('subject'), $this->input->post('post_text'));
 			redirect('/');
 		}
 	}

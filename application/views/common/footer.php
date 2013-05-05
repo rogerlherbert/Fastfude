@@ -10,7 +10,7 @@
 					<span class="icon-bar"></span>
 				</a>
 
-				<?php echo anchor('/', 'Fastfude', 'class="brand"'); ?>
+				<?php echo anchor('/', 'Fastfude', 'class="brand" rel="home"'); ?>
 
 				<div class="nav-collapse collapse">
 
@@ -20,7 +20,7 @@
 					<?php echo form_close(); ?>
 	
 					<ul class="nav">
-						<li><?php echo anchor('/', 'Home', 'id="home" rel="home"'); ?></li>
+						<li><?php echo anchor('topics', 'Topics', 'id="nav_topics"'); ?></li>
 						<li><?php echo anchor('gigs', 'Gigs', 'id="nav_gigs"'); ?></li>
 						<li><?php echo anchor('wiki', 'Wiki', 'id="nav_wiki"'); ?></li>
 						<li><?php echo anchor('messages', 'Messages', 'id="nav_messages"'); ?></li>
