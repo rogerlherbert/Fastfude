@@ -5,6 +5,7 @@
 		<ul class="nav nav-tabs nav-stacked">
 			<li><?php echo (isset($watch_status)) ? anchor('topic/unwatch/'. $topic->id, 'Stop watching') : anchor('topic/watch/'.$topic->id, 'Watch topic'); ?></li>
 			<li><?php echo anchor('topic/id/'. $topic->id .'#reply', 'Reply to topic'); ?></li>
+			<?php echo (isset($gig)) ? '<li>'. anchor('gigs/edit/'.$gig->id, 'Edit gig details') . '</li>': ''; ?>
 		</ul>
 	</div>
 </div>

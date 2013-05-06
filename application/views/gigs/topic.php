@@ -1,5 +1,4 @@
 <section class="vevent hero-unit">
-	<?php echo anchor('gigs/edit/'.$gig->id, '<i class="icon-edit"></i> Edit Gig', ' class="btn pull-right"'); ?>
 	<dl>
 		<dt>Title</dt>
 		<dd class="summary"><?php echo html_escape($gig->gig_title); ?></dd>

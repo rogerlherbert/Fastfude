@@ -28,19 +28,8 @@ class Topic extends CI_Controller
 			show_404();
 		}
 
-		/*
-		switch ($data['topic']->forum_id) 
-		{
-			case 8:
-				$this->load->model('Gig_model');
-				$data['gig'] = $this->Gig_model->getGigByTopicID($id);
-				break;
-
-			default:
-				# don't do nathin' so it is
-				break;
-		}
-		*/
+		$this->load->model('Gig_model');
+		$data['gig'] = $this->Gig_model->getGigByTopicID($id);
 
 		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
 		$data['breadcrumbs'] = array(
