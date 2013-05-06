@@ -1,8 +1,8 @@
 <?php $this->load->view('common/header'); ?>
 
 <div class="span3">
-	<div class="well sidebar-nav">
-		<ul class="nav nav-list">
+	<div class="sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked">
 			<li><?php echo anchor('settings/avatar', 'Avatar'); ?></li>
 			<li><?php echo anchor('settings/email', 'Email'); ?></li>
 			<li><?php echo anchor('settings/username', 'Username'); ?></li>

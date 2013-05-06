@@ -1,12 +1,6 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="well sidebar-nav">
-
-	</div>
-</div>
-
-<div class="span9">
+<div class="span9 offset3">
 
 <div class="btn-group pull-right">
 	<?php echo anchor('user/id/'.$profile->id, 'User profile', ' class="btn"'); ?>

@@ -1,9 +1,11 @@
 <?php $this->load->view('common/header'); ?>
 
 <div class="span3">
-	<div class="well sidebar-nav">
-		<p><?php echo anchor('user/forgot', 'I forgot my password'); ?></p>
-		<p><?php echo anchor('user/register', "Sign up for a new account"); ?></p>
+	<div class="sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked">
+			<li><?php echo anchor('user/forgot', 'I forgot my password'); ?></li>
+			<li><?php echo anchor('user/register', "Sign up for a new account"); ?></li>
+		</ul>
 	</div>
 </div>
 

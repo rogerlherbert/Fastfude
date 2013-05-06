@@ -1,26 +1,17 @@
 <?php $this->load->view('common/header'); ?>
 
 <div class="span3">
-	<div class="well sidebar-nav">
-
+	<div class="sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked">
+			<li><?php echo anchor('wiki/edit/'.$page->edit_id, 'Edit this page'); ?></li>
+			<li><?php echo anchor('wiki/history/'.$page->stub, 'History'); ?></li>
+		</ul>
+		<p>This version created on <time><?php echo date('D jS M Y, g:i a', $page->created); ?></time> by: <?php echo anchor('user/id/'.$page->user_id, $page->username); ?></p>
 	</div>
 </div>
 
 <div class="span9">
-
-<div class="btn-group">
-	<?php echo anchor('wiki/edit/'.$page->edit_id, '<i class="icon-edit"></i> Edit this page', ' class="btn"'); ?>	
-</div>
-
-<div class="wiki_text">
 	<?php echo nl2br(html_escape($page->page_text)); ?>
-</div>
-
-<div class="wiki_meta">
-	<p>last edited <?php echo date('D jS M Y, g:i a', $page->created); ?> by: <?php echo anchor('user/id/'.$page->user_id, $page->username); ?></p>
-	<p>View the <?php echo anchor('wiki/history/'.$page->stub, 'edit history'); ?> of this page.</p>
-</div>
-
 </div>
 
 <?php $this->load->view('common/footer'); ?>

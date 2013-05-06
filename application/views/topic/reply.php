@@ -1,12 +1,6 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="well sidebar-nav">
-
-	</div>
-</div>
-
-<div class="span9">
+<div class="span9 offset3">
 
 <?php echo validation_errors(); ?>
 

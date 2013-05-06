@@ -1,9 +1,11 @@
 <?php $this->load->view('common/header'); ?>
 
 <div class="span3">
-	<div class="well sidebar-nav">
-		<?php echo anchor('message/to/'.$profile->id, 'Send a message', ' class="btn btn-block btn-primary"'); ?>
-		<?php echo anchor('user/mute/'.$profile->id, 'Mute user', ' class="btn btn-block"'); ?>
+	<div class="sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked">
+			<li><?php echo anchor('message/to/'.$profile->id, 'Send a message'); ?></li>
+			<li><?php echo anchor('user/mute/'.$profile->id, 'Mute user'); ?></li>
+		</ul>
 	</div>
 </div>
 

@@ -1,8 +1,10 @@
 <?php $this->load->view('common/header'); ?>
 
 <div class="span3">
-	<div class="well sidebar-nav">
-		<?php echo anchor('topic/create', '<i class="icon-plus"></i> Create a topic', ' class="btn btn-block"'); ?>	
+	<div class="sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked">
+			<li><?php echo anchor('topic/create', 'Create a topic'); ?></li>
+		</ul>
 	</div>
 </div>
 

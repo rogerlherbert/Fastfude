@@ -1,9 +1,11 @@
 <?php $this->load->view('common/header'); ?>
 
 <div class="span3">
-	<div class="well sidebar-nav">
-		<?php echo anchor('user/id/'.$profile->id, 'User profile', ' class="btn btn-block"'); ?>
-		<?php echo anchor('user/posts/'.$profile->id, 'View posts', ' class="btn btn-block"'); ?>
+	<div class="sidebar-nav">
+		<ul>
+			<li><?php echo anchor('user/id/'.$profile->id, 'User profile'); ?></li>
+			<li><?php echo anchor('user/posts/'.$profile->id, 'View posts'); ?></li>
+		</ul>
 	</div>
 </div>
 

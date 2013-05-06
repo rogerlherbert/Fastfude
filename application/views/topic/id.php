@@ -1,8 +1,11 @@
 <?php $this->load->view('common/header'); ?>
 
 <div class="span3">
-	<div class="well sidebar-nav">
-		<?php echo (isset($watch_status)) ? anchor('topic/unwatch/'.$topic->id, '<i class="icon-bookmark-empty"></i> Stop watching', ' class="btn btn-block"') : anchor('topic/watch/'.$topic->id, '<i class="icon-bookmark"></i> Watch topic', ' class="btn btn-block"'); ?>
+	<div class="sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked">
+			<li><?php echo (isset($watch_status)) ? anchor('topic/unwatch/'. $topic->id, 'Stop watching') : anchor('topic/watch/'.$topic->id, 'Watch topic'); ?></li>
+			<li><?php echo anchor('topic/id/'. $topic->id .'#reply', 'Reply to topic'); ?></li>
+		</ul>
 	</div>
 </div>
 
@@ -46,7 +49,7 @@
 <?php } ?>
 </ol>
 
-<section class="reply">
+<section id="reply">
 
 	<h2>Post A Reply</h2>
 
