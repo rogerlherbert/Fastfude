@@ -215,7 +215,7 @@ class Topic extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-			$data['breadcrumbs'] = array(__CLASS__, __FUNCTION__);
+			$data['breadcrumbs'] = array(array('Topics', 'topics'), array('create'));
 			$data['title'] = 'Create A Topic';
 			$this->load->view('topic/create', $data);
 		}
