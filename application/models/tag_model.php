@@ -30,6 +30,65 @@ class Tag_model extends CI_Model
 			return $query->row();
 		}
 	}
+	
+	public function getTagIDs(array $tags)
+	{
+		if (count($tags) == 0) 
+		{
+			return null;
+		}
+
+		$this->db->select('id');
+		$this->db->where_in('stub', $tags);
+
+		$query = $this->db->get('tags');
+
+		if ($query->num_rows() > 0) 
+		{
+			$ids = array();
+
+			foreach ($query->result() as $row) 
+			{
+				$ids[] = $row->id;
+			}
+
+			return $ids;
+		}
+	}
+	
+	public function writeToTags($tag_str)
+	{
+		$tag_str = preg_replace('/[^a-z0-9 \-]+/i', '', $tag_str);
+		
+		$min_length = 4;
+
+		if (mb_strlen($tag_str) < $min_length) 
+		{
+			return null;
+		}
+
+		$words = array_unique(str_word_count(strtolower($tag_str), 1));
+		$tags = array();
+
+		foreach ($words as $word) 
+		{
+			if (mb_strlen($word) < $min_length) 
+			{
+				continue;
+			}
+
+			$insert_query = $this->db->insert_string('tags', array('stub' => $word));
+			$insert_query = str_replace('INSERT INTO','INSERT IGNORE INTO', $insert_query);
+			$this->db->query($insert_query);
+
+			$tags[] = $word;
+		}
+		
+		if (count($tags) > 0) 
+		{
+			return $tags;
+		}
+	}
 
 	public function getTopicsByTag($stub)
 	{

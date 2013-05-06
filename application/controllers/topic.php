@@ -221,7 +221,11 @@ class Topic extends CI_Controller
 		}
 		else
 		{
-			$this->Topic_model->addTopic($this->input->post('tags'), $this->session->userdata('user_id'), $this->input->ip_address(), $this->input->post('subject'), $this->input->post('post_text'));
+			$this->load->model('Tag_model');
+			$tags = $this->Tag_model->writeToTags(trim($this->input->post('tags')));
+			$tag_ids = $this->Tag_model->getTagIDs($tags);
+
+			$this->Topic_model->addTopic($this->session->userdata('user_id'), $this->input->ip_address(), $this->input->post('subject'), $this->input->post('post_text'), $tag_ids);
 			redirect('/');
 		}
 	}

@@ -78,10 +78,9 @@ class Topic_model extends CI_Model
 		}
 	}
 
-	public function addTopic($forum_id, $user_id, $user_ip, $title, $post_text)
+	public function addTopic($user_id, $user_ip, $title, $post_text, $tag_ids = null)
 	{
 		$fields = array(
-			'forum_id' => $forum_id,
 			'title' => $title,
 			'user_id_first' => $user_id
 		);
@@ -91,7 +90,12 @@ class Topic_model extends CI_Model
 		$topic_id = $this->db->insert_id();
 
 		$this->addPost($topic_id, $user_id, $user_ip, $post_text);
-		
+
+		if ($tag_ids) 
+		{
+			$this->addTags($topic_id, $tag_ids);
+		}
+
 		return $topic_id;
 	}
 
@@ -115,6 +119,18 @@ class Topic_model extends CI_Model
 		$this->notifyWatchers($topic_id);
 
 		return $post_id;
+	}
+	
+	public function addTags($topic_id, array $tag_ids)
+	{
+		$data = array();
+
+		foreach ($tag_ids as $tag_id) 
+		{
+			$data[] = array('topic_id' => $topic_id, 'tag_id' => $tag_id);
+		}
+
+		$this->db->insert_batch('topics_tags', $data);
 	}
 	
 	public function editPost($post_id, $post_text)
