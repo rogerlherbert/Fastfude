@@ -8,6 +8,8 @@
 
 	<title><?php echo html_escape($title); ?></title>
 
+	<?php echo link_tag(array('href' => 'assets/img/touch-icon-114.png', 'rel' => 'shortcut icon')); ?>
+
 	<?php echo link_tag(array('href' => 'assets/img/touch-icon-114.png', 'rel' => 'apple-touch-icon', 'sizes' => '57x57')); ?>
 
 	<?php echo link_tag(array('href' => 'assets/img/touch-icon-114.png', 'rel' => 'apple-touch-icon', 'sizes' => '114x114')); ?>
