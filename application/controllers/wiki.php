@@ -70,6 +70,8 @@ class Wiki extends CI_Controller
 
 			$data['title'] = $data['page']->title;
 			
+			$this->load->helper('markdown');
+			
 			$this->load->view('wiki/page', $data);
 		}
 	}

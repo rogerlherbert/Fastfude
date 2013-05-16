@@ -11,7 +11,7 @@
 </div>
 
 <div class="span9">
-	<?php echo nl2br(html_escape($page->page_text)); ?>
+	<?php echo Markdown($page->page_text); ?>
 </div>
 
 <?php $this->load->view('common/footer'); ?>
