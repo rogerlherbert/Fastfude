@@ -21,7 +21,7 @@ class Wiki_model extends CI_Model
 			return $query->result();
 		}
 		
-		return NULL;
+		return array();
 	}
 	
 	public function getCurrentPage($stub)
