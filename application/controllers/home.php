@@ -4,7 +4,10 @@ class Home extends CI_Controller
 {
 	public function index()
 	{
-		echo 'TODO :)';
+		$data['bodyclass'] = 'home';
+		$data['title'] = 'Fastfude';
+
+		$this->load->view('home/index', $data);
 	}
 }
 
