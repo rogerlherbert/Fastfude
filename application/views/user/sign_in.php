@@ -4,7 +4,7 @@
 	<div class="sidebar-nav">
 		<ul class="nav nav-tabs nav-stacked">
 			<li><?php echo anchor('user/forgot', 'I forgot my password'); ?></li>
-			<li><?php echo anchor('user/register', "Sign up for a new account"); ?></li>
+			<li><?php echo anchor('user/register', "Register a new account"); ?></li>
 		</ul>
 	</div>
 </div>
