@@ -64,7 +64,7 @@ class Tag_model extends CI_Model
 
 		if (mb_strlen($tag_str) < $min_length) 
 		{
-			return null;
+			return array();
 		}
 
 		$words = array_unique(str_word_count(strtolower($tag_str), 1));
