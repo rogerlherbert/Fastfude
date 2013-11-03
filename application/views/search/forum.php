@@ -1,10 +1,10 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span9 offset3">
+<div class="col-md-offset-3">
 
 <?php if (count($topics) > 0) { ?>
 
-<ol class="topics unstyled">
+<ol class="topics list-unstyled">
 <?php foreach ($topics as $topic) { ?>
 	<li>
 		<h3 class="topic_title"><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></h3>

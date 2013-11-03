@@ -1,28 +1,22 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span9 offset3">
+<div class="col-md-offset-3">
 
 <?php echo form_open(); ?>
 
-<div class="control-group<?php echo (form_error('title')) ? ' error' : '';?>">
+<div class="form-group<?php echo (form_error('title')) ? ' error' : '';?>">
 	<?php echo form_label('Page title', 'title', array('class' => 'control-label')); ?>
-	<div class="controls">
-		<?php echo form_input('title', set_value('title', $page->title)); ?>
-		<?php echo form_error('title','<span class="help-block">','</span>'); ?>
-	</div>
+    <?php echo form_input(array('name' => 'title', 'class' => 'form-control', 'value' => set_value('title', $page->title)); ?>
+    <?php echo form_error('title','<span class="help-block">','</span>'); ?>
 </div>
 
-<div class="control-group<?php echo (form_error('page_text')) ? ' error' : '';?>">
+<div class="form-group<?php echo (form_error('page_text')) ? ' error' : '';?>">
 	<?php echo form_label('Page text', 'page_text', array('class' => 'control-label')); ?>
-	<div class="controls">
-		<?php echo form_textarea('page_text', set_value('page_text', $page->page_text)); ?>
-		<?php echo form_error('page_text','<span class="help-block">','</span>'); ?>
-	</div>
+    <?php echo form_textarea(array('name' => 'page_text', 'class' => 'form-control', 'value' => set_value('page_text', $page->page_text)); ?>
+    <?php echo form_error('page_text','<span class="help-block">','</span>'); ?>
 </div>
 
-<div class="form-actions">
-	<?php echo form_button(array('type' => 'submit', 'content' => 'Save Changes', 'name' => 'confirm', 'class' => 'btn btn-primary')); ?>
-</div>
+<?php echo form_button(array('type' => 'submit', 'content' => 'Save Changes', 'name' => 'confirm', 'class' => 'btn btn-primary')); ?>
 
 <?php echo form_close(); ?>
 

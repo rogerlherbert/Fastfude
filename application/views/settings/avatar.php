@@ -1,23 +1,21 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="sidebar-nav">
-		<ul class="nav nav-tabs nav-stacked">
-			<li><?php echo anchor('settings/avatar', 'Avatar'); ?></li>
-			<li><?php echo anchor('settings/email', 'Email'); ?></li>
-			<li><?php echo anchor('settings/username', 'Username'); ?></li>
-			<li><?php echo anchor('settings/password', 'Password'); ?></li>
-			<li><?php echo anchor('settings/notifications', 'Notifications'); ?></li>
-			<li><?php echo anchor('settings/delete', 'Delete Account'); ?></li>
-		</ul>
-	</div>
+<div class="col-md-3">
+	<ul class="nav nav-pills nav-stacked">
+		<li><?php echo anchor('settings/avatar', 'Avatar'); ?></li>
+		<li><?php echo anchor('settings/email', 'Email'); ?></li>
+		<li><?php echo anchor('settings/username', 'Username'); ?></li>
+		<li><?php echo anchor('settings/password', 'Password'); ?></li>
+		<li><?php echo anchor('settings/notifications', 'Notifications'); ?></li>
+		<li><?php echo anchor('settings/delete', 'Delete Account'); ?></li>
+	</ul>
 </div>
 
-<div class="span9">
+<div class="col-md-9">
 
 <?php echo form_open(); ?>
 
-	<ul id="avatars" class="unstyled">
+	<ul id="avatars" class="list-unstyled">
 		<?php foreach ($options as $key => $service) { ?>
 		<li class="field">
 			<?php 
@@ -31,11 +29,10 @@
 
 		<?php } ?>
 	</ul>
-			<?php echo form_error('avatar','<span class="form_error">','</span>'); ?>
 
-	<div class="form-actions">
-		<?php echo form_button(array('type' => 'submit', 'content' => 'Save', 'name' => 'confirm', 'class' => 'btn btn-primary')); ?>
-	</div>
+	<?php echo form_error('avatar','<span class="form_error">','</span>'); ?>
+
+	<?php echo form_button(array('type' => 'submit', 'content' => 'Save', 'name' => 'confirm', 'class' => 'btn btn-primary')); ?>
 
 <?php echo form_close(); ?>
 

@@ -1,13 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span9 offset3">
+<div class="col-md-offset-3">
 
 <?php if (isset($archive)) { ?>
 
-<ol class="unstyled">
+<ol class="list-unstyled">
 <?php foreach ($archive as $year => $month) { ?>
 	<li class="year"><h2><?php echo $year; ?></h2>
-	<ol class="unstyled inline">
+	<ol class="list-unstyled list-inline">
 	<?php foreach ($month as $key => $value) { ?>
 	<?php $monthtime = mktime(0,0,0,$key+1,1,$year); ?>
 	<li class="month">

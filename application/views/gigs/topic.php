@@ -1,4 +1,4 @@
-<section class="vevent hero-unit">
+<section class="vevent jumbotron">
 	<dl>
 		<dt>Title</dt>
 		<dd class="summary"><?php echo html_escape($gig->gig_title); ?></dd>

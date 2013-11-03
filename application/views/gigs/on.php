@@ -1,10 +1,10 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span9 offset3">
+<div class="col-md-offset-3">
 
 <?php if (isset($gigs)) { ?>
 	<?php if (count($gigs) > 0) { ?>
-		<ol class="vcalendar unstyled media">
+		<ol class="vcalendar list-unstyled media">
 
 			<?php foreach ($gigs as $gig) { ?>
 			<li class="vevent media-body">

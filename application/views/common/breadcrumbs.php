@@ -1,5 +1,5 @@
-<div class="breadcrumb">
-	<li><?php echo anchor('/', 'Home') ?> <span class="divider">/</span></li>
+<ol class="breadcrumb">
+	<li><?php echo anchor('/', 'Home') ?></li>
 
 	<?php
 	$i = 1;
@@ -11,10 +11,10 @@
 		}
 		else
 		{
-			echo '<li>'. anchor(strtolower($segment[1]), $segment[0]) .' <span class="divider">/</span></li>';
+			echo '<li>'. anchor(strtolower($segment[1]), $segment[0]) .'</li>';
 		}
 		
 		$i++;
 	}
 	?>
-</div>
+</ol>

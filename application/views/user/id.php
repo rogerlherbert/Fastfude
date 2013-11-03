@@ -1,15 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="sidebar-nav">
-		<ul class="nav nav-tabs nav-stacked">
-			<li><?php echo anchor('message/to/'.$profile->id, 'Send a message'); ?></li>
-			<li><?php echo anchor('user/mute/'.$profile->id, 'Mute user'); ?></li>
-		</ul>
-	</div>
+<div class="col-md-3">
+	<ul class="nav nav-pills nav-stacked">
+		<li><?php echo anchor('message/to/'.$profile->id, 'Send a message'); ?></li>
+		<li><?php echo anchor('user/mute/'.$profile->id, 'Mute user'); ?></li>
+	</ul>
 </div>
 
-<div class="span9">
+<div class="col-md-9">
 
 <?php if (isset($muted) && in_array($profile->id, $muted)) { ?>
 

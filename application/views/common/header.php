@@ -18,21 +18,22 @@
 
 	<?php echo link_tag(array('href' => 'assets/img/touch-icon-144.png', 'rel' => 'apple-touch-icon', 'sizes' => '144x144')); ?>
 
-	<?php echo link_tag('assets/css/bootstrap.min.css'); ?>
+	<?php echo link_tag('assets/css/styles.min.css'); ?>
 
-	<?php echo link_tag('assets/css/bootstrap-responsive.min.css'); ?>
+	<style type="text/css" media="screen">
+		body { padding-top: 70px; }
+	</style>
 
 	<?php echo (isset($canonical)) ? link_tag(array('href' => site_url($canonical), 'rel' => 'canonical')) : ''; ?>
 </head>
 
 <body class="<?php echo html_escape($bodyclass); ?>">
-<div>
 
-	<header class="page-header container-fluid">
+	<header class="page-header container">
 		<?php if (isset($breadcrumbs)) {$this->load->view('common/breadcrumbs');} ?>
 
 		<h1><?php echo html_escape($title); ?></h1>
 	</header>
 	
-	<div role="main" class="container-fluid">
-		<div class="row-fluid">
+	<div role="main" class="container">
+		<div class="row">

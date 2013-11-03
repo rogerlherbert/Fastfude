@@ -1,14 +1,12 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="sidebar-nav">
-		<ul class="nav nav-tabs nav-stacked">
-			<li><?php echo anchor('gigs/create', 'Create a gig'); ?></li>
-		</ul>
-	</div>
+<div class="col-md-3">
+	<ul class="nav nav-pills nav-stacked">
+		<li><?php echo anchor('gigs/create', 'Create a gig'); ?></li>
+	</ul>
 </div>
 
-<div class="span9">
+<div class="col-md-9">
 
 <?php if (isset($calendar)) { ?>
 	<section class="calendar media-list">
@@ -18,7 +16,7 @@
 			<?php echo heading(anchor('gigs/on/'.date('Y-m-d', $offset_time), date('D d M', $offset_time)), 2) . "\n"; ?>
 
 			<?php if (count($gigs) > 0) { ?>
-				<ol class="vcalendar unstyled media">
+				<ol class="vcalendar list-unstyled media">
 
 				<?php foreach ($gigs as $gig) { ?>
 				<li class="vevent media-body">
