@@ -58,7 +58,7 @@
 
 	<div class="form-group<?php echo (form_error('post_text')) ? ' error' : '';?>">
 		<?php echo form_label('Text', 'post_text', array('class' => 'control-label')); ?>
-        <?php echo form_textarea(array('name' => 'post_text', 'class' => 'form-control', 'value' => set_value('post_text'), 'rows' => '8', 'cols' => '', 'class' => 'col-md-2')); ?>
+        <?php echo form_textarea(array('name' => 'post_text', 'class' => 'form-control', 'value' => set_value('post_text'), 'rows' => '8', 'cols' => '')); ?>
         <?php echo form_error('post_text','<span class="help-block">','</span>'); ?>
 	</div>
 
