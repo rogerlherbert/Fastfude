@@ -15,13 +15,13 @@
 
 	<div class="form-group<?php echo (form_error('username')) ? ' error' : '';?>">
 		<?php echo form_label('username', 'username', array('class' => 'control-label')); ?>
-        <?php echo form_input(array('name' => 'username', 'class' => 'form-control', 'value' => set_value('username')); ?>
+        <?php echo form_input(array('name' => 'username', 'class' => 'form-control', 'value' => set_value('username'))); ?>
         <?php echo form_error('username','<span class="help-block">','</span>'); ?>
 	</div>
 
 	<div class="form-group<?php echo (form_error('password')) ? ' error' : '';?>">
 		<?php echo form_label('password', 'password', array('class' => 'control-label')); ?>
-        <?php echo form_password('name' => 'password', 'class' => 'form-control', 'value' => set_value('password')); ?>
+        <?php echo form_password(array('name' => 'password', 'class' => 'form-control', 'value' => set_value('password'))); ?>
         <?php echo form_error('password','<span class="help-block">','</span>'); ?>
 	</div>
 

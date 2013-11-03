@@ -18,19 +18,19 @@
 
 	<div class="form-group<?php echo (form_error('location')) ? ' error' : '';?>">
 		<?php echo form_label('Venue', 'location', array('class' => 'control-label')); ?>
-        <?php echo form_input(array('name' => 'location', 'class' => 'form-control', 'value' => set_value('location', $gig->location)); ?>
+        <?php echo form_input(array('name' => 'location', 'class' => 'form-control', 'value' => set_value('location', $gig->location))); ?>
         <?php echo form_error('location','<span class="help-block">','</span>'); ?>
 	</div>
 
 	<div class="form-group<?php echo (form_error('lineup')) ? ' error' : '';?>">
 		<?php echo form_label('Lineup', 'lineup', array('class' => 'control-label')); ?>
-        <?php echo form_input(array('name' => 'lineup', 'class' => 'form-control', 'value' => set_value('lineup', $gig->lineup)); ?>
+        <?php echo form_input(array('name' => 'lineup', 'class' => 'form-control', 'value' => set_value('lineup', $gig->lineup))); ?>
         <?php echo form_error('lineup','<span class="help-block">','</span>'); ?>
 	</div>
 
 	<div class="form-group<?php echo (form_error('subject')) ? ' error' : '';?>">
 		<?php echo form_label('Subject', 'subject', array('class' => 'control-label')); ?>
-        <?php echo form_input(array('name' => 'subject', 'class' => 'form-control', 'value' => set_value('subject', $gig->title)); ?>
+        <?php echo form_input(array('name' => 'subject', 'class' => 'form-control', 'value' => set_value('subject', $gig->title))); ?>
         <?php echo form_error('subject','<span class="help-block">','</span>'); ?>
 	</div>
 

@@ -6,7 +6,7 @@
 
 	<div class="form-group<?php echo (form_error('username')) ? ' error' : '';?>">
 		<?php echo form_label('username', 'username', array('class' => 'control-label')); ?>
-        <?php echo form_input(array('name' => 'username', 'class' => 'form-control', 'value' => set_value('username')); ?>
+        <?php echo form_input(array('name' => 'username', 'class' => 'form-control', 'value' => set_value('username'))); ?>
         <?php echo form_error('username','<span class="help-block">','</span>'); ?>
 	</div>
 

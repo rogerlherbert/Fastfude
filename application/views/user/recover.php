@@ -6,13 +6,13 @@
 
 	<div class="form-group<?php echo (form_error('password')) ? ' error' : '';?>">
 		<?php echo form_label('New Password', 'password', array('class' => 'control-label')); ?>
-        <?php echo form_password(array('name' => 'password', 'class' => 'form-control', 'value' => set_value('password')); ?>
+        <?php echo form_password(array('name' => 'password', 'class' => 'form-control', 'value' => set_value('password'))); ?>
         <?php echo form_error('password','<span class="help-block">','</span>'); ?>
 	</div>
 
 	<div class="form-group<?php echo (form_error('passconf')) ? ' error' : '';?>">
 		<?php echo form_label('Confirm New Password', 'passconf', array('class' => 'control-label')); ?>
-        <?php echo form_password(array('name' => 'passconf', 'class' => 'form-control', 'value' => set_value('passconf')); ?>
+        <?php echo form_password(array('name' => 'passconf', 'class' => 'form-control', 'value' => set_value('passconf'))); ?>
         <?php echo form_error('passconf','<span class="help-block">','</span>'); ?>
 	</div>
 
