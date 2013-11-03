@@ -1,15 +1,13 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="sidebar-nav">
-		<ul>
-			<li><?php echo anchor('user/id/'.$profile->id, 'User profile'); ?></li>
-			<li><?php echo anchor('user/posts/'.$profile->id, 'View posts'); ?></li>
-		</ul>
-	</div>
+<div class="col-md-3">
+	<ul>
+		<li><?php echo anchor('user/id/'.$profile->id, 'User profile'); ?></li>
+		<li><?php echo anchor('user/posts/'.$profile->id, 'View posts'); ?></li>
+	</ul>
 </div>
 
-<div class="span9">
+<div class="col-md-9">
 
 <?php if (isset($posts)) { ?>
 

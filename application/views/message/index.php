@@ -1,18 +1,16 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="sidebar-nav">
-		<ul class="nav nav-tabs nav-stacked">
-			<li><?php echo anchor('message/create', 'Create a message'); ?>	</li>
-		</ul>
-	</div>
+<div class="col-md-3">
+	<ul class="nav nav-pills nav-stacked">
+		<li><?php echo anchor('message/create', 'Create a message'); ?>	</li>
+	</ul>
 </div>
 
-<div class="span9">
+<div class="col-md-9">
 
 <?php if (count($messages) > 0) { ?>
 
-<ol class="messages unstyled">
+<ol class="messages list-unstyled">
 	<?php foreach ($messages as $user_id => $msg) { ?>
 	<?php $class = ($msg['is_read'] == 0) ? ' class="unread"' : ''; ?>
 

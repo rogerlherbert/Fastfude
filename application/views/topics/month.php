@@ -1,18 +1,16 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="sidebar-nav">
-		<ul class="nav nav-tabs nav-stacked">
-			<li><?php echo anchor('topic/create', 'Create a topic'); ?></li>
-		</ul>
-	</div>
+<div class="col-md-3">
+	<ul class="nav nav-pills nav-stacked">
+		<li><?php echo anchor('topic/create', 'Create a topic'); ?></li>
+	</ul>
 </div>
 
-<div class="span9">
+<div class="col-md-9">
 
 <?php if (count($topics) > 0) { ?>
 
-<ol class="topic-list topic-archive unstyled">
+<ol class="topic-list topic-archive list-unstyled">
 <?php foreach ($topics as $topic) { ?>
 	<li>
 		<h3><?php echo anchor('topic/id/'.$topic->id, html_escape($topic->title)); ?></h3>

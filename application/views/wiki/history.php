@@ -1,8 +1,8 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span9 offset3">
+<div class="col-md-offset-3">
 
-<ol class="edit_history unstyled">
+<ol class="edit_history list-unstyled">
 <?php foreach ($history as $edit) { ?>
 	<li>
 		<p class="meta">

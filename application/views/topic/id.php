@@ -1,16 +1,14 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="sidebar-nav">
-		<ul class="nav nav-tabs nav-stacked">
-			<li><?php echo (isset($watch_status)) ? anchor('topic/unwatch/'. $topic->id, 'Stop watching') : anchor('topic/watch/'.$topic->id, 'Watch topic'); ?></li>
-			<li><?php echo anchor('topic/id/'. $topic->id .'#reply', 'Reply to topic'); ?></li>
-			<?php echo (isset($gig)) ? '<li>'. anchor('gigs/edit/'.$gig->id, 'Edit gig details') . '</li>': ''; ?>
-		</ul>
-	</div>
+<div class="col-md-3">
+	<ul class="nav nav-pills nav-stacked">
+		<li><?php echo (isset($watch_status)) ? anchor('topic/unwatch/'. $topic->id, 'Stop watching') : anchor('topic/watch/'.$topic->id, 'Watch topic'); ?></li>
+		<li><?php echo anchor('topic/id/'. $topic->id .'#reply', 'Reply to topic'); ?></li>
+		<?php echo (isset($gig)) ? '<li>'. anchor('gigs/edit/'.$gig->id, 'Edit gig details') . '</li>': ''; ?>
+	</ul>
 </div>
 
-<div class="span9">
+<div class="col-md-9">
 
 <?php if (isset($gig)) {
 	$this->load->view('gigs/topic');
@@ -29,7 +27,7 @@
 			<?php echo anchor('topic/post_settings/'.$post->id, '<i class="icon-cog"></i>', 'title="Post settings" class="pull-right"'); ?>
 		<?php } ?>
 
-		<?php echo img(array('src' => $post->avatar_url, 'class' => 'pull-left avatar')); ?>
+		<?php echo img(array('src' => $post->avatar_url, 'class' => 'media-object')); ?>
 
 		<article class="media-body">
 			<h4 class="media-heading">
@@ -58,17 +56,13 @@
 
 	<?php echo form_hidden('topic_id', $topic->id); ?>
 
-	<div class="control-group<?php echo (form_error('post_text')) ? ' error' : '';?>">
+	<div class="form-group<?php echo (form_error('post_text')) ? ' error' : '';?>">
 		<?php echo form_label('Text', 'post_text', array('class' => 'control-label')); ?>
-		<div class="controls">
-			<?php echo form_textarea(array('name' => 'post_text', 'value' => set_value('post_text'), 'rows' => '8', 'cols' => '', 'class' => 'span12')); ?>
-			<?php echo form_error('post_text','<span class="help-block">','</span>'); ?>
-		</div>
+        <?php echo form_textarea(array('name' => 'post_text', 'class' => 'form-control', 'value' => set_value('post_text'), 'rows' => '8', 'cols' => '', 'class' => 'col-md-2')); ?>
+        <?php echo form_error('post_text','<span class="help-block">','</span>'); ?>
 	</div>
 
-	<div class="form-actions">
-		<?php echo form_button(array('type' => 'submit', 'content' => 'Post', 'name' => 'post', 'class' => 'btn btn-primary')); ?>
-	</div>
+	<?php echo form_button(array('type' => 'submit', 'content' => 'Post', 'name' => 'post', 'class' => 'btn btn-primary')); ?>
 
 	<?php echo form_close(); ?>
 </section>

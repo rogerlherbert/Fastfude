@@ -1,16 +1,14 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="span3">
-	<div class="sidebar-nav">
-		<ul class="nav nav-tabs nav-stacked">
-			<li><?php echo anchor('wiki/create', 'Create a wiki page'); ?></li>
-		</ul>
-	</div>
+<div class="col-md-3">
+	<ul class="nav nav-pills nav-stacked">
+		<li><?php echo anchor('wiki/create', 'Create a wiki page'); ?></li>
+	</ul>
 </div>
 
-<div class="span9">
+<div class="col-md-9">
 
-<ol class="edit-history unstyled">
+<ol class="edit-history list-unstyled">
 <?php foreach ($history as $edit) { ?>
 	<li>
 		<h3><?php echo anchor('wiki/page/'.$edit->stub.'/'.$edit->edit_id, '#'.$edit->edit_id . ': ' . $edit->title); ?></h3>
