@@ -1,12 +1,6 @@
 <?php $this->load->view('common/header'); ?>
 
-<div class="col-md-3">
-	<ul class="nav nav-pills nav-stacked">
-		<li><?php echo anchor('message/create', 'Create a message'); ?>	</li>
-	</ul>
-</div>
-
-<div class="col-md-9">
+<div class="col-md-offset-3">
 
 <?php if (count($messages) > 0) { ?>
 
