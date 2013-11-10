@@ -58,36 +58,30 @@ class Tag_model extends CI_Model
 	
 	public function writeToTags($tag_str)
 	{
+		$tags = array();
 		$tag_str = preg_replace('/[^a-z0-9 \-]+/i', '', $tag_str);
-		
 		$min_length = 4;
 
-		if (mb_strlen($tag_str) < $min_length) 
+		if (mb_strlen($tag_str) >= $min_length) 
 		{
-			return array();
-		}
+			$words = array_unique(str_word_count(strtolower($tag_str), 1));
 
-		$words = array_unique(str_word_count(strtolower($tag_str), 1));
-		$tags = array();
-
-		foreach ($words as $word) 
-		{
-			if (mb_strlen($word) < $min_length) 
+			foreach ($words as $word) 
 			{
-				continue;
+				if (mb_strlen($word) < $min_length) 
+				{
+					continue;
+				}
+
+				$insert_query = $this->db->insert_string('tags', array('stub' => $word));
+				$insert_query = str_replace('INSERT INTO','INSERT IGNORE INTO', $insert_query);
+				$this->db->query($insert_query);
+
+				$tags[] = $word;
 			}
-
-			$insert_query = $this->db->insert_string('tags', array('stub' => $word));
-			$insert_query = str_replace('INSERT INTO','INSERT IGNORE INTO', $insert_query);
-			$this->db->query($insert_query);
-
-			$tags[] = $word;
 		}
-		
-		if (count($tags) > 0) 
-		{
-			return $tags;
-		}
+
+		return $tags;
 	}
 
 	public function getTopicsByTag($stub)
