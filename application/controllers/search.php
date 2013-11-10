@@ -13,9 +13,18 @@ class Search extends CI_Controller
 		// $this->output->enable_profiler(TRUE);
 	}
 	
-	public function index()
+	public function forums($str)
 	{
-		echo 'TODO :)';
+        $data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+        $data['breadcrumbs'] = array(
+            array('Search')
+        );
+
+        $data['title'] = 'Search Results';
+
+        $data['topics'] = $this->Search_model->getTopics(0, $str);
+
+        $this->load->view('search/forum', $data);
 	}
 }
 
