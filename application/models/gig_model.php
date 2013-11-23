@@ -16,7 +16,7 @@ class Gig_model extends CI_Model
 			
 			if ($gig->lineup != '') 
 			{
-				$gig->lineup = unserialize($gig->lineup);
+				$gig->lineup = json_decode($gig->lineup);
 			}
 			
 			return $gig;
@@ -34,7 +34,7 @@ class Gig_model extends CI_Model
 			
 			if ($gig->lineup != '') 
 			{
-				$gig->lineup = implode(' + ', unserialize($gig->lineup));
+				$gig->lineup = implode(' + ', json_decode($gig->lineup));
 			}
 			
 			return $gig;
@@ -49,7 +49,7 @@ class Gig_model extends CI_Model
 			'gig_title' => $title,
 			'location' => $location,
 			'reference_token' => $reference_token,
-			'lineup' => serialize($this->parseLineupStr($lineup))
+			'lineup' => json_encode($this->parseLineupStr($lineup))
 		);
 
 		$this->db->insert('gigs', $fields);
@@ -64,7 +64,7 @@ class Gig_model extends CI_Model
 			'gig_title' => $title,
 			'location' => $location,
 			'reference_token' => $reference_token,
-			'lineup' => serialize($this->parseLineupStr($lineup))
+			'lineup' => json_encode($this->parseLineupStr($lineup))
 		);
 
 		$this->db->where('id', $id);
@@ -90,13 +90,13 @@ class Gig_model extends CI_Model
 			foreach ($query->result() as $gig) 
 			{
 				$today = new DateTime('today');
-				$gigdate = new DateTime('@'.$gig->start_time);
+				$gig_date = new DateTime('@'.$gig->start_time);
 
-				$interval = $today->diff($gigdate);
+				$interval = $today->diff($gig_date);
 
 				if ($gig->lineup != '') 
 				{
-					$gig->lineup = implode(' + ', unserialize($gig->lineup));
+					$gig->lineup = implode(' + ', json_decode($gig->lineup));
 				}
 
 				$calendar[$interval->days][] = $gig;
@@ -124,7 +124,7 @@ class Gig_model extends CI_Model
 			{
 				if ($gig->lineup != '') 
 				{
-					$gig->lineup = implode(' + ', unserialize($gig->lineup));
+					$gig->lineup = implode(' + ', json_decode($gig->lineup));
 				}
 			}
 

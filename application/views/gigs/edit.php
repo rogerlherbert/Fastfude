@@ -30,7 +30,7 @@
 
 	<div class="form-group<?php echo (form_error('subject')) ? ' error' : '';?>">
 		<?php echo form_label('Subject', 'subject', array('class' => 'control-label')); ?>
-        <?php echo form_input(array('name' => 'subject', 'class' => 'form-control', 'value' => set_value('subject', $gig->title))); ?>
+        <?php echo form_input(array('name' => 'subject', 'class' => 'form-control', 'value' => set_value('subject', $gig->gig_title))); ?>
         <?php echo form_error('subject','<span class="help-block">','</span>'); ?>
 	</div>
 

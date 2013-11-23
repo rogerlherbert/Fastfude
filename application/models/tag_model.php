@@ -10,8 +10,8 @@ class Tag_model extends CI_Model
 		$this->db->select('ta.stub, COUNT(tt.tag_id) as topic_count');
 		$this->db->join('tags ta', 'ta.id = tt.tag_id', 'left');
 		$this->db->group_by('tt.tag_id');
-		$this->db->order_by('topic_count', 'desc');
-		$this->db->limit(25);
+		$this->db->order_by('topic_count', 'RANDOM');
+		$this->db->limit(50);
 		$query = $this->db->get('topics_tags tt');
 		
 		if ($query->num_rows() > 0) 
