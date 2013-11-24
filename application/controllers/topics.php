@@ -38,7 +38,7 @@ class Topics extends CI_Controller
 		$data['canonical'] = 'topics/tagged/'. $tag;
 		$data['breadcrumbs'] = array(array(__CLASS__, 'topics'), array($tag));
 
-		$this->load->view('topics/id', $data);
+		$this->load->view('topics/tagged', $data);
 	}
 
 	public function watchlist()

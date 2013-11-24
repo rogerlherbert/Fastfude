@@ -10,21 +10,34 @@ class Search extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('Search_model');
-		// $this->output->enable_profiler(TRUE);
+		$this->load->helper('date');
 	}
-	
-	public function forums($str)
+
+	public function index()
 	{
-        $data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
-        $data['breadcrumbs'] = array(
-            array('Search')
-        );
+		$type = $this->input->post('type');
+		$str = $this->input->post('q');
 
-        $data['title'] = 'Search Results';
+		$safe_types = array('topics');
 
-        $data['topics'] = $this->Search_model->getTopics(0, $str);
+		if ($str != '' && $type != '' && in_array($type, $safe_types)) {
+			redirect("search/$type/$str");
+		} else {
+			show_error('I can\'t search that :(');
+		}
+	}
 
-        $this->load->view('search/forum', $data);
+	public function topics($str)
+	{
+		$data['bodyclass'] = strtolower(__CLASS__ . ' ' . __FUNCTION__);
+		$data['breadcrumbs'] = array(
+			array('Search')
+		);
+
+		$data['topics'] = $this->Search_model->getTopics($str);
+		$data['title'] = count($data['topics']) .' topics found matching "'. $str .'"';
+
+		$this->load->view('search/topics', $data);
 	}
 }
 
